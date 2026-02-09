@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tenant Dashboard - Rent2Score</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F4F6FA] flex h-screen overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col z-20">
+        <div class="p-6 text-2xl font-bold text-[#0B1B3F] flex gap-2 items-center">
+            <i class="fa-solid fa-house text-[#1E5EFF]"></i> Rent2Score
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-1 mt-2 overflow-y-auto custom-scrollbar">
+            <a href="#" class="nav-item-light active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold">
+                <i class="fa-solid fa-chart-line"></i> Dashboard
+            </a>
+            
+            <div class="pt-4 pb-1 px-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">My Rental</div>
+            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
+                <i class="fa-solid fa-magnifying-glass"></i> Search Properties
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
+                <i class="fa-solid fa-calendar-check"></i> Schedule Inspection
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
+                <i class="fa-solid fa-hammer"></i> Lodge Maintenance
+            </a>
+
+            <div class="pt-4 pb-1 px-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Privacy & Feedback</div>
+            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
+                <i class="fa-solid fa-star"></i> Rate Landlord/Agent
+            </a>
+            <a href="#" onclick="openModal('modal-vault')" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
+                <i class="fa-solid fa-trash"></i> Manage Documents
+            </a>
+        </nav>
+
+        <div class="p-4 border-t border-gray-100">
+            <a href="index.html" class="flex items-center gap-3 px-4 py-2 text-red-500 hover:bg-red-50 rounded-lg text-sm font-bold transition">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 overflow-y-auto p-8 relative">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-2xl font-bold text-[#0B1B3F]">Hi Sarah, Your Dashboard</h1>
+                <p class="text-sm text-gray-500">Rent due in 12 days • <span class="text-green-500 font-bold">Subscription Active</span></p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="relative cursor-pointer">
+                    <i class="fa-regular fa-bell text-xl text-gray-400 hover:text-[#1E5EFF]"></i>
+                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#F5A623] rounded-full border-2 border-white"></span>
+                </div>
+                <button onclick="openModal('modal-pay')" class="bg-[#1E5EFF] text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-600 hover:-translate-y-0.5 transition">
+                    Pay Rent
+                </button>
+            </div>
+        </header>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            
+            <!-- Rent Score Card -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wide">Rent Score</h3>
+                    <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded text-[10px] font-bold">EXCELLENT</span>
+                </div>
+                <div class="text-center mt-4 relative z-10">
+                    <div class="text-6xl font-extrabold text-[#2ECC71] tracking-tight">742</div>
+                    <div class="text-sm text-gray-400 font-medium mt-1">out of 850</div>
+                </div>
+                <!-- Progress Bar -->
+                <div class="mt-6 w-full bg-gray-100 rounded-full h-2">
+                    <div class="bg-[#2ECC71] h-2 rounded-full" style="width: 87%"></div>
+                </div>
+                <button onclick="openModal('modal-score')" class="w-full mt-6 py-2 border border-[#1E5EFF] text-[#1E5EFF] rounded-xl text-xs font-bold hover:bg-blue-50 transition">
+                    View Full Breakdown
+                </button>
+            </div>
+
+            <!-- Home Loan Readiness -->
+            <div class="bg-gradient-to-br from-[#FFF8E1] to-white p-6 rounded-2xl shadow-sm border border-orange-100 hover:shadow-md transition">
+                <div class="flex justify-between items-start">
+                    <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wide">Home Loan Readiness</h3>
+                    <i class="fa-solid fa-house-chimney text-[#F5A623] text-2xl opacity-20"></i>
+                </div>
+                <div class="flex items-end gap-1 mt-4">
+                    <span class="text-5xl font-bold text-[#F5A623]">82%</span>
+                </div>
+                <p class="text-sm text-orange-500 font-bold mt-2">Getting Close!</p>
+                <div class="mt-4 space-y-2">
+                    <div class="flex items-center gap-2 text-xs font-medium text-gray-600"><i class="fa-solid fa-check-circle text-green-500"></i> Consistent Payments</div>
+                    <div class="flex items-center gap-2 text-xs font-medium text-gray-600"><i class="fa-solid fa-info-circle text-blue-500"></i> Reduce Credit Card Limit</div>
+                </div>
+            </div>
+
+            <!-- Data Vault -->
+            <div class="bg-[#0B1B3F] text-white p-6 rounded-2xl shadow-xl relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-[#1E5EFF] rounded-full blur-3xl opacity-20 -mr-10 -mt-10 group-hover:opacity-30 transition"></div>
+                <h3 class="opacity-60 text-xs font-bold uppercase tracking-wide">Privacy Snapshot</h3>
+                <div class="flex justify-between mt-6 relative z-10">
+                    <div><div class="text-3xl font-bold">6</div><div class="text-[10px] opacity-60 uppercase">Docs Stored</div></div>
+                    <div><div class="text-3xl font-bold text-[#F5A623]">1</div><div class="text-[10px] opacity-60 uppercase">Expiring</div></div>
+                    <div><div class="text-3xl font-bold text-[#2ECC71]">2</div><div class="text-[10px] opacity-60 uppercase">Active Shares</div></div>
+                </div>
+                <button onclick="openModal('modal-vault')" class="w-full mt-6 bg-white/10 hover:bg-white/20 text-white text-xs font-bold py-3 rounded-xl transition backdrop-blur-sm border border-white/5">
+                    Manage Data Vault
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL: PAY RENT -->
+    <div id="modal-pay" class="modal-overlay">
+        <div class="modal-content p-8">
+            <h2 class="text-xl font-bold text-[#0B1B3F] mb-4">Pay Rent</h2>
+            <form onsubmit="handleFakeSubmit(event, 'modal-pay', 'Rent Paid Successfully!')">
+                <div class="bg-blue-50 p-4 rounded-xl mb-6 flex justify-between items-center border border-blue-100">
+                    <div>
+                        <div class="text-xs text-gray-500 font-bold uppercase">Amount Due</div>
+                        <div class="text-lg font-bold text-[#0B1B3F]">May 2024 Rent</div>
+                    </div>
+                    <span class="font-bold text-2xl text-[#1E5EFF]">$1,500.00</span>
+                </div>
+                <div class="mb-6">
+                    <label class="text-xs font-bold text-gray-500 uppercase mb-2 block">Payment Method</label>
+                    <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 font-medium outline-none focus:border-[#1E5EFF]">
+                        <option>ANZ Account (...3210)</option>
+                        <option>Visa Debit (...4422)</option>
+                        <option>+ Add New Method</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-[#2ECC71] text-white py-3.5 rounded-xl font-bold hover:bg-green-600 transition shadow-lg">Confirm Payment</button>
+            </form>
+            <button onclick="closeModal('modal-pay')" class="w-full text-center text-gray-400 font-bold text-sm mt-4 hover:text-gray-600">Cancel</button>
+        </div>
+    </div>
+
+    <!-- MODAL: SCORE BREAKDOWN -->
+    <div id="modal-score" class="modal-overlay">
+        <div class="modal-content p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-[#0B1B3F]">Rent Score Breakdown</h2>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">742 - Excellent</span>
+            </div>
+            <div class="space-y-4">
+                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl bg-gray-50">
+                    <div class="flex gap-4 items-center">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600"><i class="fa-solid fa-clock"></i></div>
+                        <div>
+                            <div class="font-bold text-gray-700 text-sm">On-Time Payments</div>
+                            <div class="text-xs text-gray-400">12 month streak</div>
+                        </div>
+                    </div>
+                    <span class="font-bold text-[#2ECC71]">+45 pts</span>
+                </div>
+                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl bg-gray-50">
+                    <div class="flex gap-4 items-center">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600"><i class="fa-solid fa-calendar"></i></div>
+                        <div>
+                            <div class="font-bold text-gray-700 text-sm">Lease Duration</div>
+                            <div class="text-xs text-gray-400">Long term stability</div>
+                        </div>
+                    </div>
+                    <span class="font-bold text-[#1E5EFF]">+12 pts</span>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-score')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Close</button>
+        </div>
+    </div>
+
+    <!-- MODAL: DATA VAULT -->
+    <div id="modal-vault" class="modal-overlay">
+        <div class="modal-content p-8">
+            <h2 class="text-xl font-bold text-[#0B1B3F] mb-2">Manage Data Vault</h2>
+            <p class="text-sm text-gray-500 mb-6">You have full control. Revoke access or delete documents instantly.</p>
+            
+            <div class="space-y-3">
+                <!-- Item 1 -->
+                <div class="flex justify-between items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-red-50 text-red-500 rounded flex items-center justify-center"><i class="fa-regular fa-file-pdf"></i></div>
+                        <div>
+                            <div class="font-bold text-sm text-[#0B1B3F]">Lease_Agreement.pdf</div>
+                            <div class="text-[10px] text-green-500 font-bold">● Active</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-gray-400 hover:text-[#1E5EFF] px-2"><i class="fa-solid fa-eye"></i></button>
+                        <button class="text-red-500 text-xs font-bold border border-red-200 px-3 py-1.5 rounded-lg hover:bg-red-50 transition">DELETE</button>
+                    </div>
+                </div>
+                <!-- Item 2 -->
+                <div class="flex justify-between items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-blue-50 text-blue-500 rounded flex items-center justify-center"><i class="fa-regular fa-image"></i></div>
+                        <div>
+                            <div class="font-bold text-sm text-[#0B1B3F]">ID_License.jpg</div>
+                            <div class="text-[10px] text-orange-500 font-bold">● Shared with Agent</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-orange-500 text-xs font-bold border border-orange-200 px-3 py-1.5 rounded-lg hover:bg-orange-50 transition">REVOKE ACCESS</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-vault')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Done</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

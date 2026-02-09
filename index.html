@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rent2Score - Turn Rent Into Power</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-bg { background: radial-gradient(circle at 80% 20%, #eef6ff 0%, #ffffff 60%); }
+    </style>
+</head>
+<body class="bg-white text-slate-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 text-[#1E5EFF] text-2xl font-bold tracking-tight">
+                <i class="fa-solid fa-file-contract"></i> Rent2Score
+            </a>
+            <div class="hidden md:flex gap-8 items-center text-sm font-medium text-gray-600">
+                <a href="#vision" class="hover:text-[#1E5EFF] transition">Our Vision</a>
+                <a href="#security" class="hover:text-[#1E5EFF] transition">Security & Landlords</a>
+                <a href="#reviews" class="hover:text-[#1E5EFF] transition">Reviews</a>
+            </div>
+            <div class="flex gap-4">
+                <a href="auth.html" class="px-5 py-2.5 text-[#0B1B3F] font-semibold hover:bg-gray-50 rounded-lg transition">Log In</a>
+                <a href="auth.html?mode=register" class="px-5 py-2.5 bg-[#1E5EFF] text-white font-semibold rounded-lg shadow-lg shadow-blue-200 hover:bg-blue-600 transition">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-24 px-6 hero-bg overflow-hidden relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Copy -->
+            <div class="space-y-8 z-10">
+                <h1 class="text-6xl font-extrabold text-[#0B1B3F] leading-[1.15] fade-in">
+                    Turn Your Rent <br>
+                    Into <span class="text-[#1E5EFF]">Financial Power</span>
+                </h1>
+                <p class="text-lg text-gray-500 max-w-lg leading-relaxed fade-in">
+                    Build your credit score by reporting your rent payments to major credit bureaus. Privacy-first, in your control.
+                </p>
+
+                <!-- 5 Star Rating -->
+                <div class="flex items-center gap-3 fade-in">
+                    <div class="flex text-[#F5A623] text-xl">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <span class="font-bold text-gray-600 text-sm">Rated 5.0/5 by 6,300+ Aussie Renters</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4 fade-in">
+                    <a href="auth.html?mode=register" class="bg-[#2ECC71] text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl shadow-green-100 hover:bg-green-600 hover:-translate-y-1 transition text-center">
+                        Get Started Free
+                    </a>
+                    <a href="#vision" class="flex items-center justify-center gap-2 text-[#1E5EFF] font-semibold px-6 py-4 rounded-xl hover:bg-blue-50 transition">
+                        How It Works <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Hero Image / Visual -->
+            <div class="relative fade-in">
+                <div class="absolute -top-10 -right-10 w-72 h-72 bg-blue-100 rounded-full filter blur-3xl opacity-50"></div>
+                <div class="absolute -bottom-8 -left-10 w-72 h-72 bg-green-100 rounded-full filter blur-3xl opacity-50"></div>
+
+                <!-- Phone Mockup -->
+                <div class="relative z-10 mx-auto max-w-sm transform rotate-[-2deg] hover:rotate-0 transition duration-500">
+                    <div class="bg-white rounded-[2.5rem] border-[8px] border-white shadow-2xl overflow-hidden relative">
+                        <div class="bg-[#0B1B3F] p-6 pb-10 text-white text-center">
+                            <div class="text-sm opacity-80 mb-1">Your Rent Score</div>
+                            <div class="text-5xl font-bold">742</div>
+                            <div class="inline-block bg-[#2ECC71] text-white text-[10px] px-2 py-0.5 rounded-full mt-2 font-bold uppercase">Good</div>
+                        </div>
+                        <div class="bg-white -mt-6 rounded-t-3xl p-6 relative z-10">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <div class="text-xs text-gray-400 font-bold uppercase">Next Payment</div>
+                                    <div class="text-lg font-bold text-[#0B1B3F]">$1,500 <span class="text-xs text-gray-400 font-normal">/ mo</span></div>
+                                </div>
+                                <div class="bg-[#1E5EFF] text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
+                            </div>
+                            <div class="h-2 w-full bg-gray-100 rounded mb-2"></div>
+                            <div class="h-2 w-2/3 bg-gray-100 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- OUR VISION SECTION -->
+    <section id="vision" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="text-[#1E5EFF] font-bold uppercase tracking-widest text-xs">Our Vision</span>
+                <h2 class="text-4xl font-extrabold text-[#0B1B3F] mt-2 mb-6">Leveling the Financial Playing Field</h2>
+                <p class="text-gray-600 mb-6 leading-relaxed text-lg">
+                    For too long, paying rent on time counted for nothing. We believe renters deserve the same financial recognition as homeowners. 
+                    <br><br>
+                    Our vision is a world where your largest monthly expense—rent—actively works to build your financial future, unlock better loans, and prove your reliability.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#2ECC71] text-xl"></i> <span>Automatic reporting to Equifax & Experian</span></li>
+                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#2ECC71] text-xl"></i> <span>You control your data privacy</span></li>
+                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#2ECC71] text-xl"></i> <span>Portable reputation for your next rental</span></li>
+                </ul>
+            </div>
+            <div class="relative">
+                <div class="bg-blue-50 rounded-3xl p-8 transform rotate-2">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/man-holding-credit-score-card-illustration-download-in-svg-png-gif-file-formats--rating-customer-review-feedback-business-activity-pack-illustrations-3791071.png" alt="Vision" class="relative z-10 w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECURITY / LANDLORDS SECTION -->
+    <section id="security" class="py-24 bg-[#0B1B3F] text-white relative overflow-hidden">
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-[#1E5EFF] rounded-full blur-[100px] opacity-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-[#2ECC71] font-bold uppercase tracking-widest text-xs">Bank-Grade Security</span>
+                <h2 class="text-4xl font-bold mt-2 mb-4">Why Landlords & Agents Trust Us</h2>
+                <p class="text-gray-400 text-lg">We bridge the gap between Tenant Privacy and Landlord Security. Zero liability handling of sensitive documents.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+                    <div class="w-12 h-12 bg-[#2ECC71] rounded-xl flex items-center justify-center text-[#0B1B3F] text-2xl mb-6">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Verified Income</h3>
+                    <p class="text-gray-400">We connect directly to bank feeds. No more fake PDF payslips or fraudulent edits. You get 100% verified data.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+                    <div class="w-12 h-12 bg-[#F5A623] rounded-xl flex items-center justify-center text-[#0B1B3F] text-2xl mb-6">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Instant Leases</h3>
+                    <p class="text-gray-400">Tenants with a Rent2Score profile are pre-vetted. Approve applications in minutes, not days.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition">
+                    <div class="w-12 h-12 bg-[#1E5EFF] rounded-xl flex items-center justify-center text-white text-2xl mb-6">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Zero Data Liability</h3>
+                    <p class="text-gray-400">We store the PII (Personally Identifiable Information). You view it via secure link only when authorized. No data breaches.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <a href="auth.html?role=landlord" class="bg-white text-[#0B1B3F] px-8 py-4 rounded-xl font-bold shadow-lg hover:bg-gray-100 transition inline-flex items-center gap-2">
+                    Landlord Sign Up <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 py-12 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <span class="text-[#0B1B3F] font-bold text-xl"><i class="fa-solid fa-file-contract text-[#1E5EFF]"></i> Rent2Score</span>
+                <p class="text-xs text-gray-500 mt-1">&copy; 2024 Rent2Score Pty Ltd. All rights reserved.</p>
+            </div>
+            <div class="flex gap-6 grayscale opacity-50">
+                <i class="fa-brands fa-stripe text-2xl"></i>
+                <i class="fa-brands fa-aws text-2xl"></i>
+                <i class="fa-solid fa-building-columns text-2xl"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

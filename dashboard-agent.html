@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Dashboard - Rent2Score</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#F4F6FA] flex h-screen overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="w-64 bg-[#1a1a1a] text-gray-300 flex flex-col z-20">
+        <div class="p-6 font-bold text-white uppercase tracking-widest text-lg flex items-center gap-2">
+            <div class="w-8 h-8 bg-[#F5A623] text-black flex items-center justify-center rounded font-bold">B</div> Brightstone
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-1 mt-4">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#F5A623] text-black rounded text-sm font-bold shadow-md shadow-orange-900/20">
+                <i class="fa-solid fa-gauge"></i> Overview
+            </a>
+            
+            <div class="pt-6 pb-2 px-4 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Agency Tools</div>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-city"></i> Managed Properties</a>
+            <a href="#" onclick="openModal('modal-report')" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-file-pdf"></i> Compliance Reports</a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-list"></i> Credit Logs</a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-users"></i> View All Tenants</a>
+
+            <div class="pt-6 pb-2 px-4 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Actions</div>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-star"></i> Rate Tenant</a>
+            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-clipboard-list"></i> Schedule Inspection</a>
+        </nav>
+        <div class="p-4 border-t border-gray-800"><a href="index.html" class="text-sm hover:text-white transition">Logout</a></div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 overflow-y-auto p-8 relative">
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-2xl font-bold text-[#0B1B3F]">Agency Overview</h1>
+            <button onclick="handleFakeSubmit(event, null, 'Month End Report Exported')" class="bg-black text-white px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wide hover:bg-gray-800 transition shadow-lg">
+                <i class="fa-solid fa-download mr-2"></i> Export Month End
+            </button>
+        </header>
+
+        <!-- KPI Grid -->
+        <div class="grid grid-cols-3 gap-6 mb-8">
+            <div class="bg-white p-6 rounded shadow-sm border-l-4 border-[#F5A623]">
+                <div class="text-xs font-bold text-gray-400 uppercase">Managed Properties</div>
+                <div class="text-3xl font-bold text-black mt-1">52</div>
+            </div>
+            <div class="bg-white p-6 rounded shadow-sm border-l-4 border-[#1E5EFF]">
+                <div class="text-xs font-bold text-gray-400 uppercase">Compliance Rate</div>
+                <div class="text-3xl font-bold text-black mt-1">98.2%</div>
+            </div>
+            <div class="bg-white p-6 rounded shadow-sm border-l-4 border-[#2ECC71]">
+                <div class="text-xs font-bold text-gray-400 uppercase">Credit Reported</div>
+                <div class="text-3xl font-bold text-black mt-1">183</div>
+            </div>
+        </div>
+
+        <!-- Compliance Heatmap -->
+        <div class="bg-white rounded shadow-sm border border-gray-200">
+            <div class="px-6 py-4 border-b bg-gray-50 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800">Tenant Compliance Heatmap</h3>
+                <button onclick="openModal('modal-overdue')" class="bg-red-50 text-red-600 text-xs font-bold border border-red-200 px-3 py-1.5 rounded hover:bg-red-100 transition animate-pulse">
+                    View 3 Overdue Issues
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <!-- Item 1 -->
+                <div class="flex justify-between p-4 border rounded items-center bg-white hover:shadow-md transition">
+                    <div class="flex items-center gap-4">
+                        <div class="w-1.5 h-12 bg-green-500 rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-gray-800">12 Grove St, Melbourne</div>
+                            <div class="text-xs text-gray-500">Tenant: Alex Patel</div>
+                        </div>
+                    </div>
+                    <span class="text-green-600 font-bold text-xs bg-green-50 px-3 py-1 rounded-full"><i class="fa-solid fa-check"></i> Paid On Time</span>
+                </div>
+                 <!-- Item 2 -->
+                 <div class="flex justify-between p-4 border border-red-100 rounded items-center bg-red-50 hover:shadow-md transition cursor-pointer" onclick="openModal('modal-overdue')">
+                    <div class="flex items-center gap-4">
+                        <div class="w-1.5 h-12 bg-red-500 rounded-full"></div>
+                        <div>
+                            <div class="font-bold text-gray-800">305 Anderson Rd, Docklands</div>
+                            <div class="text-xs text-gray-500">Tenant: Lisa Nguyen</div>
+                        </div>
+                    </div>
+                    <span class="text-red-600 font-bold text-xs bg-white border border-red-100 px-3 py-1 rounded-full"><i class="fa-solid fa-triangle-exclamation"></i> Late (5 Days)</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL: OVERDUE -->
+    <div id="modal-overdue" class="modal-overlay">
+        <div class="modal-content p-8">
+            <h2 class="text-xl font-bold text-red-600 mb-6 flex items-center gap-2"><i class="fa-solid fa-bell"></i> Overdue Issues</h2>
+            <div class="space-y-4">
+                <div class="p-4 bg-red-50 border border-red-100 rounded-lg">
+                    <div class="flex justify-between">
+                        <div class="font-bold text-[#0B1B3F]">Lisa Nguyen - 305 Anderson Rd</div>
+                        <span class="text-xs font-bold text-red-500">5 Days Late</span>
+                    </div>
+                    <div class="text-xs text-gray-600 mt-2">Rent of $740 was due on 25th. Auto-reminder sent 2 days ago.</div>
+                    <div class="mt-3 flex gap-2">
+                        <button class="text-xs bg-red-500 text-white px-3 py-1.5 rounded font-bold hover:bg-red-600">Send Breach Notice</button>
+                        <button class="text-xs bg-white border border-gray-300 text-gray-600 px-3 py-1.5 rounded font-bold">Contact Tenant</button>
+                    </div>
+                </div>
+                
+                 <div class="p-4 bg-orange-50 border border-orange-100 rounded-lg">
+                    <div class="flex justify-between">
+                        <div class="font-bold text-[#0B1B3F]">John Ellis - 44 Lygon St</div>
+                        <span class="text-xs font-bold text-orange-500">2 Days Late</span>
+                    </div>
+                    <div class="text-xs text-gray-600 mt-2">Rent of $650 due. Usually on time.</div>
+                    <div class="mt-3 flex gap-2">
+                        <button class="text-xs bg-orange-500 text-white px-3 py-1.5 rounded font-bold hover:bg-orange-600">Send SMS Reminder</button>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-overdue')" class="w-full mt-6 bg-gray-100 py-3 rounded font-bold hover:bg-gray-200">Close</button>
+        </div>
+    </div>
+    
+    <!-- MODAL: REPORTS -->
+    <div id="modal-report" class="modal-overlay">
+        <div class="modal-content p-8">
+            <h2 class="text-xl font-bold text-[#0B1B3F] mb-4">Generate Compliance Report</h2>
+            <p class="text-sm text-gray-500 mb-6">Select report type to export.</p>
+            <div class="space-y-2 mb-6">
+                <label class="flex items-center p-3 border rounded bg-gray-50 cursor-pointer">
+                    <input type="radio" name="report" checked class="mr-3"> Month End Summary (PDF)
+                </label>
+                <label class="flex items-center p-3 border rounded bg-white cursor-pointer">
+                    <input type="radio" name="report" class="mr-3"> Arrears List (Excel)
+                </label>
+                <label class="flex items-center p-3 border rounded bg-white cursor-pointer">
+                    <input type="radio" name="report" class="mr-3"> Full Compliance Audit (CSV)
+                </label>
+            </div>
+            <button onclick="handleFakeSubmit(event, 'modal-report', 'Report Downloaded')" class="w-full bg-[#1E5EFF] text-white py-3 rounded font-bold shadow-lg hover:bg-blue-600">Download Report</button>
+             <button onclick="closeModal('modal-report')" class="w-full mt-4 text-gray-400 font-bold text-sm">Cancel</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
