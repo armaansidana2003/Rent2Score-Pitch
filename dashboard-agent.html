@@ -3,147 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agent Dashboard - Rent2Score</title>
+    <title>Agent Dashboard - Anderson & Partners Realty</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .sidebar-agent { background-color: #0B1B3F; }
+        .nav-item-agent.active { background-color: #1E5EFF; color: white; border-left: 4px solid #60a5fa; }
+        .bg-navy-gradient { background: linear-gradient(135deg, #0B1B3F 0%, #1E5EFF 100%); }
+        .gauge-container { position: relative; width: 150px; height: 75px; overflow: hidden; }
+        .gauge-bg { width: 150px; height: 150px; border-radius: 50%; border: 15px solid #e5e7eb; border-bottom-color: transparent; border-left-color: transparent; transform: rotate(-45deg); }
+        .gauge-fill { position: absolute; top: 0; left: 0; width: 150px; height: 150px; border-radius: 50%; border: 15px solid #2ECC71; border-bottom-color: transparent; border-left-color: transparent; transform: rotate(15deg); }
+    </style>
 </head>
-<body class="bg-[#F4F6FA] flex h-screen overflow-hidden">
+<body class="bg-[#F0F2F5] flex h-screen overflow-hidden font-sans text-slate-800">
 
     <!-- SIDEBAR -->
-    <aside class="w-64 bg-[#1a1a1a] text-gray-300 flex flex-col z-20">
-        <div class="p-6 font-bold text-white uppercase tracking-widest text-lg flex items-center gap-2">
-            <div class="w-8 h-8 bg-[#F5A623] text-black flex items-center justify-center rounded font-bold">B</div> Brightstone
+    <aside class="w-72 sidebar-agent text-gray-300 flex flex-col flex-shrink-0 z-20 shadow-2xl">
+        <!-- 1. BRAND LOGO + AGENCY BRAND (Top Left - 140px) -->
+        <div class="p-6 flex flex-col items-center border-b border-white/5">
+            <img src="images/logo.png" alt="Rent2Score" style="width: 140px; height: auto;" class="mb-2" onerror="this.style.display='none';">
+            <div class="text-xs font-bold text-white tracking-widest uppercase opacity-70">Anderson & Partners</div>
         </div>
         
-        <nav class="flex-1 px-4 space-y-1 mt-4">
-            <a href="#" class="flex items-center gap-3 px-4 py-3 bg-[#F5A623] text-black rounded text-sm font-bold shadow-md shadow-orange-900/20">
-                <i class="fa-solid fa-gauge"></i> Overview
+        <nav class="flex-1 space-y-1 mt-4 overflow-y-auto custom-scrollbar">
+            <a href="#" class="nav-item-agent active flex items-center gap-4 px-6 py-3 text-sm font-medium">
+                <i class="fa-solid fa-house text-lg"></i> Dashboard
             </a>
-            
-            <div class="pt-6 pb-2 px-4 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Agency Tools</div>
-            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-city"></i> Managed Properties</a>
-            <a href="#" onclick="openModal('modal-report')" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-file-pdf"></i> Compliance Reports</a>
-            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-list"></i> Credit Logs</a>
-            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-users"></i> View All Tenants</a>
+            <a href="#" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-building-user text-lg"></i> Managed Properties
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-user-shield text-lg"></i> Compliance Heatmap
+            </a>
 
-            <div class="pt-6 pb-2 px-4 text-[10px] font-bold text-gray-600 uppercase tracking-widest">Actions</div>
-            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-star"></i> Rate Tenant</a>
-            <a href="#" class="flex items-center gap-3 px-4 py-2 hover:bg-white/10 rounded text-sm transition"><i class="fa-solid fa-clipboard-list"></i> Schedule Inspection</a>
+            <!-- 6. REPORTS SECTION IN MENU (Customized for Agents) -->
+            <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Reporting Hub</div>
+            <a href="#" onclick="openModal('modal-reports-agent')" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-sm font-medium transition text-white">
+                <i class="fa-solid fa-file-export"></i> Download Center
+            </a>
+
+            <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Account Tools</div>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition">
+                <i class="fa-solid fa-star"></i> Rate Tenant
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition">
+                <i class="fa-solid fa-calendar-check"></i> Schedule Inspection
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition">
+                <i class="fa-solid fa-wrench"></i> Schedule Maintenance
+            </a>
         </nav>
-        <div class="p-4 border-t border-gray-800"><a href="index.html" class="text-sm hover:text-white transition">Logout</a></div>
+
+        <!-- 4. LOGOUT AT BOTTOM OF SIDEBAR -->
+        <div class="p-6 border-t border-white/10 bg-black/10">
+            <a href="index.html" class="flex items-center gap-3 text-red-400 hover:text-red-300 transition font-bold text-sm">
+                <i class="fa-solid fa-power-off"></i> Logout
+            </a>
+        </div>
     </aside>
 
     <!-- MAIN CONTENT -->
-    <main class="flex-1 overflow-y-auto p-8 relative">
-        <header class="flex justify-between items-center mb-8">
-            <h1 class="text-2xl font-bold text-[#0B1B3F]">Agency Overview</h1>
-            <button onclick="handleFakeSubmit(event, null, 'Month End Report Exported')" class="bg-black text-white px-5 py-2.5 rounded text-xs font-bold uppercase tracking-wide hover:bg-gray-800 transition shadow-lg">
-                <i class="fa-solid fa-download mr-2"></i> Export Month End
-            </button>
+    <main class="flex-1 overflow-y-auto relative">
+        
+        <!-- HEADER -->
+        <header class="bg-white px-8 h-[88px] flex justify-between items-center sticky top-0 z-10 border-b border-gray-200">
+            <div class="flex flex-col">
+                <h1 class="text-xl font-bold text-[#0B1B3F]">Welcome, James!</h1>
+                <p class="text-xs text-gray-400 font-bold uppercase tracking-tighter">Anderson & Partners Realty Dashboard</p>
+            </div>
+            
+            <div class="flex items-center gap-6">
+                <!-- Notification / Badges -->
+                <div class="flex items-center gap-4">
+                    <div class="relative cursor-pointer">
+                        <i class="fa-solid fa-bell text-xl text-gray-300"></i>
+                        <span class="absolute -top-1 -right-1 bg-red-500 rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold text-white border-2 border-white">2</span>
+                    </div>
+                </div>
+
+                <!-- 2. & 3. PHOTO UPLOAD / PROFILE / MY ACCOUNT -->
+                <div class="flex items-center gap-3 pl-6 border-l border-gray-200 cursor-pointer group">
+                    <div class="relative">
+                        <img src="https://i.pravatar.cc/150?u=james" class="w-11 h-11 rounded-full border-2 border-white shadow-sm group-hover:border-blue-100 transition">
+                        <div class="absolute -bottom-0.5 -right-0.5 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-white shadow-sm" title="Upload Photo">
+                            <i class="fa-solid fa-camera text-white"></i>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-bold text-[#0B1B3F] leading-tight">James Adamson</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">My Account</div>
+                    </div>
+                </div>
+            </div>
         </header>
 
-        <!-- KPI Grid -->
-        <div class="grid grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded shadow-sm border-l-4 border-[#F5A623]">
-                <div class="text-xs font-bold text-gray-400 uppercase">Managed Properties</div>
-                <div class="text-3xl font-bold text-black mt-1">52</div>
-            </div>
-            <div class="bg-white p-6 rounded shadow-sm border-l-4 border-[#1E5EFF]">
-                <div class="text-xs font-bold text-gray-400 uppercase">Compliance Rate</div>
-                <div class="text-3xl font-bold text-black mt-1">98.2%</div>
-            </div>
-            <div class="bg-white p-6 rounded shadow-sm border-l-4 border-[#2ECC71]">
-                <div class="text-xs font-bold text-gray-400 uppercase">Credit Reported</div>
-                <div class="text-3xl font-bold text-black mt-1">183</div>
-            </div>
-        </div>
-
-        <!-- Compliance Heatmap -->
-        <div class="bg-white rounded shadow-sm border border-gray-200">
-            <div class="px-6 py-4 border-b bg-gray-50 flex justify-between items-center">
-                <h3 class="font-bold text-gray-800">Tenant Compliance Heatmap</h3>
-                <button onclick="openModal('modal-overdue')" class="bg-red-50 text-red-600 text-xs font-bold border border-red-200 px-3 py-1.5 rounded hover:bg-red-100 transition animate-pulse">
-                    View 3 Overdue Issues
-                </button>
-            </div>
-            <div class="p-6 space-y-4">
-                <!-- Item 1 -->
-                <div class="flex justify-between p-4 border rounded items-center bg-white hover:shadow-md transition">
-                    <div class="flex items-center gap-4">
-                        <div class="w-1.5 h-12 bg-green-500 rounded-full"></div>
-                        <div>
-                            <div class="font-bold text-gray-800">12 Grove St, Melbourne</div>
-                            <div class="text-xs text-gray-500">Tenant: Alex Patel</div>
-                        </div>
-                    </div>
-                    <span class="text-green-600 font-bold text-xs bg-green-50 px-3 py-1 rounded-full"><i class="fa-solid fa-check"></i> Paid On Time</span>
+        <div class="p-8 max-w-[1800px] mx-auto space-y-6">
+            
+            <!-- KPI CARDS (Matching Screenshot) -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="bg-[#2ECC71] p-5 rounded-xl flex items-center gap-4 shadow-lg text-white">
+                    <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-circle-check"></i></div>
+                    <div><div class="text-3xl font-extrabold">137</div><div class="text-[10px] font-bold uppercase">Verified Tenants</div></div>
                 </div>
-                 <!-- Item 2 -->
-                 <div class="flex justify-between p-4 border border-red-100 rounded items-center bg-red-50 hover:shadow-md transition cursor-pointer" onclick="openModal('modal-overdue')">
-                    <div class="flex items-center gap-4">
-                        <div class="w-1.5 h-12 bg-red-500 rounded-full"></div>
-                        <div>
-                            <div class="font-bold text-gray-800">305 Anderson Rd, Docklands</div>
-                            <div class="text-xs text-gray-500">Tenant: Lisa Nguyen</div>
+                <div class="bg-[#1E5EFF] p-5 rounded-xl flex items-center gap-4 shadow-lg text-white">
+                    <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-house"></i></div>
+                    <div><div class="text-3xl font-extrabold">27</div><div class="text-[10px] font-bold uppercase">Active Properties</div></div>
+                </div>
+                <div class="bg-[#0B1B3F] p-5 rounded-xl flex items-center gap-4 shadow-lg text-white">
+                    <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <div><div class="text-3xl font-extrabold">$152,200</div><div class="text-[10px] font-bold uppercase">Rent Verified</div></div>
+                </div>
+                <div class="bg-[#E74C3C] p-5 rounded-xl flex items-center gap-4 shadow-lg text-white">
+                    <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-message"></i></div>
+                    <div><div class="text-3xl font-extrabold">8</div><div class="text-[10px] font-bold uppercase">Pending Issues</div></div>
+                </div>
+            </div>
+
+            <div class="flex gap-8">
+                <!-- AT RISK TENANTS TABLE -->
+                <div class="flex-1 space-y-6">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                        <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                            <h3 class="font-bold text-[#0B1B3F]">At Risk Tenants</h3>
+                        </div>
+
+                        <!-- 7. FILTER SECTION -->
+                        <div class="p-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
+                            <div class="relative">
+                                <input type="text" placeholder="Search for Tenants" class="w-full pl-10 pr-4 py-2 border rounded-lg text-sm bg-gray-50 outline-none">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                            <select class="border rounded-lg p-2 text-sm bg-gray-50 text-gray-500">
+                                <option>Select a Property...</option>
+                            </select>
+                            <div class="flex gap-2">
+                                <button class="bg-white border border-gray-200 px-4 py-2 rounded-lg text-xs font-bold text-gray-600">Filter</button>
+                                <button class="bg-gray-100 px-3 py-2 rounded-lg text-gray-400"><i class="fa-solid fa-list-ul"></i></button>
+                            </div>
+                        </div>
+
+                        <table class="w-full text-sm text-left">
+                            <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold tracking-widest border-b border-gray-100">
+                                <tr>
+                                    <th class="px-6 py-4">Tenant ↑</th>
+                                    <th class="px-6 py-4 text-center">Property ↑</th>
+                                    <th class="px-6 py-4 text-center">Rent Due ↑</th>
+                                    <th class="px-6 py-4 text-right">Scores</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100">
+                                <!-- Row 1 -->
+                                <tr class="hover:bg-gray-50 transition cursor-pointer">
+                                    <td class="px-6 py-4 flex items-center gap-3">
+                                        <img src="https://i.pravatar.cc/100?img=20" class="w-10 h-10 rounded-full shadow-sm">
+                                        <div><div class="font-bold text-gray-800">Emma Johnson</div><div class="text-[10px] text-gray-400">12 Grove St, Melbourne VIC</div></div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex flex-col items-center">
+                                            <div class="flex items-center gap-1 font-bold text-gray-700 text-xs"><span class="bg-blue-900 text-white px-1.5 rounded-[2px] text-[8px]">ANZ</span> 1030</div>
+                                            <div class="text-[10px] text-gray-400 uppercase">Current</div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="font-bold text-gray-800">$1,500 <span class="text-orange-500 text-[10px] ml-1">Over 2 Days</span></div>
+                                        <div class="text-[9px] text-red-500 font-bold uppercase tracking-tighter">Overdue 11 Days</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right"><button class="bg-[#F5A623] text-white px-4 py-2 rounded text-[10px] font-black uppercase shadow-sm">Flag Overdue</button></td>
+                                </tr>
+                                <!-- Row 2 (Alex) -->
+                                <tr class="bg-blue-50/50 border-l-4 border-blue-500 cursor-pointer">
+                                    <td class="px-6 py-4 flex items-center gap-3">
+                                        <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full shadow-sm">
+                                        <div><div class="font-bold text-blue-600">Alex Patel</div><div class="text-[10px] text-gray-400">77 York St, Richmond VIC</div></div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex items-center justify-center gap-1 font-bold text-gray-700 text-xs"><span class="bg-red-700 text-white px-1.5 rounded-[2px] text-[8px]">STAE</span> 7800</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center"><div class="font-bold text-gray-800">$1,650 <span class="text-orange-500 text-[10px] ml-1">Over 1 Day</span></div></td>
+                                    <td class="px-6 py-4 text-right"><button class="bg-yellow-50 text-orange-400 border border-orange-200 px-4 py-2 rounded text-[10px] font-black uppercase">Flag Moderate Risk</button></td>
+                                </tr>
+                                <!-- Row 3 (Mia) -->
+                                <tr class="hover:bg-gray-50 transition cursor-pointer">
+                                    <td class="px-6 py-4 flex items-center gap-3">
+                                        <img src="https://i.pravatar.cc/100?img=35" class="w-10 h-10 rounded-full shadow-sm">
+                                        <div><div class="font-bold text-gray-800">Mia Thompson</div><div class="text-[10px] text-gray-400">331 High St, Richmond VIC</div></div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center">
+                                        <div class="flex items-center justify-center gap-1 font-bold text-gray-700 text-xs"><span class="bg-black text-white px-1.5 rounded-[2px] text-[8px]">NAB</span> 1670</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-center"><div class="font-bold text-gray-800">$1,900 <span class="text-red-500 text-[10px] ml-1">Over 2 Days</span></div></td>
+                                    <td class="px-6 py-4 text-right"><button class="bg-[#E74C3C] text-white px-10 py-2 rounded text-[10px] font-black uppercase">High Risk</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="p-4 bg-gray-50/50 text-center border-t">
+                            <button class="bg-white border border-gray-300 text-gray-500 px-6 py-2 rounded-lg text-xs font-bold uppercase hover:bg-gray-50 shadow-sm transition">View All Tenants</button>
                         </div>
                     </div>
-                    <span class="text-red-600 font-bold text-xs bg-white border border-red-100 px-3 py-1 rounded-full"><i class="fa-solid fa-triangle-exclamation"></i> Late (5 Days)</span>
+                </div>
+
+                <!-- RIGHT SIDEBAR (Matching Layout) -->
+                <div class="w-80 flex flex-col gap-6 flex-shrink-0">
+                    
+                    <!-- Quick Overview Card -->
+                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 text-sm mb-4">Quick Overview</h3>
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
+                            <div class="flex-1">
+                                <div class="font-bold text-sm text-[#0B1B3F]">John Ellis</div>
+                                <div class="text-[10px] text-gray-400">44 Lygon St, Brunswick VIC</div>
+                                <div class="text-[10px] text-red-500 font-bold mt-1">$1,700 Overdue 5 Days</div>
+                            </div>
+                            <i class="fa-solid fa-circle-check text-green-500"></i>
+                        </div>
+                        <button class="w-full bg-gray-50 border border-gray-200 text-gray-500 py-2 rounded-lg font-bold text-[10px] uppercase hover:bg-gray-100 transition">View 3 Overdue Issues</button>
+                    </div>
+
+                    <!-- 5. LANDLORD ACTIVITY & DYNAMIC TENANT PROFILE -->
+                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 text-sm mb-4">Landlord Activity</h3>
+                        <div class="flex items-center gap-3">
+                            <img src="https://i.pravatar.cc/100?u=bill" class="w-10 h-10 rounded-full">
+                            <div>
+                                <div class="font-bold text-sm text-[#0B1B3F]">Bill Anderson</div>
+                                <div class="text-[10px] text-gray-400">Flagged Due in 12 Days ago <span class="text-blue-500">Success</span></div>
+                            </div>
+                            <span class="ml-auto text-[9px] text-gray-400">5 Apr ago</span>
+                        </div>
+                    </div>
+
+                    <!-- Mortgage Readiness (Investment Potential) -->
+                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
+                        <h3 class="font-bold text-gray-800 text-sm mb-4">Mortgage Readiness</h3>
+                        <div class="flex items-center flex-col text-center">
+                            <div class="gauge-container">
+                                <div class="gauge-bg"></div>
+                                <div class="gauge-fill"></div>
+                                <div class="absolute inset-0 flex items-center justify-center mt-6">
+                                    <span class="text-3xl font-black text-[#0B1B3F]">24%</span>
+                                </div>
+                            </div>
+                            <div class="text-orange-400 font-black text-lg mt-2 uppercase">24% High Risk</div>
+                        </div>
+                        <div class="text-[10px] space-y-2 mt-4 pt-4 border-t border-gray-100 font-bold">
+                             <div class="flex items-center gap-2 text-red-500 uppercase"><span class="w-2 h-2 bg-red-500 rounded-full"></span> Adam Collins - Vacationer Risk</div>
+                             <div class="flex items-center gap-2 text-orange-500 uppercase"><span class="w-2 h-2 bg-orange-500 rounded-full"></span> Offering 4 weeks free management!</div>
+                        </div>
+                        <button class="w-full mt-5 bg-green-600 text-white py-2.5 rounded-lg font-bold text-[10px] uppercase shadow-md shadow-green-100 hover:bg-green-700 transition">View Eligible Leads</button>
+                    </div>
+
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- MODAL: OVERDUE -->
-    <div id="modal-overdue" class="modal-overlay">
-        <div class="modal-content p-8">
-            <h2 class="text-xl font-bold text-red-600 mb-6 flex items-center gap-2"><i class="fa-solid fa-bell"></i> Overdue Issues</h2>
-            <div class="space-y-4">
-                <div class="p-4 bg-red-50 border border-red-100 rounded-lg">
-                    <div class="flex justify-between">
-                        <div class="font-bold text-[#0B1B3F]">Lisa Nguyen - 305 Anderson Rd</div>
-                        <span class="text-xs font-bold text-red-500">5 Days Late</span>
-                    </div>
-                    <div class="text-xs text-gray-600 mt-2">Rent of $740 was due on 25th. Auto-reminder sent 2 days ago.</div>
-                    <div class="mt-3 flex gap-2">
-                        <button class="text-xs bg-red-500 text-white px-3 py-1.5 rounded font-bold hover:bg-red-600">Send Breach Notice</button>
-                        <button class="text-xs bg-white border border-gray-300 text-gray-600 px-3 py-1.5 rounded font-bold">Contact Tenant</button>
-                    </div>
+    <!-- MODAL: REPORTS HUB FOR AGENTS -->
+    <div id="modal-reports-agent" class="modal-overlay">
+        <div class="modal-content p-10 max-w-2xl">
+            <h2 class="text-2xl font-bold text-[#0B1B3F] mb-2">Agency Reporting Hub</h2>
+            <p class="text-gray-500 mb-8">Export data across your entire portfolio for compliance and EOFY.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 border border-gray-100 rounded-2xl bg-gray-50 hover:border-blue-400 transition cursor-pointer">
+                    <div class="bg-blue-100 text-blue-600 w-10 h-10 rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-city"></i></div>
+                    <div class="font-bold text-[#0B1B3F] text-sm">Active Properties</div>
+                    <div class="text-[10px] text-gray-400 mt-1">Full list with lease end dates.</div>
                 </div>
-                
-                 <div class="p-4 bg-orange-50 border border-orange-100 rounded-lg">
-                    <div class="flex justify-between">
-                        <div class="font-bold text-[#0B1B3F]">John Ellis - 44 Lygon St</div>
-                        <span class="text-xs font-bold text-orange-500">2 Days Late</span>
-                    </div>
-                    <div class="text-xs text-gray-600 mt-2">Rent of $650 due. Usually on time.</div>
-                    <div class="mt-3 flex gap-2">
-                        <button class="text-xs bg-orange-500 text-white px-3 py-1.5 rounded font-bold hover:bg-orange-600">Send SMS Reminder</button>
-                    </div>
+                <div class="p-4 border border-gray-100 rounded-2xl bg-gray-50 hover:border-blue-400 transition cursor-pointer">
+                    <div class="bg-green-100 text-green-600 w-10 h-10 rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="font-bold text-[#0B1B3F] text-sm">Rent Verifications</div>
+                    <div class="text-[10px] text-gray-400 mt-1">Audit trail of all verified payments.</div>
+                </div>
+                <div class="p-4 border border-gray-100 rounded-2xl bg-gray-50 hover:border-blue-400 transition cursor-pointer">
+                    <div class="bg-orange-100 text-orange-600 w-10 h-10 rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-wrench"></i></div>
+                    <div class="font-bold text-[#0B1B3F] text-sm">Maintenance Log</div>
+                    <div class="text-[10px] text-gray-400 mt-1">Pending vs Completed requests.</div>
+                </div>
+                <div class="p-4 border border-gray-100 rounded-2xl bg-gray-50 hover:border-blue-400 transition cursor-pointer">
+                    <div class="bg-purple-100 text-purple-600 w-10 h-10 rounded-lg flex items-center justify-center mb-3"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                    <div class="font-bold text-[#0B1B3F] text-sm">Rental Ledger</div>
+                    <div class="text-[10px] text-gray-400 mt-1">Agency-wide ledger (PDF/CSV).</div>
                 </div>
             </div>
-            <button onclick="closeModal('modal-overdue')" class="w-full mt-6 bg-gray-100 py-3 rounded font-bold hover:bg-gray-200">Close</button>
-        </div>
-    </div>
-    
-    <!-- MODAL: REPORTS -->
-    <div id="modal-report" class="modal-overlay">
-        <div class="modal-content p-8">
-            <h2 class="text-xl font-bold text-[#0B1B3F] mb-4">Generate Compliance Report</h2>
-            <p class="text-sm text-gray-500 mb-6">Select report type to export.</p>
-            <div class="space-y-2 mb-6">
-                <label class="flex items-center p-3 border rounded bg-gray-50 cursor-pointer">
-                    <input type="radio" name="report" checked class="mr-3"> Month End Summary (PDF)
-                </label>
-                <label class="flex items-center p-3 border rounded bg-white cursor-pointer">
-                    <input type="radio" name="report" class="mr-3"> Arrears List (Excel)
-                </label>
-                <label class="flex items-center p-3 border rounded bg-white cursor-pointer">
-                    <input type="radio" name="report" class="mr-3"> Full Compliance Audit (CSV)
-                </label>
-            </div>
-            <button onclick="handleFakeSubmit(event, 'modal-report', 'Report Downloaded')" class="w-full bg-[#1E5EFF] text-white py-3 rounded font-bold shadow-lg hover:bg-blue-600">Download Report</button>
-             <button onclick="closeModal('modal-report')" class="w-full mt-4 text-gray-400 font-bold text-sm">Cancel</button>
+            <button onclick="closeModal('modal-reports-agent')" class="w-full mt-8 bg-gray-100 text-gray-600 py-4 rounded-2xl font-bold hover:bg-gray-200 transition">Close Reporting Hub</button>
         </div>
     </div>
 
