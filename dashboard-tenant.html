@@ -7,116 +7,191 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Exact Gradients from Screenshot */
+        .card-green { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); }
+        .card-orange { background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%); }
+        
+        /* Custom Gauge CSS */
+        .gauge-half {
+            width: 120px; height: 60px;
+            background: conic-gradient(#ffffff 0% 70%, rgba(255,255,255,0.3) 70% 100%);
+            border-top-left-radius: 120px; border-top-right-radius: 120px;
+            transform: rotate(-90deg);
+        }
+        
+        /* Sidebar Active State */
+        .sidebar-item-active {
+            background-color: #1a2b55;
+            border-left: 4px solid #3b82f6;
+        }
+    </style>
 </head>
-<body class="bg-[#F4F6FA] flex h-screen overflow-hidden">
+<body class="bg-[#F0F2F5] flex h-screen overflow-hidden font-sans text-slate-800">
 
     <!-- SIDEBAR -->
-    <aside class="w-64 bg-white border-r border-gray-200 flex flex-col z-20">
-        <div class="p-6 text-2xl font-bold text-[#0B1B3F] flex gap-2 items-center">
-            <i class="fa-solid fa-house text-[#1E5EFF]"></i> Rent2Score
+    <aside class="w-72 bg-[#0B1B3F] text-gray-300 flex flex-col flex-shrink-0 z-20">
+        <!-- BIG LOGO (Top Left - 140px) -->
+        <div class="p-6 flex items-center gap-3">
+            <img src="images/logo.png" alt="Rent2Score" style="width: 140px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <!-- Fallback text -->
+            <div class="hidden text-2xl font-bold text-white tracking-tight items-center gap-2">
+                <i class="fa-solid fa-house"></i> RentScore
+            </div>
         </div>
         
-        <nav class="flex-1 px-4 space-y-1 mt-2 overflow-y-auto custom-scrollbar">
-            <a href="#" class="nav-item-light active flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold">
-                <i class="fa-solid fa-chart-line"></i> Dashboard
+        <!-- UPDATED SIDEBAR MENU -->
+        <nav class="flex-1 space-y-1 mt-4 overflow-y-auto custom-scrollbar">
+            <a href="#" class="sidebar-item-active flex items-center gap-4 px-6 py-4 text-white text-sm font-medium">
+                <i class="fa-solid fa-house text-lg"></i> Dashboard
             </a>
-            
-            <div class="pt-4 pb-1 px-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">My Rental</div>
-            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
-                <i class="fa-solid fa-magnifying-glass"></i> Search Properties
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-gauge-high text-lg"></i> Rent Score
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
-                <i class="fa-solid fa-calendar-check"></i> Schedule Inspection
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-credit-card text-lg"></i> Payments
             </a>
-            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
-                <i class="fa-solid fa-hammer"></i> Lodge Maintenance
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-chart-line text-lg"></i> Credit Reporting
             </a>
-
-            <div class="pt-4 pb-1 px-4 text-[10px] font-bold text-gray-400 uppercase tracking-wider">Privacy & Feedback</div>
-            <a href="#" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
-                <i class="fa-solid fa-star"></i> Rate Landlord/Agent
+            <!-- NEW "MY DATA VAULT" LINK -->
+            <a href="dashboard-vault.html" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-shield-halved text-lg"></i> My Data Vault
             </a>
-            <a href="#" onclick="openModal('modal-vault')" class="flex items-center gap-3 px-4 py-2.5 text-gray-500 hover:bg-gray-50 hover:text-[#1E5EFF] rounded-xl text-sm font-medium transition">
-                <i class="fa-solid fa-trash"></i> Manage Documents
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-gear text-lg"></i> Settings
             </a>
         </nav>
 
-        <div class="p-4 border-t border-gray-100">
-            <a href="index.html" class="flex items-center gap-3 px-4 py-2 text-red-500 hover:bg-red-50 rounded-lg text-sm font-bold transition">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i> Logout
+        <!-- LOGOUT -->
+        <div class="p-6 border-t border-white/10">
+            <a href="index.html" class="flex items-center gap-3 text-gray-400 hover:text-white transition font-bold text-sm">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
             </a>
         </div>
     </aside>
 
     <!-- MAIN CONTENT -->
-    <main class="flex-1 overflow-y-auto p-8 relative">
-        <!-- Header -->
-        <header class="flex justify-between items-center mb-8">
-            <div>
-                <h1 class="text-2xl font-bold text-[#0B1B3F]">Hi Sarah, Your Dashboard</h1>
-                <p class="text-sm text-gray-500">Rent due in 12 days • <span class="text-green-500 font-bold">Subscription Active</span></p>
-            </div>
-            <div class="flex items-center gap-4">
+    <main class="flex-1 overflow-y-auto relative">
+        
+        <!-- HEADER -->
+        <header class="bg-[#0B1B3F] text-white px-8 py-3 flex justify-end items-center shadow-md border-l border-white/5">
+            <div class="flex items-center gap-6">
+                <!-- Notification -->
                 <div class="relative cursor-pointer">
-                    <i class="fa-regular fa-bell text-xl text-gray-400 hover:text-[#1E5EFF]"></i>
-                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#F5A623] rounded-full border-2 border-white"></span>
+                    <i class="fa-solid fa-bell text-xl text-gray-300 hover:text-white transition"></i>
+                    <div class="absolute -top-1 -right-1 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold border-2 border-[#0B1B3F]">2</div>
                 </div>
-                <button onclick="openModal('modal-pay')" class="bg-[#1E5EFF] text-white px-6 py-2.5 rounded-xl font-bold shadow-lg shadow-blue-200 hover:bg-blue-600 hover:-translate-y-0.5 transition">
-                    Pay Rent
-                </button>
+
+                <!-- PROFILE / PHOTO UPLOAD / MY ACCOUNT -->
+                <div class="flex items-center gap-3 pl-6 border-l border-white/10 cursor-pointer group">
+                    <div class="relative">
+                        <img src="https://i.pravatar.cc/150?u=sarah" class="w-10 h-10 rounded-full border-2 border-white/50 group-hover:border-white transition">
+                        <!-- Photo Upload Icon -->
+                        <div class="absolute -bottom-1 -right-1 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-[#0B1B3F]" title="Upload Photo">
+                            <i class="fa-solid fa-camera"></i>
+                        </div>
+                    </div>
+                    <div class="text-right hidden md:block">
+                        <div class="text-sm font-bold leading-tight">Sarah Martin</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">My Account</div>
+                    </div>
+                    <i class="fa-solid fa-chevron-down text-xs text-gray-500 group-hover:text-white transition"></i>
+                </div>
             </div>
         </header>
 
-        <!-- Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div class="p-8 max-w-[1600px] mx-auto space-y-6">
             
-            <!-- Rent Score Card -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 relative overflow-hidden group hover:shadow-md transition">
-                <div class="flex justify-between items-start">
-                    <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wide">Rent Score</h3>
-                    <span class="bg-green-100 text-green-600 px-2 py-0.5 rounded text-[10px] font-bold">EXCELLENT</span>
-                </div>
-                <div class="text-center mt-4 relative z-10">
-                    <div class="text-6xl font-extrabold text-[#2ECC71] tracking-tight">742</div>
-                    <div class="text-sm text-gray-400 font-medium mt-1">out of 850</div>
-                </div>
-                <!-- Progress Bar -->
-                <div class="mt-6 w-full bg-gray-100 rounded-full h-2">
-                    <div class="bg-[#2ECC71] h-2 rounded-full" style="width: 87%"></div>
-                </div>
-                <button onclick="openModal('modal-score')" class="w-full mt-6 py-2 border border-[#1E5EFF] text-[#1E5EFF] rounded-xl text-xs font-bold hover:bg-blue-50 transition">
-                    View Full Breakdown
-                </button>
-            </div>
+            <h1 class="text-3xl font-bold text-[#0B1B3F]">Welcome, Sarah!</h1>
 
-            <!-- Home Loan Readiness -->
-            <div class="bg-gradient-to-br from-[#FFF8E1] to-white p-6 rounded-2xl shadow-sm border border-orange-100 hover:shadow-md transition">
-                <div class="flex justify-between items-start">
-                    <h3 class="text-gray-400 text-xs font-bold uppercase tracking-wide">Home Loan Readiness</h3>
-                    <i class="fa-solid fa-house-chimney text-[#F5A623] text-2xl opacity-20"></i>
-                </div>
-                <div class="flex items-end gap-1 mt-4">
-                    <span class="text-5xl font-bold text-[#F5A623]">82%</span>
-                </div>
-                <p class="text-sm text-orange-500 font-bold mt-2">Getting Close!</p>
-                <div class="mt-4 space-y-2">
-                    <div class="flex items-center gap-2 text-xs font-medium text-gray-600"><i class="fa-solid fa-check-circle text-green-500"></i> Consistent Payments</div>
-                    <div class="flex items-center gap-2 text-xs font-medium text-gray-600"><i class="fa-solid fa-info-circle text-blue-500"></i> Reduce Credit Card Limit</div>
+            <!-- Rent Due Bar -->
+            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
+                <h2 class="text-lg font-bold text-gray-800 mb-3">Next Rent Due: $1,600 - 1st May</h2>
+                <div class="flex items-center gap-2">
+                    <span class="bg-[#002B5C] text-white text-xs font-bold px-2 py-1 rounded">ANZ</span>
+                    <span class="text-blue-500"><i class="fa-solid fa-circle-check"></i></span>
+                    <span class="text-gray-700 font-bold text-sm">3210 Account Linked</span>
+                    <span class="text-green-600 font-bold text-sm flex items-center gap-1 ml-3"><i class="fa-solid fa-check"></i> Rent Verified</span>
+                    <span class="text-green-600"><i class="fa-solid fa-check"></i></span>
                 </div>
             </div>
 
-            <!-- Data Vault -->
-            <div class="bg-[#0B1B3F] text-white p-6 rounded-2xl shadow-xl relative overflow-hidden group">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-[#1E5EFF] rounded-full blur-3xl opacity-20 -mr-10 -mt-10 group-hover:opacity-30 transition"></div>
-                <h3 class="opacity-60 text-xs font-bold uppercase tracking-wide">Privacy Snapshot</h3>
-                <div class="flex justify-between mt-6 relative z-10">
-                    <div><div class="text-3xl font-bold">6</div><div class="text-[10px] opacity-60 uppercase">Docs Stored</div></div>
-                    <div><div class="text-3xl font-bold text-[#F5A623]">1</div><div class="text-[10px] opacity-60 uppercase">Expiring</div></div>
-                    <div><div class="text-3xl font-bold text-[#2ECC71]">2</div><div class="text-[10px] opacity-60 uppercase">Active Shares</div></div>
+            <h3 class="text-gray-600 font-bold text-lg">Lease Info</h3>
+
+            <!-- TOP ROW CARDS -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-12 gap-6">
+                
+                <div class="xl:col-span-5 bg-score-green card-green rounded-xl p-6 text-white relative overflow-hidden shadow-md flex flex-col justify-between h-64">
+                    <div>
+                        <h3 class="text-sm font-bold opacity-90">Renter Credit Score</h3>
+                        <div class="flex items-baseline gap-3 mt-2"><span class="text-7xl font-bold">745</span><span class="text-2xl font-bold opacity-80">GOOD</span></div>
+                        <p class="text-sm font-bold mt-2 opacity-90">On-Time Payments: 11/11</p>
+                    </div>
+                    <div class="absolute right-4 top-12"><div class="gauge-half relative"><div class="absolute bottom-0 left-1/2 w-1 h-14 bg-white origin-bottom transform rotate-45 rounded-full"></div></div></div>
+                    <button onclick="openModal('modal-score')" class="bg-[#1a2b55] hover:bg-black text-white text-xs font-bold px-6 py-3 rounded shadow-md w-max transition">VIEW FULL REPORT</button>
                 </div>
-                <button onclick="openModal('modal-vault')" class="w-full mt-6 bg-white/10 hover:bg-white/20 text-white text-xs font-bold py-3 rounded-xl transition backdrop-blur-sm border border-white/5">
-                    Manage Data Vault
-                </button>
+
+                <div class="xl:col-span-4 bg-loan-orange card-orange rounded-xl p-6 text-white relative overflow-hidden shadow-md flex flex-col justify-between h-64">
+                    <div>
+                        <h3 class="text-sm font-bold opacity-90">Home Loan Readiness</h3>
+                        <div class="flex items-baseline gap-1 mt-2"><span class="text-7xl font-bold">82</span><span class="text-4xl font-bold">%</span></div>
+                        <p class="text-lg font-bold mt-1">Getting Close!</p>
+                    </div>
+                    <div class="absolute right-4 top-8 text-white opacity-40"><i class="fa-solid fa-house-chimney text-8xl"></i></div>
+                    <div class="bg-white/20 backdrop-blur-md rounded px-4 py-2 text-xs font-bold flex items-center justify-between cursor-pointer hover:bg-white/30 transition"><span>Fast Track: Add $5K to Savings</span><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+
+                <div class="xl:col-span-3 bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-64 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-gray-800 font-bold text-sm mb-4">Mortgage Readiness Summary</h3>
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="https://i.pravatar.cc/150?u=mia" class="w-10 h-10 rounded-full">
+                            <div><div class="text-[10px] text-gray-500 font-bold">Est $1,000</div><div class="text-[10px] font-bold text-gray-800">Set $65 Goal!</div></div>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-500 mt-0.5 text-sm"></i><span class="text-xs font-bold text-gray-700">Boost Your Credit Score</span></div>
+                            <div class="flex items-start gap-2"><i class="fa-solid fa-circle-arrow-down text-orange-500 mt-0.5 text-sm"></i><span class="text-xs font-bold text-gray-700">Reduce Debts Before Applying</span></div>
+                            <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-500 mt-0.5 text-sm"></i><span class="text-xs font-bold text-gray-700">Get Pre-Approval Advice</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTTOM ROW GRID -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-12 gap-6">
+                
+                <div class="xl:col-span-5 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
+                    <h3 class="font-bold text-gray-800 text-lg mb-4">Payment History</h3>
+                    <div class="space-y-5">
+                        <div class="flex justify-between items-center text-sm pb-2 border-b border-gray-100"><div class="flex items-center gap-3"><span class="text-gray-500 font-medium">02 Apr</span><span class="text-gray-600">On-Time Payment</span><i class="fa-solid fa-circle-check text-green-500"></i></div><span class="font-bold text-gray-800">~$1,600</span></div>
+                        <div class="flex justify-between items-center text-sm pb-2 border-b border-gray-100"><div class="flex items-center gap-3"><span class="text-gray-500 font-medium">01 Mar</span><span class="text-gray-600">On-Time Payment</span><i class="fa-solid fa-circle-check text-green-500"></i></div><span class="font-bold text-gray-800">~$1,600</span></div>
+                        <div class="flex justify-between items-center text-sm"><div class="flex items-center gap-3"><span class="text-gray-500 font-medium">01 Feb</span><span class="text-gray-600">On-Time Payment</span><i class="fa-solid fa-circle-check text-green-500"></i></div><span class="font-bold text-gray-800">~$1,700</span></div>
+                    </div>
+                </div>
+
+                <div class="xl:col-span-4 bg-white rounded-xl p-6 shadow-sm border border-gray-200 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-gray-800 text-lg mb-4">Savings Tracker</h3>
+                        <div class="mb-2 text-sm text-gray-600">Saving for Deposit</div>
+                        <div class="w-full bg-gray-200 rounded-full h-4 mb-2"><div class="bg-[#2d6a4f] h-4 rounded-full" style="width: 78%"></div></div>
+                        <div class="flex justify-between items-center mb-6"><span class="font-bold text-gray-800 text-xl">$19,600 / $25,000</span><span class="text-xs font-bold text-gray-500">78% of Goal</span></div>
+                    </div>
+                    <button class="w-full bg-[#1a2b55] text-white py-3 rounded text-xs font-bold uppercase shadow-md hover:bg-black transition">BOOST SAVINGS ▼</button>
+                </div>
+
+                <div class="xl:col-span-3 bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex flex-col justify-between items-center text-center bg-gradient-to-b from-white to-gray-50">
+                    <div class="flex items-center gap-3 w-full mb-2">
+                        <div class="bg-orange-500 text-white w-12 h-12 rounded flex items-center justify-center text-2xl shadow-sm"><i class="fa-solid fa-gift"></i></div>
+                        <div class="text-left"><div class="font-bold text-gray-800">Referral Program</div><div class="text-xs text-gray-500">Get 1 Month Virtual!</div></div>
+                    </div>
+                    <button class="w-full bg-[#40916c] hover:bg-[#2d6a4f] text-white py-3 rounded text-xs font-bold uppercase shadow-md transition mt-4">REFER FRIENDS ▼</button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg p-3 flex justify-center items-center gap-3 border border-gray-200 shadow-sm">
+                <div class="flex -space-x-2"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=12"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=32"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=5"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=8"></div>
+                <p class="text-sm text-gray-600 font-medium">You're not alone! <span class="font-bold text-[#0B1B3F]">6,300+ Aussies</span> are building credit through RentScore.</p>
             </div>
         </div>
     </main>
@@ -131,19 +206,49 @@
                         <div class="text-xs text-gray-500 font-bold uppercase">Amount Due</div>
                         <div class="text-lg font-bold text-[#0B1B3F]">May 2024 Rent</div>
                     </div>
-                    <span class="font-bold text-2xl text-[#1E5EFF]">$1,500.00</span>
+                    <span class="font-bold text-2xl text-[#1E5EFF]">$1,600.00</span>
                 </div>
                 <div class="mb-6">
                     <label class="text-xs font-bold text-gray-500 uppercase mb-2 block">Payment Method</label>
                     <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 font-medium outline-none focus:border-[#1E5EFF]">
-                        <option>ANZ Account (...3210)</option>
+                        <option>ANZ Account (Linked ...3210)</option>
                         <option>Visa Debit (...4422)</option>
-                        <option>+ Add New Method</option>
                     </select>
                 </div>
-                <button type="submit" class="w-full bg-[#2ECC71] text-white py-3.5 rounded-xl font-bold hover:bg-green-600 transition shadow-lg">Confirm Payment</button>
+                <button type="submit" class="w-full bg-[#1E5EFF] text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">Confirm Payment</button>
             </form>
             <button onclick="closeModal('modal-pay')" class="w-full text-center text-gray-400 font-bold text-sm mt-4 hover:text-gray-600">Cancel</button>
+        </div>
+    </div>
+
+    <!-- MODAL: REPORTS -->
+    <div id="modal-reports" class="modal-overlay">
+        <div class="modal-content p-8">
+            <h2 class="text-xl font-bold text-[#0B1B3F] mb-2">My Reports</h2>
+            <p class="text-sm text-gray-500 mb-6">Download your official rental history and documents.</p>
+            <div class="space-y-3">
+                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-blue-100 text-[#1E5EFF] w-10 h-10 rounded-lg flex items-center justify-center text-lg"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+                        <div>
+                            <div class="font-bold text-[#0B1B3F] text-sm">Full Rental Ledger</div>
+                            <div class="text-xs text-gray-400">PDF • 12 Months History</div>
+                        </div>
+                    </div>
+                    <button class="text-[#1E5EFF]"><i class="fa-solid fa-download"></i></button>
+                </div>
+                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <div class="bg-green-100 text-green-600 w-10 h-10 rounded-lg flex items-center justify-center text-lg"><i class="fa-solid fa-chart-line"></i></div>
+                        <div>
+                            <div class="font-bold text-[#0B1B3F] text-sm">Credit Score History</div>
+                            <div class="text-xs text-gray-400">PDF • Credit Agencies</div>
+                        </div>
+                    </div>
+                    <button class="text-[#1E5EFF]"><i class="fa-solid fa-download"></i></button>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-reports')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Close</button>
         </div>
     </div>
 
@@ -152,7 +257,7 @@
         <div class="modal-content p-8">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-bold text-[#0B1B3F]">Rent Score Breakdown</h2>
-                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">742 - Excellent</span>
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">745 - GOOD</span>
             </div>
             <div class="space-y-4">
                 <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl bg-gray-50">
@@ -160,62 +265,13 @@
                         <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600"><i class="fa-solid fa-clock"></i></div>
                         <div>
                             <div class="font-bold text-gray-700 text-sm">On-Time Payments</div>
-                            <div class="text-xs text-gray-400">12 month streak</div>
+                            <div class="text-xs text-gray-400">11/11 month streak</div>
                         </div>
                     </div>
                     <span class="font-bold text-[#2ECC71]">+45 pts</span>
                 </div>
-                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl bg-gray-50">
-                    <div class="flex gap-4 items-center">
-                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600"><i class="fa-solid fa-calendar"></i></div>
-                        <div>
-                            <div class="font-bold text-gray-700 text-sm">Lease Duration</div>
-                            <div class="text-xs text-gray-400">Long term stability</div>
-                        </div>
-                    </div>
-                    <span class="font-bold text-[#1E5EFF]">+12 pts</span>
-                </div>
             </div>
             <button onclick="closeModal('modal-score')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Close</button>
-        </div>
-    </div>
-
-    <!-- MODAL: DATA VAULT -->
-    <div id="modal-vault" class="modal-overlay">
-        <div class="modal-content p-8">
-            <h2 class="text-xl font-bold text-[#0B1B3F] mb-2">Manage Data Vault</h2>
-            <p class="text-sm text-gray-500 mb-6">You have full control. Revoke access or delete documents instantly.</p>
-            
-            <div class="space-y-3">
-                <!-- Item 1 -->
-                <div class="flex justify-between items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-red-50 text-red-500 rounded flex items-center justify-center"><i class="fa-regular fa-file-pdf"></i></div>
-                        <div>
-                            <div class="font-bold text-sm text-[#0B1B3F]">Lease_Agreement.pdf</div>
-                            <div class="text-[10px] text-green-500 font-bold">● Active</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="text-gray-400 hover:text-[#1E5EFF] px-2"><i class="fa-solid fa-eye"></i></button>
-                        <button class="text-red-500 text-xs font-bold border border-red-200 px-3 py-1.5 rounded-lg hover:bg-red-50 transition">DELETE</button>
-                    </div>
-                </div>
-                <!-- Item 2 -->
-                <div class="flex justify-between items-center p-3 bg-white border border-gray-100 rounded-xl shadow-sm">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-blue-50 text-blue-500 rounded flex items-center justify-center"><i class="fa-regular fa-image"></i></div>
-                        <div>
-                            <div class="font-bold text-sm text-[#0B1B3F]">ID_License.jpg</div>
-                            <div class="text-[10px] text-orange-500 font-bold">● Shared with Agent</div>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <button class="text-orange-500 text-xs font-bold border border-orange-200 px-3 py-1.5 rounded-lg hover:bg-orange-50 transition">REVOKE ACCESS</button>
-                    </div>
-                </div>
-            </div>
-            <button onclick="closeModal('modal-vault')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Done</button>
         </div>
     </div>
 
