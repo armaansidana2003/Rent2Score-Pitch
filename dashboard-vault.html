@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Data Vault - Rent2Score</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Custom Styles for the Vault Screenshot Replica */
+        .vault-stat-card { transition: transform 0.2s; }
+        .vault-stat-card:hover { transform: translateY(-2px); }
+        .btn-action { box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        /* Floating Access Card Style */
+        .access-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px -10px rgba(0,0,0,0.3);
+            border: 1px solid #e2e8f0;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="bg-[#F4F6FA] flex h-screen overflow-hidden font-sans text-slate-800">
+
+    <!-- SIDEBAR (Consistent with App) -->
+    <aside class="w-72 bg-[#0B1B3F] text-gray-300 flex flex-col flex-shrink-0 z-20">
+        <div class="p-6 flex items-center gap-3">
+            <img src="images/logo.png" alt="Rent2Score" style="width: 140px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+            <div class="hidden text-2xl font-bold text-white tracking-tight items-center gap-2"><i class="fa-solid fa-house"></i> RentScore</div>
+        </div>
+        
+        <nav class="flex-1 space-y-1 mt-4 overflow-y-auto custom-scrollbar">
+            <a href="dashboard-tenant.html" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-house text-lg"></i> Dashboard
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-gauge-high text-lg"></i> Rent Score
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-credit-card text-lg"></i> Payments
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-chart-line text-lg"></i> Credit Reporting
+            </a>
+            <!-- ACTIVE TAB -->
+            <a href="#" class="bg-[#1E5EFF] text-white flex items-center gap-4 px-6 py-4 text-sm font-medium border-l-4 border-white">
+                <i class="fa-solid fa-shield-halved text-lg"></i> My Data Vault
+            </a>
+            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-gear text-lg"></i> Settings
+            </a>
+        </nav>
+
+        <div class="p-6 border-t border-white/10">
+            <a href="index.html" class="flex items-center gap-3 text-gray-400 hover:text-white transition font-bold text-sm">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT (Exact Replica of Screenshot) -->
+    <main class="flex-1 overflow-y-auto relative p-8">
+        
+        <!-- Header -->
+        <div class="flex justify-between items-start mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-[#0B1B3F]">My Data Vault</h1>
+                <p class="text-gray-500 mt-1">Manage your rental documents and access.</p>
+            </div>
+            
+            <!-- CORRECTED Profile Top Right -->
+            <div class="flex items-center gap-4">
+                <button class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-[#1E5EFF]"><i class="fa-solid fa-bell"></i></button>
+                <button class="w-8 h-8 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-400 hover:text-[#1E5EFF]"><i class="fa-solid fa-gear"></i></button>
+                <div class="flex items-center gap-2 bg-white px-3 py-1.5 rounded-full shadow-sm cursor-pointer border border-gray-100">
+                    <img src="https://i.pravatar.cc/150?u=sarah" class="w-7 h-7 rounded-full"> <!-- Corrected Avatar -->
+                    <span class="text-sm font-bold text-gray-700">Sarah v</span> <!-- Corrected Name -->
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Stats Cards -->
+        <div class="grid grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 vault-stat-card">
+                <div class="w-12 h-12 rounded-lg bg-green-50 text-green-500 flex items-center justify-center text-2xl"><i class="fa-regular fa-file-lines"></i></div>
+                <div>
+                    <h3 class="font-bold text-gray-800 text-sm">View Documents</h3>
+                    <p class="text-[10px] text-gray-400">See every document stored</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 vault-stat-card">
+                <div class="w-12 h-12 rounded-lg bg-teal-50 text-teal-500 flex items-center justify-center text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <div>
+                    <h3 class="font-bold text-gray-800 text-sm">Track Access</h3>
+                    <p class="text-[10px] text-gray-400">See who accessed it</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 vault-stat-card">
+                <div class="w-12 h-12 rounded-lg bg-orange-50 text-orange-500 flex items-center justify-center text-2xl"><i class="fa-regular fa-clock"></i></div>
+                <div>
+                    <h3 class="font-bold text-gray-800 text-sm">Auto Expiry</h3>
+                    <p class="text-[10px] text-gray-400">Set auto-expiry dates</p>
+                </div>
+            </div>
+            <div class="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center gap-4 vault-stat-card">
+                <div class="w-12 h-12 rounded-lg bg-red-50 text-red-500 flex items-center justify-center text-2xl"><i class="fa-solid fa-ban"></i></div>
+                <div>
+                    <h3 class="font-bold text-gray-800 text-sm">Revoke Access</h3>
+                    <p class="text-[10px] text-gray-400">Revoke access instantly</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="flex justify-between items-end mb-4">
+            <div class="flex items-baseline gap-2">
+                <h2 class="text-lg font-bold text-[#0B1B3F]">6 Total Documents</h2>
+                <a href="#" class="text-sm text-[#1E5EFF] font-bold">Show All (6)</a>
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="text-sm text-[#1E5EFF] font-bold self-center">Show All (6)</a>
+                <div class="relative">
+                    <input type="text" placeholder="Search" class="pl-9 pr-4 py-2 bg-white border border-gray-200 rounded-lg text-sm w-48 focus:outline-none focus:border-blue-500">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area: Table + Overlay -->
+        <div class="relative">
+            
+            <!-- Table Underlying -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-gray-50 text-gray-400 text-xs uppercase font-semibold">
+                        <tr>
+                            <th class="px-6 py-4">Document Name ▾</th>
+                            <th class="px-6 py-4">Type</th>
+                            <th class="px-6 py-4">Date Added</th>
+                            <th class="px-6 py-4">Expires In</th>
+                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <!-- Row 1 (Active) -->
+                        <tr class="bg-green-50/30">
+                            <td class="px-6 py-4 font-bold text-gray-700 flex items-center gap-3">
+                                <div class="w-8 h-8 bg-green-100 text-green-600 rounded flex items-center justify-center"><i class="fa-regular fa-file-lines"></i></div>
+                                Lease_Apartment_14.pdf
+                            </td>
+                            <td class="px-6 py-4 text-gray-500">Lease</td>
+                            <td class="px-6 py-4 text-gray-500">Today a 10:45 AM</td>
+                            <td class="px-6 py-4 text-gray-500"><span class="w-2 h-2 rounded-full bg-green-500 inline-block mr-1"></span> 5 months</td>
+                            <td class="px-6 py-4 font-bold text-green-500"><i class="fa-solid fa-check"></i> Viewed</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="bg-[#1E5EFF] text-white px-4 py-1.5 rounded-lg text-xs font-bold btn-action">View ></button>
+                            </td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-bold text-gray-700 flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded flex items-center justify-center"><i class="fa-regular fa-image"></i></div>
+                                Payslip_June2024.png
+                            </td>
+                            <td class="px-6 py-4 text-gray-500">Proof</td>
+                            <td class="px-6 py-4 text-gray-500">Yesterday</td>
+                            <td class="px-6 py-4 text-gray-500">--</td>
+                            <td class="px-6 py-4 font-bold text-gray-400">Pending</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="bg-[#1E5EFF] text-white px-4 py-1.5 rounded-lg text-xs font-bold btn-action">View ></button>
+                            </td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 font-bold text-gray-700 flex items-center gap-3">
+                                <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded flex items-center justify-center"><i class="fa-regular fa-id-card"></i></div>
+                                ID_DriverLicense.jpg
+                            </td>
+                            <td class="px-6 py-4 text-gray-500">ID</td>
+                            <td class="px-6 py-4 text-gray-500">June 12, 2024</td>
+                            <td class="px-6 py-4 text-gray-500">--</td>
+                            <td class="px-6 py-4 font-bold text-green-500"><i class="fa-solid fa-check"></i> Viewed</td>
+                            <td class="px-6 py-4 text-right">
+                                <button class="bg-[#1E5EFF] text-white px-4 py-1.5 rounded-lg text-xs font-bold btn-action">View ></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- THE FLOATING OVERLAY (Exactly as per screenshot) -->
+            <div id="access-modal" class="absolute top-16 right-10 w-[600px] access-card z-30">
+                <!-- Header -->
+                <div class="p-6 border-b border-gray-100 flex justify-between items-start">
+                    <div class="flex gap-4">
+                        <div class="w-10 h-10 bg-orange-100 text-orange-500 rounded-lg flex items-center justify-center text-xl"><i class="fa-regular fa-file-lines"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gray-800 text-lg">Access History for Lease_Apartment_14.pdf</h3>
+                            <p class="text-xs text-gray-400 mt-1">Audit log shown is private</p>
+                        </div>
+                    </div>
+                    <button onclick="document.getElementById('access-modal').style.display='none'" class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <!-- Controls -->
+                <div class="px-6 py-4 bg-gray-50/50 flex justify-between items-center border-b border-gray-100">
+                    <div class="flex items-center gap-2">
+                        <div class="w-10 h-5 bg-gray-300 rounded-full relative cursor-pointer"><div class="w-3 h-3 bg-white rounded-full absolute top-1 left-1"></div></div>
+                        <span class="text-xs font-bold text-gray-500">Hide document</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-gray-200/50 px-3 py-1 rounded text-xs text-gray-500">
+                        <i class="fa-regular fa-calendar"></i> Auto-Delete in: <span class="font-bold text-gray-700">June 30, 2024</span>
+                    </div>
+                </div>
+
+                <!-- List -->
+                <div class="p-2">
+                    <table class="w-full text-left text-xs">
+                        <thead class="text-gray-400 font-medium">
+                            <tr>
+                                <th class="px-4 py-2">Accessed By</th>
+                                <th class="px-4 py-2">Role</th>
+                                <th class="px-4 py-2">Date/Time</th>
+                                <th class="px-4 py-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            <!-- Item 1 -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-bold text-[#0B1B3F]">
+                                    <div class="w-6 h-6 rounded bg-teal-100 text-teal-600 flex items-center justify-center"><i class="fa-solid fa-building"></i></div> Brightstone Realty
+                                </td>
+                                <td class="px-4 py-3"><span class="text-green-500">●</span> Agent</td>
+                                <td class="px-4 py-3 text-gray-400">Today at 10:45 AM</td>
+                                <td class="px-4 py-3 font-bold text-[#0B1B3F]">Viewed</td>
+                            </tr>
+                            <!-- Item 2 -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-bold text-[#0B1B3F]">
+                                    <div class="w-6 h-6 rounded bg-blue-100 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-shield-halved"></i></div> Rent2Score System
+                                </td>
+                                <td class="px-4 py-3"><span class="text-green-500">●</span> System</td>
+                                <td class="px-4 py-3 text-gray-400">Yesterday at 2:17 PM</td>
+                                <td class="px-4 py-3 font-bold text-[#0B1B3F]">Viewed</td>
+                            </tr>
+                            <!-- Item 3 -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-bold text-[#0B1B3F]">
+                                    <div class="w-6 h-6 rounded bg-gray-100 text-gray-600 flex items-center justify-center"><i class="fa-solid fa-bolt"></i></div> AMP Connect
+                                </td>
+                                <td class="px-4 py-3"><span class="text-orange-400">●</span> Rental Platform</td>
+                                <td class="px-4 py-3 text-gray-400">May 4, 2024</td>
+                                <td class="px-4 py-3 font-bold text-[#0B1B3F]">Viewed</td>
+                            </tr>
+                            <!-- Item 4 -->
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 flex items-center gap-2 font-bold text-[#0B1B3F]">
+                                    <div class="w-6 h-6 rounded bg-green-100 text-green-600 flex items-center justify-center"><i class="fa-solid fa-user"></i></div> Tenant (You)
+                                </td>
+                                <td class="px-4 py-3"><span class="text-orange-400">●</span> Tenant</td>
+                                <td class="px-4 py-3 text-gray-400">April, 2024</td>
+                                <td class="px-4 py-3 font-bold text-[#0B1B3F]">Viewed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Footer Actions -->
+                <div class="p-4 border-t border-gray-100 bg-gray-50 rounded-b-xl flex justify-between items-center">
+                    <div class="flex items-center gap-2 text-xs text-gray-500">
+                        <i class="fa-solid fa-rotate"></i> Auto-Delete in: <span class="font-bold text-[#1E5EFF]">7 days (Scheduled)</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 bg-white border border-gray-300 rounded-lg text-xs font-bold text-gray-600 hover:bg-gray-50"><i class="fa-solid fa-lock mr-1"></i> Close</button>
+                        <button class="px-4 py-2 bg-[#E74C3C] rounded-lg text-xs font-bold text-white hover:bg-red-600 shadow-md"><i class="fa-solid fa-ban mr-1"></i> Revoke Access</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
