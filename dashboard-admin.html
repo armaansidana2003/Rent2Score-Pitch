@@ -3,51 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - RentScore Pro Internal</title>
+    <title>System Admin - RentScore Pro</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .sidebar-admin { background-color: #0B1B3F; }
-        .nav-item-admin.active { background-color: #1E5EFF; color: white; border-left: 4px solid #60a5fa; }
-        .bg-navy-gradient { background: linear-gradient(135deg, #0B1B3F 0%, #1E5EFF 100%); }
+        .sidebar-pro { background-color: #0B1B3F; }
+        .nav-item-pro.active { background-color: #1E5EFF; color: white; border-left: 4px solid #60a5fa; }
         .tab-btn-admin.active { border-bottom: 3px solid #2ECC71; color: #0B1B3F; font-weight: 700; }
+        .bg-navy-gradient { background: linear-gradient(135deg, #0B1B3F 0%, #1E5EFF 100%); }
     </style>
 </head>
 <body class="bg-[#F0F2F5] flex h-screen overflow-hidden font-sans text-slate-800">
 
     <!-- SIDEBAR -->
-    <aside class="w-72 sidebar-admin text-gray-300 flex flex-col flex-shrink-0 z-20 shadow-2xl">
-        <!-- 1. BRAND LOGO (Top Left - 140px) -->
-        <div class="p-6 flex items-center h-[88px] border-b border-white/5">
-            <img src="images/logo.png" alt="Rent2Score" style="width: 140px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-            <span class="hidden text-xl font-bold text-white tracking-tight">RentScore Pro</span>
+    <aside class="w-72 sidebar-pro text-gray-300 flex flex-col flex-shrink-0 z-20 shadow-2xl">
+        
+        <!-- 1. BRAND LOGO (White Background Container) -->
+        <div class="p-6 h-[100px] bg-white flex items-center justify-center border-b border-gray-100">
+            <img src="images/logo.png" alt="Rent2Score" style="width: 160px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <span class="hidden text-2xl font-black text-[#0B1B3F]">Rent2Score</span>
         </div>
         
         <nav class="flex-1 space-y-1 mt-4 overflow-y-auto custom-scrollbar">
             <a href="#" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-house text-lg"></i> Dashboard
+                <i class="fa-solid fa-gauge-high text-lg"></i> System Overview
             </a>
-            
-            <!-- ADMIN PORTAL ACCESS LINKS -->
+
+            <!-- PORTAL MANAGEMENT SECTION -->
             <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Portal Management</div>
-            <a href="#" class="nav-item-admin active flex items-center gap-4 px-6 py-3 text-sm font-medium transition">
+            
+            <a href="dashboard-tenant.html" class="nav-item-pro active flex items-center gap-4 px-6 py-3 text-sm font-medium transition">
                 <i class="fa-solid fa-user-gear text-lg"></i> Tenant Portal
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
+            <a href="dashboard-landlord.html" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
                 <i class="fa-solid fa-house-lock text-lg"></i> Landlord Portal
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-building-shield text-lg"></i> Agency Portal
+            <a href="dashboard-agent.html" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-building-shield text-lg"></i> Real Estate Agent Portal
             </a>
 
-            <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">System Tools</div>
-            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-money-bill-transfer"></i> Transactions</a>
-            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-chart-pie"></i> Reports</a>
-            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-gears"></i> System Settings</a>
+            <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Global Controls</div>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-users-viewfinder"></i> User Management</a>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-receipt"></i> Global Transactions</a>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-bug"></i> System Audit Logs</a>
         </nav>
 
-        <!-- 4. LOGOUT AT BOTTOM OF LEFT MENU -->
+        <!-- LOGOUT (Bottom Left Menu) -->
         <div class="p-6 border-t border-white/10 bg-black/10">
             <a href="index.html" class="flex items-center gap-3 text-red-400 hover:text-red-300 transition font-bold text-sm">
                 <i class="fa-solid fa-power-off"></i> Logout
@@ -60,202 +62,138 @@
         
         <!-- HEADER -->
         <header class="bg-white px-8 h-[88px] flex justify-between items-center sticky top-0 z-10 border-b border-gray-200">
-            <h1 class="text-2xl font-bold text-[#0B1B3F]">Hi Adam, Rent Verification Dashboard</h1>
+            <h1 class="text-2xl font-bold text-[#0B1B3F]">System Admin Dashboard</h1>
             
             <div class="flex items-center gap-6">
                 <!-- 7. FILTER SECTION -->
-                <div class="flex items-center gap-2">
-                    <button class="bg-white border border-gray-300 px-4 py-1.5 rounded-lg text-xs font-bold text-gray-600 hover:bg-gray-50 transition">Filter</button>
+                <div class="flex items-center gap-3">
                     <div class="relative">
-                        <input type="text" placeholder="Search tenants..." class="w-64 pl-4 pr-10 py-1.5 bg-gray-100 border border-gray-200 rounded-lg text-xs outline-none focus:border-blue-400">
-                        <i class="fa-solid fa-magnifying-glass absolute right-3 top-2 text-gray-400 text-xs"></i>
+                        <input type="text" placeholder="Global user search..." class="w-72 pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-xl text-xs outline-none focus:border-blue-400 transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
                     </div>
-                    <button class="bg-white border border-gray-300 px-4 py-1.5 rounded-lg text-xs font-bold text-gray-600">Filter</button>
+                    <button class="bg-white border border-gray-300 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 hover:bg-gray-50 transition">Advanced Filter</button>
                 </div>
 
-                <!-- 2. & 3. PHOTO UPLOAD / PROFILE / MY ACCOUNT -->
+                <!-- PROFILE / PHOTO UPLOAD / MY ACCOUNT -->
                 <div class="flex items-center gap-3 pl-6 border-l border-gray-200 cursor-pointer group">
                     <div class="relative">
                         <img src="https://i.pravatar.cc/150?u=adam" class="w-11 h-11 rounded-full border-2 border-white shadow-sm group-hover:border-blue-100 transition">
-                        <div class="absolute -bottom-0.5 -right-0.5 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-white shadow-sm" title="Change Profile Photo">
+                        <!-- Photo Upload Action -->
+                        <div class="absolute -bottom-0.5 -right-0.5 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-white shadow-sm" title="Change Admin Photo">
                             <i class="fa-solid fa-camera text-white"></i>
                         </div>
                     </div>
                     <div class="text-right">
                         <div class="text-sm font-bold text-[#0B1B3F] leading-tight">Adam Williams</div>
-                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">System Admin</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">System Administrator</div>
                     </div>
-                    <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">2</div>
                 </div>
             </div>
         </header>
 
         <div class="p-8 max-w-[1800px] mx-auto space-y-6">
             
-            <!-- KPI CARDS (Matching Screenshot) -->
+            <!-- KPI CARDS (Admin Global View) -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="bg-green-100 border border-green-200 p-5 rounded-xl flex items-center gap-4 shadow-sm">
-                    <div class="bg-green-600 text-white w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-circle-check"></i></div>
-                    <div><div class="text-3xl font-extrabold text-[#0B1B3F]">85</div><div class="text-[10px] font-bold text-green-700 uppercase">Verified Tenants</div></div>
+                <div class="bg-white p-5 rounded-2xl flex items-center gap-4 shadow-sm border border-gray-100">
+                    <div class="bg-green-600 text-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-green-100"><i class="fa-solid fa-users"></i></div>
+                    <div><div class="text-3xl font-extrabold text-[#0B1B3F]">13,402</div><div class="text-[10px] font-bold text-gray-400 uppercase">Total Active Users</div></div>
                 </div>
-                <div class="bg-orange-100 border border-orange-200 p-5 rounded-xl flex items-center gap-4 shadow-sm">
-                    <div class="bg-[#F5A623] text-white w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-hourglass-half"></i></div>
-                    <div><div class="text-3xl font-extrabold text-[#0B1B3F]">4</div><div class="text-[10px] font-bold text-orange-700 uppercase">Pending Verif.</div></div>
+                <div class="bg-white p-5 rounded-2xl flex items-center gap-4 shadow-sm border border-gray-100">
+                    <div class="bg-orange-500 text-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-orange-100"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <div><div class="text-3xl font-extrabold">24</div><div class="text-[10px] font-bold text-gray-400 uppercase">Pending Audits</div></div>
                 </div>
-                <div class="bg-red-100 border border-red-200 p-5 rounded-xl flex items-center gap-4 shadow-sm">
-                    <div class="bg-red-500 text-white w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <div><div class="text-3xl font-extrabold text-[#0B1B3F]">10</div><div class="text-[10px] font-bold text-red-700 uppercase">Flagged Issues</div></div>
+                <div class="bg-white p-5 rounded-2xl flex items-center gap-4 shadow-sm border border-gray-100">
+                    <div class="bg-red-500 text-white w-12 h-12 rounded-xl flex items-center justify-center text-2xl shadow-lg shadow-red-100"><i class="fa-solid fa-shield-virus"></i></div>
+                    <div><div class="text-3xl font-extrabold">12</div><div class="text-[10px] font-bold text-gray-400 uppercase">Security Flags</div></div>
                 </div>
                 <div class="bg-navy-gradient p-5 rounded-xl flex items-center gap-4 shadow-lg text-white">
-                    <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-dollar-sign"></i></div>
-                    <div><div class="text-3xl font-extrabold">$242,000</div><div class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Rents Verified</div></div>
+                    <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-chart-line"></i></div>
+                    <div><div class="text-3xl font-extrabold">$1.2M</div><div class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Global Rent Volume</div></div>
                 </div>
             </div>
 
             <div class="flex gap-8">
-                <!-- PENDING VERIFICATIONS TABLE -->
+                <!-- GLOBAL USER TABLE -->
                 <div class="flex-1 space-y-6">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                        <!-- TABS -->
                         <div class="flex border-b border-gray-100 px-6 bg-gray-50/50">
-                            <button class="tab-btn-admin active py-4 px-4 text-sm">Pending Verifications</button>
-                            <button class="tab-btn-admin py-4 px-4 text-sm text-gray-400">Verified Rentals</button>
-                            <button class="tab-btn-admin py-4 px-4 text-sm text-gray-400">Flagged Issues</button>
-                        </div>
-
-                        <!-- SUB-FILTER -->
-                        <div class="p-4 border-b border-gray-100 flex justify-between bg-white items-center">
-                            <div class="relative w-full max-w-sm">
-                                <input type="text" placeholder="Search for Tenants" class="w-full pl-10 pr-4 py-2 border rounded-lg text-sm bg-gray-50 outline-none">
-                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
-                            </div>
-                            <div class="flex gap-2">
-                                <button class="bg-white border border-gray-200 px-4 py-1.5 rounded text-xs font-bold text-gray-600 tracking-tight">Filter</button>
-                                <button class="bg-gray-100 px-3 py-1.5 rounded text-gray-400"><i class="fa-solid fa-chevron-left"></i> <i class="fa-solid fa-list-ul ml-1"></i></button>
-                            </div>
+                            <button class="tab-btn-admin active py-4 px-4 text-sm font-bold">Client Verification Queue</button>
+                            <button class="tab-btn-admin py-4 px-4 text-sm text-gray-400">Subscription Management</button>
+                            <button class="tab-btn-admin py-4 px-4 text-sm text-gray-400">Escalated Issues</button>
                         </div>
 
                         <table class="w-full text-sm text-left">
                             <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold tracking-widest border-b border-gray-100">
                                 <tr>
-                                    <th class="px-6 py-4">Tenant</th>
-                                    <th class="px-6 py-4">Property</th>
-                                    <th class="px-6 py-4">Rent Due ↑</th>
-                                    <th class="px-6 py-4 text-center">Status</th>
+                                    <th class="px-6 py-4">Client Detail</th>
+                                    <th class="px-6 py-4">Portal Role</th>
+                                    <th class="px-6 py-4">Registration Date</th>
+                                    <th class="px-6 py-4 text-right">Administrative Action</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                <!-- Emma Johnson -->
+                                <!-- Example 1: Tenant -->
                                 <tr class="hover:bg-gray-50 transition cursor-pointer">
                                     <td class="px-6 py-4 flex items-center gap-3">
-                                        <img src="https://i.pravatar.cc/100?img=20" class="w-10 h-10 rounded-full shadow-sm">
-                                        <div><div class="font-bold text-gray-800">Emma Johnson</div><div class="text-[10px] text-gray-400">15 Grove St, Melbourne VIC</div></div>
+                                        <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full shadow-sm border border-gray-200">
+                                        <div><div class="font-bold text-gray-800">Sarah Martin</div><div class="text-[10px] text-gray-400">sarah.m@email.com</div></div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-2"><span class="bg-[#002B5C] text-white text-[10px] px-1.5 py-0.5 rounded font-bold">ANZ</span> <span class="font-mono text-xs">*4329</span></div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="font-bold text-gray-800">$1,800 <span class="text-gray-400 text-[10px] font-normal">Due May 1</span></div>
-                                        <div class="text-[9px] text-gray-400">Verification Pending</div>
-                                    </td>
-                                    <td class="px-6 py-4"><div class="flex gap-2 justify-center"><button class="bg-[#2ECC71] text-white px-3 py-1 rounded text-[10px] font-black uppercase shadow-sm">Verify ▼</button><button class="bg-[#F5A623] text-white px-4 py-1 rounded text-[10px] font-black uppercase shadow-sm">Flag</button></div></td>
+                                    <td class="px-6 py-4"><span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-[10px] font-bold border border-blue-200">TENANT</span></td>
+                                    <td class="px-6 py-4 text-gray-500 font-mono text-xs">2024-05-01</td>
+                                    <td class="px-6 py-4 text-right"><button class="bg-[#0B1B3F] text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-black transition shadow-sm">Manage Profile</button></td>
                                 </tr>
-                                <!-- Alex Patel -->
+                                <!-- Example 2: Landlord -->
                                 <tr class="hover:bg-gray-50 transition cursor-pointer">
                                     <td class="px-6 py-4 flex items-center gap-3">
-                                        <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full shadow-sm">
-                                        <div><div class="font-bold text-gray-800">Alex Patel</div><div class="text-[10px] text-gray-400">202 Falcon Dr, Richmond VIC</div></div>
+                                        <img src="https://i.pravatar.cc/100?u=bill" class="w-10 h-10 rounded-full shadow-sm border border-gray-200">
+                                        <div><div class="font-bold text-gray-800">Bill Anderson</div><div class="text-[10px] text-gray-400">bill.prop@investor.com</div></div>
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-2"><span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold">NAB</span> <span class="font-mono text-xs">*7890</span></div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="font-bold text-gray-800">$1,500 <span class="text-gray-400 text-[10px] font-normal">Due May 2</span></div>
-                                        <div class="text-[9px] text-gray-400">Verification Pending</div>
-                                    </td>
-                                    <td class="px-6 py-4"><div class="flex gap-2 justify-center"><button class="bg-[#2ECC71] text-white px-3 py-1 rounded text-[10px] font-black uppercase shadow-sm">Verify ▼</button><button class="bg-[#F5A623] text-white px-4 py-1 rounded text-[10px] font-black uppercase shadow-sm">Flag</button></div></td>
-                                </tr>
-                                <!-- Mia Thompson -->
-                                <tr class="hover:bg-gray-50 transition cursor-pointer">
-                                    <td class="px-6 py-4 flex items-center gap-3">
-                                        <img src="https://i.pravatar.cc/100?img=35" class="w-10 h-10 rounded-full shadow-sm">
-                                        <div><div class="font-bold text-gray-800">Mia Thompson</div><div class="text-[10px] text-gray-400">7 York St, Carlton VIC</div></div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-2 font-black text-red-600 text-xs">W <span class="font-mono font-normal ml-1">*6543</span></div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <div class="font-bold text-gray-800">$1,700 <span class="text-gray-400 text-[10px] font-normal">Due May 2nd</span></div>
-                                        <div class="text-[9px] text-gray-400">Verification Pending</div>
-                                    </td>
-                                    <td class="px-6 py-4"><div class="flex gap-2 justify-center"><button class="bg-[#2ECC71] text-white px-3 py-1 rounded text-[10px] font-black uppercase shadow-sm">Verify ▼</button><button class="bg-[#F5A623] text-white px-4 py-1 rounded text-[10px] font-black uppercase shadow-sm">Flag</button></div></td>
+                                    <td class="px-6 py-4"><span class="bg-green-100 text-green-700 px-2 py-0.5 rounded text-[10px] font-bold border border-green-200">LANDLORD</span></td>
+                                    <td class="px-6 py-4 text-gray-500 font-mono text-xs">2024-04-15</td>
+                                    <td class="px-6 py-4 text-right"><button class="bg-[#0B1B3F] text-white px-4 py-1.5 rounded-lg text-xs font-bold hover:bg-black transition shadow-sm">Manage Profile</button></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="p-4 bg-gray-50/50 text-center border-t border-gray-100">
+                            <button class="text-xs font-bold text-[#1E5EFF] uppercase tracking-widest hover:underline">View All Clients Across All Portals</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- RIGHT SIDEBAR (Matching Verification History Xerox) -->
+                <!-- RIGHT SIDEBAR: SYSTEM AUDIT & HISTORY -->
                 <div class="w-80 flex flex-col gap-6 flex-shrink-0">
                     
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-                        <h3 class="font-bold text-gray-800 text-sm mb-4">Verification History</h3>
-                        <div class="space-y-4">
-                            <!-- David Wilson -->
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></div>
-                                <div class="flex-1">
-                                    <div class="font-bold text-xs text-gray-800 flex justify-between">David Wilson <i class="fa-solid fa-circle-check text-green-500 text-[10px]"></i></div>
-                                    <div class="text-[10px] text-gray-400 font-bold">$1,550 - 2 Apr <span class="ml-4 font-normal">10 King St</span></div>
-                                </div>
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm relative overflow-hidden">
+                        <h3 class="font-bold text-gray-400 text-[10px] uppercase mb-6 tracking-widest">Recent Portal Activity</h3>
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] mt-1"><i class="fa-solid fa-user-plus"></i></div>
+                                <div><div class="font-bold text-xs">New Agency Joined</div><div class="text-[10px] text-gray-400">Anderson & Partners registered 27 properties.</div></div>
                             </div>
-                            <!-- Lisa Nguyen -->
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></div>
-                                <div class="flex-1">
-                                    <div class="font-bold text-xs text-gray-800 flex justify-between">Lisa Nguyen <i class="fa-solid fa-circle-check text-green-500 text-[10px]"></i></div>
-                                    <div class="text-[10px] text-gray-400 font-bold">$1,500 - 1 Apr <span class="ml-4 font-normal">5 Henry St</span></div>
-                                </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[10px] mt-1"><i class="fa-solid fa-check-double"></i></div>
+                                <div><div class="font-bold text-xs">Global Score Update</div><div class="text-[10px] text-gray-400">1,240 credit reports pushed to agencies.</div></div>
                             </div>
-                            <!-- Nathan Lee -->
-                            <div class="flex items-center gap-3">
-                                <div class="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></div>
-                                <div class="flex-1">
-                                    <div class="font-bold text-xs text-gray-800 flex justify-between">Nathan Lee <i class="fa-solid fa-circle-check text-green-500 text-[10px]"></i></div>
-                                    <div class="text-[10px] text-gray-400 font-bold">$1,800 - 23 Mar <span class="ml-3 font-normal">251 High St</span></div>
-                                </div>
-                            </div>
-                            <!-- Emily Walker -->
-                            <div class="flex items-center gap-3 bg-orange-50 p-1.5 rounded-lg border border-orange-100">
-                                <div class="w-6 h-6 rounded-full bg-orange-500 text-white flex items-center justify-center text-[10px] font-black">?</div>
-                                <div class="flex-1">
-                                    <div class="font-bold text-xs text-orange-700 flex justify-between">Emily Walker <i class="fa-solid fa-clock text-orange-400 text-[10px]"></i></div>
-                                    <div class="text-[10px] text-orange-600 font-bold">$1,570 - 29 Mar <span class="ml-3 font-normal">332 Elm Rd</span></div>
-                                </div>
+                            <div class="flex items-start gap-3">
+                                <div class="w-6 h-6 rounded-full bg-red-100 text-red-600 flex items-center justify-center text-[10px] mt-1"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                                <div><div class="font-bold text-xs">Payment Alert</div><div class="text-[10px] text-gray-400">Stripe dispute detected on invoice #9921.</div></div>
                             </div>
                         </div>
-                        <button class="w-full mt-6 bg-[#0B1B3F] text-white py-2.5 rounded-lg font-bold text-[10px] uppercase tracking-wider hover:bg-black transition">View Full Report ▼</button>
+                        <button class="w-full mt-6 bg-[#0B1B3F] text-white py-3 rounded-xl font-bold text-xs hover:bg-black transition shadow-lg uppercase tracking-wider">Download System Health PDF</button>
                     </div>
 
-                    <!-- Past Verification History Block -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex-1">
-                        <h3 class="font-bold text-gray-800 text-sm mb-4">Verification History</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between text-[10px] border-b border-gray-50 pb-2">
-                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> <span class="font-bold">David Wilson</span> <span class="text-gray-400">10 King St</span></div>
-                                <span class="font-mono">$1,340 - 1 Apr</span>
-                            </div>
-                            <div class="flex items-center justify-between text-[10px] border-b border-gray-50 pb-2">
-                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> <span class="font-bold">Lisa Nguyen</span> <span class="text-gray-400">5 Henry St</span></div>
-                                <span class="font-mono">$2,200 - 1 Apr</span>
-                            </div>
-                            <div class="flex items-center justify-between text-[10px]">
-                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> <span class="font-bold">Nathan Lee</span> <span class="text-gray-400">231 High St</span></div>
-                                <span class="font-mono">$1,800 - 23 Mar</span>
-                            </div>
+                    <!-- System Performance -->
+                    <div class="bg-white rounded-2xl p-5 border border-gray-200 shadow-sm">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl shadow-lg"><i class="fa-solid fa-microchip"></i></div>
+                            <div><div class="text-lg font-black text-green-600">99.9%</div><div class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Uptime Performance</div></div>
+                        </div>
+                        <div class="text-[10px] space-y-2 pt-2 border-t border-gray-100 font-bold text-[#0B1B3F]">
+                             <div class="flex items-center gap-2"><i class="fa-solid fa-server opacity-30"></i> SYDNEY NODE: ACTIVE</div>
+                             <div class="flex items-center gap-2"><i class="fa-solid fa-lock opacity-30"></i> ENCRYPTION: AES-256</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
