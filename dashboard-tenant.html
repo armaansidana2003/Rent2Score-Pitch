@@ -8,65 +8,113 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Exact Gradients from Screenshot */
-        .card-green { background: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%); }
-        .card-orange { background: linear-gradient(135deg, #e85d04 0%, #f48c06 100%); }
+        /* Exact Deep Brand Colors */
+        .card-deep-green { background: linear-gradient(135deg, #064E3B 0%, #059669 100%); }
+        .card-deep-orange { background: linear-gradient(135deg, #9A3412 0%, #EA580C 100%); }
         
-        /* Custom Gauge CSS */
-        .gauge-half {
-            width: 120px; height: 60px;
-            background: conic-gradient(#ffffff 0% 70%, rgba(255,255,255,0.3) 70% 100%);
-            border-top-left-radius: 120px; border-top-right-radius: 120px;
-            transform: rotate(-90deg);
+        /* NEW: Perfect Semi-Circle Gauge CSS */
+        .gauge-container {
+            position: relative;
+            width: 180px;
+            height: 90px; /* Half height for semi-circle */
+            overflow: hidden;
+            margin: 0 auto;
         }
-        
-        /* Sidebar Active State */
-        .sidebar-item-active {
-            background-color: #1a2b55;
-            border-left: 4px solid #3b82f6;
+        .gauge-body {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 180deg at 50% 50%,
+                #064E3B 0deg,
+                #10B981 120deg,
+                #E2E8F0 120deg 180deg
+            );
+            transform: rotate(90deg);
         }
+        .gauge-mask {
+            position: absolute;
+            top: 25px; left: 25px;
+            width: 130px; height: 130px;
+            background: #064E3B; /* Matches card bg to look hollow */
+            border-radius: 50%;
+            z-index: 2;
+        }
+        .gauge-needle {
+            position: absolute;
+            bottom: 0; left: 50%;
+            width: 4px; height: 70px;
+            background: #fff;
+            transform-origin: bottom center;
+            transform: translateX(-50%) rotate(45deg); /* Adjust degree based on score */
+            z-index: 3;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .gauge-center-point {
+            position: absolute;
+            bottom: -5px; left: 50%;
+            width: 12px; height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 10px; }
     </style>
 </head>
 <body class="bg-[#F0F2F5] flex h-screen overflow-hidden font-sans text-slate-800">
 
     <!-- SIDEBAR -->
-    <aside class="w-72 bg-[#0B1B3F] text-gray-300 flex flex-col flex-shrink-0 z-20">
-        <!-- BIG LOGO (Top Left - 140px) -->
-        <div class="p-6 flex items-center gap-3">
-            <img src="images/logo.png" alt="Rent2Score" style="width: 140px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <!-- Fallback text -->
-            <div class="hidden text-2xl font-bold text-white tracking-tight items-center gap-2">
-                <i class="fa-solid fa-house"></i> RentScore
-            </div>
+    <aside class="w-72 bg-[#0B1B3F] text-gray-300 flex flex-col flex-shrink-0 z-20 shadow-2xl">
+        <!-- 1. Brand Logo Container (White Background) -->
+        <div class="p-6 h-[110px] bg-white flex items-center justify-center border-b border-gray-100">
+            <img src="images/logo.png" alt="Rent2Score" style="width: 180px; height: auto; object-fit: contain;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <span class="hidden text-2xl font-black text-[#0B1B3F] tracking-tighter">Rent2Score</span>
         </div>
         
-        <!-- UPDATED SIDEBAR MENU -->
         <nav class="flex-1 space-y-1 mt-4 overflow-y-auto custom-scrollbar">
-            <a href="#" class="sidebar-item-active flex items-center gap-4 px-6 py-4 text-white text-sm font-medium">
-                <i class="fa-solid fa-house text-lg"></i> Dashboard
+            <a href="#" class="flex items-center gap-4 px-6 py-3 bg-white/10 text-white text-sm font-bold border-l-4 border-[#1E5EFF]">
+                <i class="fa-solid fa-house"></i> Dashboard
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-gauge-high text-lg"></i> Rent Score
+            <a href="#" class="flex items-center gap-4 px-6 py-3 hover:bg-white/5 text-sm font-medium transition">
+                <i class="fa-solid fa-chart-line"></i> Rent2Score
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-credit-card text-lg"></i> Payments
+            
+            <div class="pt-6 pb-1 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Property Services</div>
+            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-sm transition font-medium">
+                <i class="fa-solid fa-magnifying-glass"></i> Search & Apply
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-chart-line text-lg"></i> Credit Reporting
+            
+            <!-- Maintenance Categories -->
+            <div class="pt-2">
+                <div class="px-6 py-2 text-xs font-bold text-gray-400 flex items-center gap-2">
+                    <i class="fa-solid fa-hammer"></i> Maintenance Requests
+                </div>
+                <div class="pl-12 space-y-1">
+                    <a href="#" class="block text-xs py-1.5 hover:text-white transition">Electric Request</a>
+                    <a href="#" class="block text-xs py-1.5 hover:text-white transition">Plumbing Request</a>
+                    <a href="#" class="block text-xs py-1.5 hover:text-white transition">Water Request</a>
+                    <a href="#" class="block text-xs py-1.5 hover:text-white transition">Gas Request</a>
+                    <a href="#" class="block text-xs py-1.5 hover:text-white transition">General House</a>
+                </div>
+            </div>
+
+            <div class="pt-6 pb-1 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Data & Performance</div>
+            <a href="#" onclick="openModal('modal-reports')" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-sm transition font-medium">
+                <i class="fa-solid fa-file-pdf"></i> Reports Center
             </a>
-            <!-- NEW "MY DATA VAULT" LINK -->
-            <a href="dashboard-vault.html" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-shield-halved text-lg"></i> My Data Vault
-            </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-gear text-lg"></i> Settings
+            <a href="dashboard-vault.html" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-sm transition font-medium">
+                <i class="fa-solid fa-shield-halved"></i> My Data Vault
             </a>
         </nav>
 
-        <!-- LOGOUT -->
-        <div class="p-6 border-t border-white/10">
-            <a href="index.html" class="flex items-center gap-3 text-gray-400 hover:text-white transition font-bold text-sm">
-                <i class="fa-solid fa-right-from-bracket"></i> Logout
+        <!-- Logout -->
+        <div class="p-6 border-t border-white/10 bg-black/20">
+            <a href="index.html" class="flex items-center gap-3 text-red-400 hover:text-red-300 transition font-bold text-sm">
+                <i class="fa-solid fa-power-off"></i> Logout
             </a>
         </div>
     </aside>
@@ -75,203 +123,257 @@
     <main class="flex-1 overflow-y-auto relative">
         
         <!-- HEADER -->
-        <header class="bg-[#0B1B3F] text-white px-8 py-3 flex justify-end items-center shadow-md border-l border-white/5">
-            <div class="flex items-center gap-6">
-                <!-- Notification -->
-                <div class="relative cursor-pointer">
-                    <i class="fa-solid fa-bell text-xl text-gray-300 hover:text-white transition"></i>
-                    <div class="absolute -top-1 -right-1 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold border-2 border-[#0B1B3F]">2</div>
+        <header class="bg-[#0B1B3F] text-white px-8 h-[80px] flex justify-between items-center shadow-lg border-l border-white/5">
+            <div class="text-xs font-black uppercase tracking-[0.2em] opacity-60">Real Data. Real Progress.</div>
+            
+            <div class="flex items-center gap-8">
+                <!-- Document Upload Area -->
+                <div class="flex items-center bg-white/10 rounded-xl p-1 pr-4 border border-white/10">
+                    <button onclick="document.getElementById('doc-upload').click()" class="bg-[#1E5EFF] hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition flex items-center gap-2">
+                        <i class="fa-solid fa-upload"></i> Upload
+                    </button>
+                    <span class="text-[10px] ml-3 text-gray-300 font-bold">Receipts / Documents</span>
+                    <input type="file" id="doc-upload" class="hidden">
                 </div>
 
-                <!-- PROFILE / PHOTO UPLOAD / MY ACCOUNT -->
+                <!-- Profile with Account Section -->
                 <div class="flex items-center gap-3 pl-6 border-l border-white/10 cursor-pointer group">
-                    <div class="relative">
-                        <img src="https://i.pravatar.cc/150?u=sarah" class="w-10 h-10 rounded-full border-2 border-white/50 group-hover:border-white transition">
-                        <!-- Photo Upload Icon -->
-                        <div class="absolute -bottom-1 -right-1 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-[#0B1B3F]" title="Upload Photo">
-                            <i class="fa-solid fa-camera"></i>
-                        </div>
-                    </div>
-                    <div class="text-right hidden md:block">
+                    <div class="text-right">
                         <div class="text-sm font-bold leading-tight">Sarah Martin</div>
-                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">My Account</div>
+                        <div class="text-[10px] text-[#2ECC71] font-black uppercase tracking-widest group-hover:text-white transition">My Account</div>
                     </div>
-                    <i class="fa-solid fa-chevron-down text-xs text-gray-500 group-hover:text-white transition"></i>
+                    <div class="relative">
+                        <img src="https://i.pravatar.cc/150?u=sarah" class="w-11 h-11 rounded-full border-2 border-white shadow-md">
+                        <div class="absolute -bottom-1 -right-1 bg-blue-500 w-4 h-4 rounded-full border-2 border-[#0B1B3F] flex items-center justify-center text-[8px]"><i class="fa-solid fa-camera"></i></div>
+                    </div>
+                    <div class="bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold">2</div>
                 </div>
             </div>
         </header>
 
-        <div class="p-8 max-w-[1600px] mx-auto space-y-6">
+        <div class="p-8 max-w-[1600px] mx-auto space-y-8">
             
-            <h1 class="text-3xl font-bold text-[#0B1B3F]">Welcome, Sarah!</h1>
+            <h1 class="text-4xl font-black text-[#0B1B3F] tracking-tight">Welcome, Sarah!</h1>
 
-            <!-- Rent Due Bar -->
-            <div class="bg-white p-5 rounded-lg shadow-sm border border-gray-200">
-                <h2 class="text-lg font-bold text-gray-800 mb-3">Next Rent Due: $1,600 - 1st May</h2>
-                <div class="flex items-center gap-2">
-                    <span class="bg-[#002B5C] text-white text-xs font-bold px-2 py-1 rounded">ANZ</span>
-                    <span class="text-blue-500"><i class="fa-solid fa-circle-check"></i></span>
-                    <span class="text-gray-700 font-bold text-sm">3210 Account Linked</span>
-                    <span class="text-green-600 font-bold text-sm flex items-center gap-1 ml-3"><i class="fa-solid fa-check"></i> Rent Verified</span>
-                    <span class="text-green-600"><i class="fa-solid fa-check"></i></span>
+            <!-- Next Rent Bar -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold text-gray-800">Next Rent Due: $1,600 - 1st May</h2>
+                    <div class="flex items-center gap-3 mt-2">
+                        <span class="bg-[#002B5C] text-white text-[10px] font-black px-2 py-1 rounded tracking-widest uppercase">ANZ</span>
+                        <i class="fa-solid fa-circle-check text-blue-500 text-sm"></i>
+                        <span class="text-gray-700 font-bold text-sm">+3210 Account Linked</span>
+                        <span class="w-px h-4 bg-gray-200 mx-2"></span>
+                        <span class="text-green-600 font-black text-sm flex items-center gap-1 uppercase tracking-tighter">Rent Verified <i class="fa-solid fa-check-double"></i></span>
+                    </div>
                 </div>
+                <button onclick="openModal('modal-pay')" class="bg-[#1E5EFF] hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-black text-xs tracking-widest uppercase shadow-xl transition transform hover:scale-105">
+                    Pay Rent Now
+                </button>
             </div>
 
-            <h3 class="text-gray-600 font-bold text-lg">Lease Info</h3>
+            <h3 class="text-gray-400 font-black text-xs uppercase tracking-[0.2em]">Lease Information</h3>
 
-            <!-- TOP ROW CARDS -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-12 gap-6">
+            <!-- TOP ROW: Score, Home Loan, Summary -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
-                <div class="xl:col-span-5 bg-score-green card-green rounded-xl p-6 text-white relative overflow-hidden shadow-md flex flex-col justify-between h-64">
-                    <div>
-                        <h3 class="text-sm font-bold opacity-90">Renter Credit Score</h3>
-                        <div class="flex items-baseline gap-3 mt-2"><span class="text-7xl font-bold">745</span><span class="text-2xl font-bold opacity-80">GOOD</span></div>
-                        <p class="text-sm font-bold mt-2 opacity-90">On-Time Payments: 11/11</p>
-                    </div>
-                    <div class="absolute right-4 top-12"><div class="gauge-half relative"><div class="absolute bottom-0 left-1/2 w-1 h-14 bg-white origin-bottom transform rotate-45 rounded-full"></div></div></div>
-                    <button onclick="openModal('modal-score')" class="bg-[#1a2b55] hover:bg-black text-white text-xs font-bold px-6 py-3 rounded shadow-md w-max transition">VIEW FULL REPORT</button>
-                </div>
-
-                <div class="xl:col-span-4 bg-loan-orange card-orange rounded-xl p-6 text-white relative overflow-hidden shadow-md flex flex-col justify-between h-64">
-                    <div>
-                        <h3 class="text-sm font-bold opacity-90">Home Loan Readiness</h3>
-                        <div class="flex items-baseline gap-1 mt-2"><span class="text-7xl font-bold">82</span><span class="text-4xl font-bold">%</span></div>
-                        <p class="text-lg font-bold mt-1">Getting Close!</p>
-                    </div>
-                    <div class="absolute right-4 top-8 text-white opacity-40"><i class="fa-solid fa-house-chimney text-8xl"></i></div>
-                    <div class="bg-white/20 backdrop-blur-md rounded px-4 py-2 text-xs font-bold flex items-center justify-between cursor-pointer hover:bg-white/30 transition"><span>Fast Track: Add $5K to Savings</span><i class="fa-solid fa-chevron-right"></i></div>
-                </div>
-
-                <div class="xl:col-span-3 bg-white rounded-xl p-6 shadow-sm border border-gray-200 h-64 flex flex-col justify-between">
-                    <div>
-                        <h3 class="text-gray-800 font-bold text-sm mb-4">Mortgage Readiness Summary</h3>
-                        <div class="flex items-center gap-3 mb-4">
-                            <img src="https://i.pravatar.cc/150?u=mia" class="w-10 h-10 rounded-full">
-                            <div><div class="text-[10px] text-gray-500 font-bold">Est $1,000</div><div class="text-[10px] font-bold text-gray-800">Set $65 Goal!</div></div>
+                <!-- 1. Rent Score (Correct Meter Graphic) -->
+                <div class="card-deep-green rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-xs font-black opacity-70 uppercase tracking-widest">Renter Credit Score</h3>
+                        <div class="flex items-baseline gap-4 mt-2">
+                            <span class="text-7xl font-black tracking-tighter">745</span>
+                            <span class="text-2xl font-bold opacity-80">GOOD</span>
                         </div>
-                        <div class="space-y-2">
-                            <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-500 mt-0.5 text-sm"></i><span class="text-xs font-bold text-gray-700">Boost Your Credit Score</span></div>
-                            <div class="flex items-start gap-2"><i class="fa-solid fa-circle-arrow-down text-orange-500 mt-0.5 text-sm"></i><span class="text-xs font-bold text-gray-700">Reduce Debts Before Applying</span></div>
-                            <div class="flex items-start gap-2"><i class="fa-solid fa-circle-check text-green-500 mt-0.5 text-sm"></i><span class="text-xs font-bold text-gray-700">Get Pre-Approval Advice</span></div>
+                        <p class="text-xs font-bold mt-4 opacity-80">On-Time Payments: 11/11</p>
+                        
+                        <!-- Visual Meter Xerox -->
+                        <div class="mt-4">
+                            <div class="gauge-container">
+                                <div class="gauge-body"></div>
+                                <div class="gauge-mask"></div>
+                                <div class="gauge-needle"></div>
+                                <div class="gauge-center-point"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="openModal('modal-score')" class="mt-8 bg-[#0B1B3F] text-white py-4 px-6 rounded-2xl font-black text-[10px] tracking-[0.2em] uppercase hover:bg-black transition shadow-lg">
+                            VIEW FULL REPORT
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2. Home Loan (Correct House Graphic) -->
+                <div class="card-deep-orange rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl">
+                    <div class="relative z-10 flex flex-col h-full">
+                        <h3 class="text-xs font-black opacity-70 uppercase tracking-widest">Home Loan Readiness</h3>
+                        <div class="flex items-baseline gap-1 mt-2">
+                            <span class="text-7xl font-black tracking-tighter">82</span>
+                            <span class="text-3xl font-bold">%</span>
+                        </div>
+                        <p class="text-lg font-black mt-1">Getting Close!</p>
+                        
+                        <!-- Real House Icon from Screenshot -->
+                        <div class="mt-2 flex justify-center">
+                            <div class="relative">
+                                <i class="fa-solid fa-house-chimney text-[100px] opacity-20"></i>
+                                <i class="fa-solid fa-house-circle-check absolute top-0 left-0 text-[100px] text-white opacity-40"></i>
+                            </div>
+                        </div>
+
+                        <div class="mt-auto bg-white/20 backdrop-blur-md rounded-2xl p-4 text-[10px] font-black uppercase tracking-widest flex items-center justify-between cursor-pointer hover:bg-white/30 transition">
+                            <span>Fast Track: Add $5K to Savings</span>
+                            <i class="fa-solid fa-chevron-right"></i>
                         </div>
                     </div>
                 </div>
+
+                <!-- 3. Mortgage Summary & Rewards -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-3xl p-6 shadow-sm border border-gray-200">
+                        <h3 class="text-gray-800 font-black text-[10px] mb-6 uppercase tracking-[0.2em] border-b pb-3">Mortgage Readiness Summary</h3>
+                        
+                        <div class="flex items-center gap-4 mb-8">
+                            <img src="https://i.pravatar.cc/150?u=mia" class="w-14 h-14 rounded-full shadow-md border-2 border-white">
+                            <div>
+                                <div class="text-[9px] text-gray-400 font-black uppercase">Sarah's Monthly Goal</div>
+                                <div class="text-lg font-black text-gray-800">$1,000 / $6,500 <span class="text-[#2ECC71]">Active</span></div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-green-600 text-lg"></i>
+                                <span class="text-xs font-bold text-gray-700 uppercase tracking-tighter">Boost Your Credit Score</span>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-minus text-orange-600 text-lg"></i>
+                                <span class="text-xs font-bold text-gray-700 uppercase tracking-tighter">Reduce Debts Before Applying</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REWARD POINTS FIELD -->
+                    <div class="bg-gradient-to-br from-[#0B1B3F] to-[#1E5EFF] rounded-3xl p-6 text-white shadow-xl overflow-hidden relative group">
+                        <div class="relative z-10">
+                            <div class="text-[10px] font-black uppercase opacity-60 tracking-widest">Rent2Score Rewards</div>
+                            <div class="text-4xl font-black mt-1">2,450 <span class="text-xs font-normal opacity-50 uppercase">points</span></div>
+                            <button class="mt-4 bg-white text-[#0B1B3F] text-[9px] font-black px-4 py-2 rounded-full uppercase tracking-widest hover:scale-105 transition">Earn More Points</button>
+                        </div>
+                        <i class="fa-solid fa-medal text-8xl opacity-10 absolute -right-4 -bottom-4 group-hover:rotate-12 transition duration-500"></i>
+                    </div>
+                </div>
             </div>
 
-            <!-- BOTTOM ROW GRID -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-12 gap-6">
-                
-                <div class="xl:col-span-5 bg-white rounded-xl p-6 shadow-sm border border-gray-200">
-                    <h3 class="font-bold text-gray-800 text-lg mb-4">Payment History</h3>
-                    <div class="space-y-5">
-                        <div class="flex justify-between items-center text-sm pb-2 border-b border-gray-100"><div class="flex items-center gap-3"><span class="text-gray-500 font-medium">02 Apr</span><span class="text-gray-600">On-Time Payment</span><i class="fa-solid fa-circle-check text-green-500"></i></div><span class="font-bold text-gray-800">~$1,600</span></div>
-                        <div class="flex justify-between items-center text-sm pb-2 border-b border-gray-100"><div class="flex items-center gap-3"><span class="text-gray-500 font-medium">01 Mar</span><span class="text-gray-600">On-Time Payment</span><i class="fa-solid fa-circle-check text-green-500"></i></div><span class="font-bold text-gray-800">~$1,600</span></div>
-                        <div class="flex justify-between items-center text-sm"><div class="flex items-center gap-3"><span class="text-gray-500 font-medium">01 Feb</span><span class="text-gray-600">On-Time Payment</span><i class="fa-solid fa-circle-check text-green-500"></i></div><span class="font-bold text-gray-800">~$1,700</span></div>
+            <!-- BOTTOM SECTION -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Payment History -->
+                <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-200">
+                    <h3 class="font-black text-gray-800 text-lg mb-8 uppercase tracking-widest flex justify-between items-center">
+                        Payment History 
+                        <span class="text-[9px] text-[#1E5EFF] font-black tracking-widest cursor-pointer">Export CSV</span>
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <div class="flex items-center gap-5 text-sm font-bold text-gray-600">
+                                <span class="w-14 text-gray-300 font-black">02 APR</span>
+                                <span>On-Time Payment</span>
+                                <i class="fa-solid fa-circle-check text-green-600"></i>
+                            </div>
+                            <span class="font-black text-[#0B1B3F] text-lg">"$1,600</span>
+                        </div>
+                        <div class="flex justify-between items-center pb-3 border-b border-gray-50">
+                            <div class="flex items-center gap-5 text-sm font-bold text-gray-600">
+                                <span class="w-14 text-gray-300 font-black">01 MAR</span>
+                                <span>On-Time Payment</span>
+                                <i class="fa-solid fa-circle-check text-green-600"></i>
+                            </div>
+                            <span class="font-black text-[#0B1B3F] text-lg">"$1,600</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center gap-5 text-sm font-bold text-gray-600">
+                                <span class="w-14 text-gray-300 font-black">01 FEB</span>
+                                <span>On-Time Payment</span>
+                                <i class="fa-solid fa-circle-check text-green-600"></i>
+                            </div>
+                            <span class="font-black text-[#0B1B3F] text-lg">"$1,700</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="xl:col-span-4 bg-white rounded-xl p-6 shadow-sm border border-gray-200 flex flex-col justify-between">
-                    <div>
-                        <h3 class="font-bold text-gray-800 text-lg mb-4">Savings Tracker</h3>
-                        <div class="mb-2 text-sm text-gray-600">Saving for Deposit</div>
-                        <div class="w-full bg-gray-200 rounded-full h-4 mb-2"><div class="bg-[#2d6a4f] h-4 rounded-full" style="width: 78%"></div></div>
-                        <div class="flex justify-between items-center mb-6"><span class="font-bold text-gray-800 text-xl">$19,600 / $25,000</span><span class="text-xs font-bold text-gray-500">78% of Goal</span></div>
+                <!-- Savings & Referral -->
+                <div class="space-y-8">
+                    <!-- Savings Tracker -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm border border-gray-200">
+                        <h3 class="font-black text-gray-800 text-lg mb-6 uppercase tracking-widest">Savings Tracker</h3>
+                        <div class="mb-4 text-[10px] font-black text-gray-400 uppercase tracking-[0.3em]">Saving for First Home Deposit</div>
+                        <div class="w-full bg-gray-100 rounded-full h-6 mb-4 p-1 shadow-inner overflow-hidden">
+                            <div class="bg-gradient-to-r from-[#064E3B] to-[#10B981] h-full rounded-full" style="width: 78%"></div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <div class="text-3xl font-black text-[#0B1B3F] tracking-tighter">$19,600 <span class="text-gray-300">/ $25,000</span></div>
+                                <div class="text-[10px] text-[#10B981] font-black uppercase mt-1 tracking-widest">78% of Total Goal achieved</div>
+                            </div>
+                            <button class="bg-[#0B1B3F] text-white px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-black transition shadow-lg">
+                                BOOST ▼
+                            </button>
+                        </div>
                     </div>
-                    <button class="w-full bg-[#1a2b55] text-white py-3 rounded text-xs font-bold uppercase shadow-md hover:bg-black transition">BOOST SAVINGS ▼</button>
-                </div>
 
-                <div class="xl:col-span-3 bg-white rounded-xl p-4 shadow-sm border border-gray-200 flex flex-col justify-between items-center text-center bg-gradient-to-b from-white to-gray-50">
-                    <div class="flex items-center gap-3 w-full mb-2">
-                        <div class="bg-orange-500 text-white w-12 h-12 rounded flex items-center justify-center text-2xl shadow-sm"><i class="fa-solid fa-gift"></i></div>
-                        <div class="text-left"><div class="font-bold text-gray-800">Referral Program</div><div class="text-xs text-gray-500">Get 1 Month Virtual!</div></div>
+                    <!-- Referral Program -->
+                    <div class="bg-[#F8FAFC] border border-gray-200 rounded-3xl p-6 flex items-center justify-between shadow-sm border-dashed">
+                        <div class="flex items-center gap-5">
+                            <div class="bg-orange-500 text-white w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-xl transform -rotate-3 hover:rotate-0 transition"><i class="fa-solid fa-gift"></i></div>
+                            <div>
+                                <div class="font-black text-[#0B1B3F] uppercase text-sm tracking-widest">Referral Program</div>
+                                <div class="text-xs text-gray-500 font-medium italic">Refer a friend, get 1 month credit reporting free!</div>
+                            </div>
+                        </div>
+                        <button class="bg-[#064E3B] hover:bg-black text-white px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl transition">
+                            INVITE NOW
+                        </button>
                     </div>
-                    <button class="w-full bg-[#40916c] hover:bg-[#2d6a4f] text-white py-3 rounded text-xs font-bold uppercase shadow-md transition mt-4">REFER FRIENDS ▼</button>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg p-3 flex justify-center items-center gap-3 border border-gray-200 shadow-sm">
-                <div class="flex -space-x-2"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=12"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=32"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=5"><img class="w-8 h-8 rounded-full border-2 border-white" src="https://i.pravatar.cc/150?img=8"></div>
-                <p class="text-sm text-gray-600 font-medium">You're not alone! <span class="font-bold text-[#0B1B3F]">6,300+ Aussies</span> are building credit through RentScore.</p>
+            <!-- Footer Strip -->
+            <div class="bg-white rounded-2xl p-4 flex justify-center items-center gap-4 shadow-sm border border-gray-100">
+                <div class="flex -space-x-3">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-sm" src="https://i.pravatar.cc/150?img=12">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-sm" src="https://i.pravatar.cc/150?img=32">
+                    <img class="w-10 h-10 rounded-full border-2 border-white shadow-sm" src="https://i.pravatar.cc/150?img=5">
+                    <div class="w-10 h-10 rounded-full bg-[#0B1B3F] border-2 border-white flex items-center justify-center text-[10px] font-bold text-white shadow-sm">+6k</div>
+                </div>
+                <p class="text-sm font-bold text-[#0B1B3F]">
+                    You're not alone! <span class="text-[#1E5EFF] font-black underline decoration-2 underline-offset-4">6,300+ Aussies</span> are building credit through Rent2Score.
+                </p>
             </div>
+
         </div>
     </main>
 
-    <!-- MODAL: PAY RENT -->
-    <div id="modal-pay" class="modal-overlay">
-        <div class="modal-content p-8">
-            <h2 class="text-xl font-bold text-[#0B1B3F] mb-4">Pay Rent</h2>
-            <form onsubmit="handleFakeSubmit(event, 'modal-pay', 'Rent Paid Successfully!')">
-                <div class="bg-blue-50 p-4 rounded-xl mb-6 flex justify-between items-center border border-blue-100">
-                    <div>
-                        <div class="text-xs text-gray-500 font-bold uppercase">Amount Due</div>
-                        <div class="text-lg font-bold text-[#0B1B3F]">May 2024 Rent</div>
-                    </div>
-                    <span class="font-bold text-2xl text-[#1E5EFF]">$1,600.00</span>
-                </div>
-                <div class="mb-6">
-                    <label class="text-xs font-bold text-gray-500 uppercase mb-2 block">Payment Method</label>
-                    <select class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50 font-medium outline-none focus:border-[#1E5EFF]">
-                        <option>ANZ Account (Linked ...3210)</option>
-                        <option>Visa Debit (...4422)</option>
-                    </select>
-                </div>
-                <button type="submit" class="w-full bg-[#1E5EFF] text-white py-3.5 rounded-xl font-bold hover:bg-blue-700 transition shadow-lg">Confirm Payment</button>
-            </form>
-            <button onclick="closeModal('modal-pay')" class="w-full text-center text-gray-400 font-bold text-sm mt-4 hover:text-gray-600">Cancel</button>
-        </div>
-    </div>
-
     <!-- MODAL: REPORTS -->
     <div id="modal-reports" class="modal-overlay">
-        <div class="modal-content p-8">
-            <h2 class="text-xl font-bold text-[#0B1B3F] mb-2">My Reports</h2>
-            <p class="text-sm text-gray-500 mb-6">Download your official rental history and documents.</p>
-            <div class="space-y-3">
-                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition cursor-pointer">
+        <div class="modal-content p-10">
+            <h2 class="text-2xl font-black text-[#0B1B3F] mb-4 uppercase tracking-[0.2em]">Reports & Data Center</h2>
+            <div class="space-y-4 mt-6">
+                <button onclick="handleFakeSubmit(event, 'modal-reports', 'Rental Ledger Downloaded')" class="w-full flex items-center justify-between p-5 border-2 border-gray-100 rounded-3xl hover:border-[#1E5EFF] transition group">
                     <div class="flex items-center gap-4">
-                        <div class="bg-blue-100 text-[#1E5EFF] w-10 h-10 rounded-lg flex items-center justify-center text-lg"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                        <div>
-                            <div class="font-bold text-[#0B1B3F] text-sm">Full Rental Ledger</div>
-                            <div class="text-xs text-gray-400">PDF • 12 Months History</div>
-                        </div>
+                        <i class="fa-solid fa-file-invoice text-2xl text-blue-500"></i>
+                        <div class="text-left"><div class="font-black text-gray-800 uppercase text-xs">Official Rental Ledger</div><div class="text-[10px] text-gray-400">PDF • 12 Months Activity</div></div>
                     </div>
-                    <button class="text-[#1E5EFF]"><i class="fa-solid fa-download"></i></button>
-                </div>
-                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl hover:bg-gray-50 transition cursor-pointer">
+                    <i class="fa-solid fa-download text-gray-300 group-hover:text-blue-500"></i>
+                </button>
+                <button onclick="handleFakeSubmit(event, 'modal-reports', 'Maintenance History Exported')" class="w-full flex items-center justify-between p-5 border-2 border-gray-100 rounded-3xl hover:border-[#1E5EFF] transition group">
                     <div class="flex items-center gap-4">
-                        <div class="bg-green-100 text-green-600 w-10 h-10 rounded-lg flex items-center justify-center text-lg"><i class="fa-solid fa-chart-line"></i></div>
-                        <div>
-                            <div class="font-bold text-[#0B1B3F] text-sm">Credit Score History</div>
-                            <div class="text-xs text-gray-400">PDF • Credit Agencies</div>
-                        </div>
+                        <i class="fa-solid fa-hammer text-2xl text-orange-500"></i>
+                        <div class="text-left"><div class="font-black text-gray-800 uppercase text-xs">Maintenance Report</div><div class="text-[10px] text-gray-400">CSV • Request Logs</div></div>
                     </div>
-                    <button class="text-[#1E5EFF]"><i class="fa-solid fa-download"></i></button>
-                </div>
+                    <i class="fa-solid fa-download text-gray-300 group-hover:text-blue-500"></i>
+                </button>
             </div>
-            <button onclick="closeModal('modal-reports')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Close</button>
-        </div>
-    </div>
-
-    <!-- MODAL: SCORE BREAKDOWN -->
-    <div id="modal-score" class="modal-overlay">
-        <div class="modal-content p-8">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-xl font-bold text-[#0B1B3F]">Rent Score Breakdown</h2>
-                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">745 - GOOD</span>
-            </div>
-            <div class="space-y-4">
-                <div class="flex justify-between items-center p-4 border border-gray-100 rounded-xl bg-gray-50">
-                    <div class="flex gap-4 items-center">
-                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600"><i class="fa-solid fa-clock"></i></div>
-                        <div>
-                            <div class="font-bold text-gray-700 text-sm">On-Time Payments</div>
-                            <div class="text-xs text-gray-400">11/11 month streak</div>
-                        </div>
-                    </div>
-                    <span class="font-bold text-[#2ECC71]">+45 pts</span>
-                </div>
-            </div>
-            <button onclick="closeModal('modal-score')" class="w-full mt-6 bg-gray-100 text-gray-600 py-3 rounded-xl font-bold hover:bg-gray-200">Close</button>
+            <button onclick="closeModal('modal-reports')" class="w-full mt-10 bg-gray-100 text-gray-400 py-4 rounded-3xl font-black uppercase tracking-widest hover:bg-gray-200 transition">Close Center</button>
         </div>
     </div>
 
