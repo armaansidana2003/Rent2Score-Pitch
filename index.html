@@ -10,15 +10,20 @@
     <style>
         html { scroll-behavior: smooth; }
         .hero-bg { background: radial-gradient(circle at 80% 20%, #eef6ff 0%, #ffffff 60%); }
-        .brand-logo { height: 100px; width: auto; object-fit: contain; }
+        .brand-logo { height: 60px; width: auto; object-fit: contain; }
         
+        /* Updated Deep Brand Colors */
+        .text-deep-green { color: #064E3B; }
+        .bg-deep-green { background-color: #064E3B; }
+        .text-deep-orange { color: #9A3412; }
+        .bg-deep-orange { background-color: #9A3412; }
+
         /* Step Connector Line */
         .step-connector {
             position: absolute; top: 2rem; left: 50%; width: 100%; height: 2px; background-color: #E2E8F0; z-index: 0; display: none;
         }
         @media (min-width: 768px) { .step-connector { display: block; } }
 
-        /* Trust Logos Grayscale to Color on Hover */
         .trust-logo { filter: grayscale(100%); opacity: 0.6; transition: all 0.3s; }
         .trust-logo:hover { filter: grayscale(0%); opacity: 1; }
     </style>
@@ -60,11 +65,12 @@
                 </h1>
                 
                 <p class="text-lg text-gray-500 max-w-lg leading-relaxed fade-in">
-                    Stop letting your biggest monthly expense go unnoticed. Report your rent payments to Equifax & Experian securely.
+                    Stop letting your biggest monthly expense go unnoticed. Report your rent payments to credit agencies securely.
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 pt-4 fade-in">
-                    <a href="auth.html?mode=register" class="bg-[#2ECC71] text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl shadow-green-100 hover:bg-green-600 hover:-translate-y-1 transition text-center">
+                    <!-- Deep Green Button -->
+                    <a href="auth.html?mode=register" class="bg-[#064E3B] text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:opacity-90 hover:-translate-y-1 transition text-center">
                         Get Started Free
                     </a>
                     <a href="#howitworks" class="flex items-center justify-center gap-2 text-[#1E5EFF] font-semibold px-6 py-4 rounded-xl hover:bg-blue-50 transition">
@@ -84,7 +90,8 @@
                         <div class="bg-[#0B1B3F] p-6 pb-10 text-white text-center">
                             <div class="text-sm opacity-80 mb-1">Your Rent Score</div>
                             <div class="text-5xl font-bold">742</div>
-                            <div class="inline-block bg-[#2ECC71] text-white text-[10px] px-2 py-0.5 rounded-full mt-2 font-bold uppercase">Good</div>
+                            <!-- Deep Green Status -->
+                            <div class="inline-block bg-[#064E3B] text-white text-[10px] px-2 py-0.5 rounded-full mt-2 font-bold uppercase">Good</div>
                         </div>
                         <div class="bg-white -mt-6 rounded-t-3xl p-6 relative z-10">
                             <div class="flex justify-between items-center mb-6">
@@ -95,11 +102,12 @@
                                 <div class="bg-[#1E5EFF] text-white w-10 h-10 rounded-full shadow-lg flex items-center justify-center"><i class="fa-solid fa-check"></i></div>
                             </div>
                             <!-- Mini Notification visual -->
-                            <div class="mt-4 flex gap-3 items-center bg-blue-50 p-3 rounded-xl border border-blue-100 animate-pulse">
+                            <div class="mt-4 flex gap-3 items-center bg-blue-50 p-3 rounded-xl border border-blue-100">
                                 <div class="w-8 h-8 rounded-full bg-white flex items-center justify-center text-[#1E5EFF] shadow-sm"><i class="fa-solid fa-bell"></i></div>
                                 <div>
                                     <div class="text-xs font-bold text-[#0B1B3F]">Rent Reported</div>
-                                    <div class="text-[10px] text-gray-500">Sent to Equifax & Experian</div>
+                                    <!-- Text Update -->
+                                    <div class="text-[10px] text-gray-500">Sent to Credit agencies</div>
                                 </div>
                             </div>
                         </div>
@@ -109,11 +117,10 @@
         </div>
     </header>
 
-    <!-- NEW SECTION: SOCIAL PROOF BANNER -->
+    <!-- SOCIAL PROOF BANNER -->
     <section class="bg-white pb-12 px-6">
         <div class="max-w-4xl mx-auto">
             <div class="bg-[#F4F6FA] rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center justify-center gap-6 shadow-sm border border-gray-100">
-                <!-- Avatars -->
                 <div class="flex -space-x-4">
                     <img class="w-12 h-12 rounded-full border-[3px] border-white shadow-sm" src="https://i.pravatar.cc/150?img=32" alt="User">
                     <img class="w-12 h-12 rounded-full border-[3px] border-white shadow-sm" src="https://i.pravatar.cc/150?img=12" alt="User">
@@ -122,20 +129,19 @@
                         +6k
                     </div>
                 </div>
-                <!-- Text -->
                 <div class="text-center md:text-left">
                     <p class="text-[#0B1B3F] text-lg">
-                        You're not alone! <span class="font-extrabold">6,300+ Aussies</span> are building credit through RentScore.
+                        <!-- Brand Correction -->
+                        You're not alone! <span class="font-extrabold">6,300+ Aussies</span> are building credit through Rent2Score.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION: TRUST BADGES STRIP -->
+    <!-- TRUST BADGES -->
     <section class="border-y border-gray-100 bg-white py-10 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8">
-            <!-- TrustPilot -->
+        <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-center md:justify-between items-center gap-8 text-center">
             <div class="flex items-center gap-2 trust-logo cursor-pointer">
                 <i class="fa-solid fa-star text-[#00b67a] text-2xl"></i>
                 <div class="flex flex-col leading-none">
@@ -143,33 +149,25 @@
                     <div class="flex text-[#00b67a] text-xs">
                         <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                     </div>
+                    <span class="text-[10px] font-bold text-gray-500 mt-1">Rated 5/5</span>
                 </div>
             </div>
-            
-            <!-- Mozo -->
             <div class="flex items-center gap-1 trust-logo cursor-pointer">
                 <i class="fa-brands fa-envira text-2xl text-green-600"></i>
                 <span class="text-2xl font-bold text-gray-700 tracking-tight">mozo</span>
             </div>
-
-            <!-- SIC -->
             <div class="flex items-center gap-2 trust-logo cursor-pointer">
                 <i class="fa-solid fa-shield-cat text-2xl text-blue-600"></i>
                 <span class="text-xl font-bold text-[#0B1B3F]">SIC</span>
             </div>
-
-            <!-- Finder -->
             <div class="flex items-center gap-1 trust-logo cursor-pointer">
                 <i class="fa-solid fa-magnifying-glass-chart text-2xl text-blue-500"></i>
                 <span class="text-2xl font-bold italic text-[#0B1B3F]">finder</span>
             </div>
-
-            <!-- AUSTRAC -->
             <div class="flex items-center gap-2 trust-logo cursor-pointer">
                 <i class="fa-solid fa-crown text-2xl text-[#0B1B3F]"></i>
                 <div class="flex flex-col leading-none">
                     <span class="font-bold text-[#0B1B3F] text-sm tracking-widest uppercase">AUSTRAC</span>
-                    <span class="text-[8px] text-gray-500 uppercase">Registered Remittance</span>
                 </div>
             </div>
         </div>
@@ -177,51 +175,38 @@
 
     <!-- HOW IT WORKS SECTION -->
     <section id="howitworks" class="py-24 bg-[#F8FAFC]">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <span class="text-[#1E5EFF] font-bold uppercase tracking-widest text-xs">Simple Process</span>
-                <h2 class="text-4xl font-extrabold text-[#0B1B3F] mt-2">How It Works</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative text-center">
-                
-                <!-- Step 1 -->
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl font-extrabold text-[#0B1B3F] mb-16">How It Works</h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative">
                 <div class="relative z-10 group">
                     <div class="w-16 h-16 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-center text-[#1E5EFF] text-2xl mx-auto mb-4 group-hover:-translate-y-2 transition duration-300">
                         <i class="fa-solid fa-user-plus"></i>
                     </div>
                     <h3 class="font-bold text-[#0B1B3F] mb-1">Sign Up</h3>
-                    <div class="step-connector hidden md:block"></div>
+                    <div class="step-connector"></div>
                 </div>
-
-                <!-- Step 2 -->
                 <div class="relative z-10 group">
                     <div class="w-16 h-16 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-center text-[#1E5EFF] text-2xl mx-auto mb-4 group-hover:-translate-y-2 transition duration-300">
                         <i class="fa-solid fa-file-invoice-dollar"></i>
                     </div>
                     <h3 class="font-bold text-[#0B1B3F] mb-1">Verify Rent</h3>
-                    <div class="step-connector hidden md:block"></div>
+                    <div class="step-connector"></div>
                 </div>
-
-                <!-- Step 3 -->
                 <div class="relative z-10 group">
-                    <div class="w-16 h-16 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-center text-[#2ECC71] text-2xl mx-auto mb-4 group-hover:-translate-y-2 transition duration-300">
+                    <!-- Deep Green Step Icon -->
+                    <div class="w-16 h-16 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-center text-[#064E3B] text-2xl mx-auto mb-4 group-hover:-translate-y-2 transition duration-300">
                         <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <h3 class="font-bold text-[#0B1B3F] mb-1">Build Score</h3>
-                    <div class="step-connector hidden md:block"></div>
+                    <div class="step-connector"></div>
                 </div>
-
-                <!-- Step 4 -->
                 <div class="relative z-10 group">
                     <div class="w-16 h-16 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-center text-[#1E5EFF] text-2xl mx-auto mb-4 group-hover:-translate-y-2 transition duration-300">
                         <i class="fa-solid fa-user-shield"></i>
                     </div>
                     <h3 class="font-bold text-[#0B1B3F] mb-1">Control Data</h3>
-                    <div class="step-connector hidden md:block"></div>
+                    <div class="step-connector"></div>
                 </div>
-
-                <!-- Step 5 -->
                 <div class="relative z-10 group">
                     <div class="w-16 h-16 bg-white border border-gray-200 rounded-2xl shadow-sm flex items-center justify-center text-[#0B1B3F] text-2xl mx-auto mb-4 group-hover:-translate-y-2 transition duration-300">
                         <i class="fa-solid fa-share-nodes"></i>
@@ -229,8 +214,7 @@
                     <h3 class="font-bold text-[#0B1B3F] mb-1">Share Securely</h3>
                 </div>
             </div>
-
-            <div class="mt-16 text-center max-w-3xl mx-auto bg-blue-50 border border-blue-100 rounded-2xl p-8">
+            <div class="mt-16 bg-blue-50 border border-blue-100 rounded-2xl p-8">
                 <p class="text-[#0B1B3F] font-medium text-lg italic">
                     "Renters shouldn’t have to trade privacy for opportunity. Rent2Score ensures rental payments work for you, not against you."
                 </p>
@@ -238,11 +222,9 @@
         </div>
     </section>
 
-    <!-- OUR VISION SECTION WITH CUSTOM GRAPHIC -->
+    <!-- VISION SECTION -->
     <section id="vision" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
-            
-            <!-- Text Content -->
             <div>
                 <span class="text-[#1E5EFF] font-bold uppercase tracking-widest text-xs">Our Vision</span>
                 <h2 class="text-4xl font-extrabold text-[#0B1B3F] mt-2 mb-6">Building Australia's Trusted Platform</h2>
@@ -250,100 +232,67 @@
                     To build Australia’s most trusted privacy-first rent reporting, credit building platform, where rental payments strengthen credit profiles without compromising personal data, ensuring fairness for renters, landlords, and lenders.
                 </p>
                 <ul class="space-y-4">
-                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#2ECC71] text-xl"></i> <span>Automatic reporting to major credit reporting agencies</span></li>
-                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#2ECC71] text-xl"></i> <span>You control your data privacy</span></li>
-                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#2ECC71] text-xl"></i> <span>Portable reputation for your next rental</span></li>
+                    <!-- Deep Green Ticks -->
+                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#064E3B] text-xl"></i> <span>Automatic reporting to major credit reporting agencies</span></li>
+                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#064E3B] text-xl"></i> <span>You control your data privacy</span></li>
+                    <li class="flex items-center gap-3 font-medium text-[#0B1B3F]"><i class="fa-solid fa-check-circle text-[#064E3B] text-xl"></i> <span>Portable reputation for your next rental</span></li>
                 </ul>
             </div>
-
-            <!-- Custom Graphic: Score Builder Visualization -->
             <div class="relative flex justify-center">
-                <!-- Decorative BG -->
                 <div class="absolute inset-0 bg-gradient-to-tr from-blue-50 to-white rounded-full blur-3xl opacity-50"></div>
-                
-                <div class="relative z-10 bg-white p-6 rounded-3xl shadow-2xl border border-gray-100 max-w-sm w-full transform hover:scale-105 transition duration-500">
-                    <!-- Graph Header -->
+                <div class="relative z-10 bg-white p-6 rounded-3xl shadow-2xl border border-gray-100 max-w-sm w-full">
                     <div class="flex justify-between items-center mb-6">
                         <div>
                             <div class="text-xs text-gray-400 font-bold uppercase">Your Projection</div>
                             <div class="text-3xl font-extrabold text-[#0B1B3F]">742</div>
                         </div>
-                        <div class="bg-green-50 text-[#2ECC71] px-3 py-1 rounded-full text-xs font-bold">+45 pts</div>
+                        <!-- Deep Green Label -->
+                        <div class="bg-green-50 text-[#064E3B] px-3 py-1 rounded-full text-xs font-bold">+45 pts</div>
                     </div>
-
-                    <!-- CSS Bar Chart -->
                     <div class="flex items-end gap-2 h-40 mb-4">
                         <div class="w-1/5 bg-gray-100 rounded-t-lg h-[40%]"></div>
                         <div class="w-1/5 bg-gray-100 rounded-t-lg h-[55%]"></div>
                         <div class="w-1/5 bg-blue-100 rounded-t-lg h-[65%]"></div>
                         <div class="w-1/5 bg-blue-200 rounded-t-lg h-[80%]"></div>
-                        <div class="w-1/5 bg-[#1E5EFF] rounded-t-lg h-[100%] relative group">
-                            <!-- Tooltip -->
-                            <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-[#0B1B3F] text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
-                                Current
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- List Items -->
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-xl">
-                            <div class="w-8 h-8 rounded-full bg-green-100 text-[#2ECC71] flex items-center justify-center text-xs"><i class="fa-solid fa-check"></i></div>
-                            <div class="flex-1">
-                                <div class="text-xs font-bold text-[#0B1B3F]">Rent Paid on Time</div>
-                                <div class="text-[10px] text-gray-400">12 Month Streak</div>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-xl">
-                            <div class="w-8 h-8 rounded-full bg-blue-100 text-[#1E5EFF] flex items-center justify-center text-xs"><i class="fa-solid fa-arrow-up"></i></div>
-                            <div class="flex-1">
-                                <div class="text-xs font-bold text-[#0B1B3F]">Reported to Equifax</div>
-                                <div class="text-[10px] text-gray-400">Updated Today</div>
-                            </div>
-                        </div>
+                        <div class="w-1/5 bg-[#1E5EFF] rounded-t-lg h-[100%]"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECURITY / LANDLORDS SECTION -->
+    <!-- SECURITY SECTION -->
     <section id="security" class="py-24 bg-[#0B1B3F] text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-[#1E5EFF] rounded-full blur-[100px] opacity-20"></div>
-        
         <div class="max-w-7xl mx-auto px-6 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="text-[#2ECC71] font-bold uppercase tracking-widest text-xs">Bank-Grade Security</span>
+                <span class="text-[#064E3B] font-bold uppercase tracking-widest text-xs">Bank-Grade Security</span>
                 <h2 class="text-4xl font-bold mt-2 mb-4">Why Landlords & Agents Trust Us</h2>
-                <p class="text-gray-400 text-lg">We bridge the gap between Tenant Privacy and Landlord Security. Zero liability handling of sensitive documents.</p>
+                <p class="text-gray-400 text-lg">We bridge the gap between Tenant Privacy and Landlord Security.</p>
             </div>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Card 1 -->
                 <div class="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition">
-                    <div class="w-12 h-12 bg-[#2ECC71] rounded-xl flex items-center justify-center text-[#0B1B3F] text-2xl mb-6">
+                    <!-- Deep Green Icon -->
+                    <div class="w-12 h-12 bg-[#064E3B] rounded-xl flex items-center justify-center text-white text-2xl mb-6">
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Verified Income</h3>
                     <p class="text-gray-400">We connect directly to bank feeds. No more PDF payslips. You get 100% verified data.</p>
                 </div>
-
-                <!-- Card 2 -->
                 <div class="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition">
-                    <div class="w-12 h-12 bg-[#F5A623] rounded-xl flex items-center justify-center text-[#0B1B3F] text-2xl mb-6">
+                    <!-- Deep Orange Icon -->
+                    <div class="w-12 h-12 bg-[#9A3412] rounded-xl flex items-center justify-center text-white text-2xl mb-6">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Applications approved instantly</h3>
-                    <p class="text-gray-400">Tenants with a Rent2Score profile are pre-vetted. Approve applications in minutes, not days.</p>
+                    <p class="text-gray-400">Tenants are pre-vetted. Approve applications in minutes, not days.</p>
                 </div>
-
-                <!-- Card 3 -->
                 <div class="bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-white/10 hover:bg-white/10 transition">
                     <div class="w-12 h-12 bg-[#1E5EFF] rounded-xl flex items-center justify-center text-white text-2xl mb-6">
                         <i class="fa-solid fa-lock"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3">Zero Data Liability</h3>
-                    <p class="text-gray-400">We store the PII (Personally Identifiable Information). You view it via secure link only when authorized. No data breaches.</p>
+                    <p class="text-gray-400">We store the sensitive data. You view authorized summaries only.</p>
                 </div>
             </div>
 
@@ -365,10 +314,13 @@
                 </div>
                 <p class="text-xs text-gray-500 mt-2">&copy; 2026 Rent2Score Pty Ltd. All rights reserved.</p>
             </div>
-            <div class="flex gap-6 grayscale opacity-50">
-                <i class="fa-brands fa-stripe text-2xl"></i>
-                <i class="fa-brands fa-aws text-2xl"></i>
-                <i class="fa-solid fa-building-columns text-2xl"></i>
+            <!-- Cleaned Footer (Icons Removed) -->
+            <div class="flex gap-6 items-center text-gray-400 font-bold text-xs uppercase tracking-widest">
+                <span>Secure Banking</span>
+                <span>•</span>
+                <span>Privacy First</span>
+                <span>•</span>
+                <span>Australia Owned</span>
             </div>
         </div>
     </footer>
