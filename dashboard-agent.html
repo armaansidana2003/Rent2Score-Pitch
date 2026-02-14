@@ -4,214 +4,261 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agent Dashboard - Anderson & Partners Realty</title>
+    <!-- Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    
     <style>
-        .sidebar-pro { background-color: #0B1B3F; }
-        .nav-item-pro.active { background-color: #1E5EFF; color: white; border-left: 4px solid #60a5fa; }
-        
-        /* Fixed Column Alignment for Xerox Look */
+        /* ========================================================================== */
+        /* 1. BRAND DESIGN SYSTEM (Navy & Deep Shaded)                                */
+        /* ========================================================================== */
+        :root {
+            --sidebar-navy: #0B1B3F;
+            --brand-blue: #1E5EFF;
+            --deep-green: #064E3B;
+            --deep-orange: #9A3412;
+            --bg-main: #F0F2F5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: #334155;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========================================================================== */
+        /* 2. SIDEBAR STYLING                                                         */
+        /* ========================================================================== */
+        .sidebar-brand-box {
+            background-color: white; /* White Logo Background as requested */
+            height: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.5rem;
+            color: #94A3B8;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: white;
+        }
+
+        .nav-link.active {
+            background-color: rgba(30, 94, 255, 0.1);
+            color: white;
+            border-left-color: #1E5EFF;
+            font-weight: 700;
+        }
+
+        /* ========================================================================== */
+        /* 3. TABLE ALIGNMENT & KPI STYLING                                           */
+        /* ========================================================================== */
         .col-tenant { width: 30%; }
         .col-property { width: 25%; }
         .col-rent { width: 25%; }
-        .col-scores { width: 20%; text-align: right; }
+        .col-risk { width: 20%; text-align: right; }
 
-        .card-red { background-color: #E74C3C; }
-        .card-green { background-color: #2ECC71; }
-        .card-blue { background-color: #1E5EFF; }
-        .card-navy { background-color: #0B1B3F; }
+        .bg-kpi-navy { background: linear-gradient(135deg, #0B1B3F 0%, #1E5EFF 100%); }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(11, 27, 63, 0.85); backdrop-filter: blur(6px);
+            z-index: 100; display: none; justify-content: center; align-items: center;
+        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
     </style>
 </head>
-<body class="bg-[#F0F2F5] flex h-screen overflow-hidden font-sans text-slate-800">
+<body class="flex h-screen overflow-hidden">
 
-    <!-- SIDEBAR -->
-    <aside class="w-72 sidebar-pro text-gray-400 flex flex-col flex-shrink-0 z-20 shadow-2xl">
-        <!-- 1. Brand Logo Container (White Background) -->
-        <div class="p-6 h-[88px] bg-white flex items-center justify-center border-b border-gray-100">
-            <img src="images/logo.png" alt="Rent2Score" style="width: 140px; height: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-            <span class="hidden text-xl font-bold text-[#0B1B3F]">RentScore Pro</span>
+    <!-- ========================================================================== -->
+    <!-- SIDEBAR (Left Menu)                                                        -->
+    <!-- ========================================================================== -->
+    <aside class="w-72 bg-[#0B1B3F] flex flex-col flex-shrink-0 z-30 shadow-2xl">
+        <div class="sidebar-brand-box">
+            <!-- BIG LOGO (140px) -->
+            <img src="images/logo.png" alt="Rent2Score" style="width: 140px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+            <span class="hidden text-xl font-black text-[#0B1B3F]">Anderson & Partners</span>
         </div>
-        
-        <nav class="flex-1 space-y-1 mt-4 overflow-y-auto custom-scrollbar">
-            <a href="#" class="nav-item-pro active flex items-center gap-4 px-6 py-4 text-white text-sm font-medium transition">
-                <i class="fa-solid fa-house text-lg"></i> Dashboard
+
+        <nav class="flex-1 mt-4 overflow-y-auto custom-scrollbar">
+            <a href="dashboard-agent.html" class="nav-link active">
+                <i class="fa-solid fa-house"></i> Dashboard
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-building-user text-lg"></i> Managed Properties
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-building-user"></i> Managed Properties
             </a>
-            <a href="#" class="flex items-center gap-4 px-6 py-4 hover:bg-white/5 text-sm font-medium transition">
-                <i class="fa-solid fa-user-shield text-lg"></i> Compliance Heatmap
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-user-shield"></i> Compliance Heatmap
             </a>
 
-            <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Reporting</div>
-            <a href="#" onclick="openModal('modal-reports-agent')" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-sm transition font-medium">
-                <i class="fa-solid fa-file-export"></i> Download Center
+            <div class="mt-8 px-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Agency Management</div>
+            <a href="#" class="nav-link"><i class="fa-solid fa-star"></i> Rate Tenant</a>
+            <a href="#" class="nav-link"><i class="fa-solid fa-calendar-check"></i> Schedule Inspection</a>
+            
+            <!-- REMARK FIX: Agent Feedback Menu Item -->
+            <a href="#" onclick="openModal('modal-feedback-agent')" class="nav-link text-white bg-white/5">
+                <i class="fa-solid fa-comment-dots text-[#F5A623]"></i> Agency Feedback
             </a>
 
-            <div class="pt-6 pb-2 px-6 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Management</div>
-            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-star"></i> Rate Tenant</a>
-            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-calendar-check"></i> Schedule Inspection</a>
-            <a href="#" class="flex items-center gap-4 px-6 py-2.5 hover:bg-white/5 text-xs font-medium transition"><i class="fa-solid fa-wrench"></i> Maintenance Hub</a>
+            <div class="mt-4 px-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Reporting</div>
+            <a href="#" onclick="openModal('modal-reports-agent')" class="nav-link">
+                <i class="fa-solid fa-file-pdf"></i> Download Center
+            </a>
         </nav>
 
-        <!-- 4. Logout Section -->
         <div class="p-6 border-t border-white/10 bg-black/10">
-            <a href="index.html" class="flex items-center gap-3 text-red-400 hover:text-red-300 transition font-bold text-sm">
+            <a href="index.html" class="flex items-center gap-3 text-red-400 font-bold text-sm hover:text-red-300 transition uppercase tracking-widest text-[10px]">
                 <i class="fa-solid fa-power-off"></i> Logout
             </a>
         </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
+    <!-- ========================================================================== -->
+    <!-- MAIN CONTENT                                                               -->
+    <!-- ========================================================================== -->
     <main class="flex-1 overflow-y-auto relative">
         
         <!-- HEADER -->
-        <header class="bg-white px-8 h-[88px] flex justify-between items-center sticky top-0 z-10 border-b border-gray-200">
+        <header class="bg-white px-8 h-[88px] flex justify-between items-center sticky top-0 z-40 border-b border-gray-200">
             <div class="flex flex-col">
                 <h1 class="text-xl font-bold text-[#0B1B3F]">Welcome, James!</h1>
-                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Anderson & Partners Realty Dashboard</p>
+                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Anderson & Partners Realty Dashboard</p>
             </div>
             
             <div class="flex items-center gap-6">
-                <!-- Profile Section -->
-                <div class="flex items-center gap-3 pl-6 border-l border-gray-200 cursor-pointer group">
+                <!-- Header Search -->
+                <div class="flex items-center gap-2">
                     <div class="relative">
-                        <img src="https://i.pravatar.cc/150?u=james" class="w-11 h-11 rounded-full border-2 border-white shadow-sm group-hover:border-blue-100 transition">
-                        <div class="absolute -bottom-0.5 -right-0.5 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-white shadow-sm"><i class="fa-solid fa-camera text-white"></i></div>
+                        <input type="text" placeholder="Quick search..." class="w-48 pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-xl text-xs outline-none focus:border-blue-400 transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
                     </div>
-                    <div class="text-right">
-                        <div class="text-sm font-bold text-[#0B1B3F] leading-tight">James Adamson</div>
-                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">My Account</div>
-                    </div>
-                    <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">2</div>
+                </div>
+
+                <div class="flex items-center gap-3 pl-6 border-l border-gray-200 cursor-pointer">
+                    <img src="https://i.pravatar.cc/150?u=james" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
+                    <div class="text-sm font-bold text-gray-800">James Adamson</div>
+                    <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shadow-lg">2</div>
                 </div>
             </div>
         </header>
 
-        <div class="p-8 max-w-[1800px] mx-auto space-y-6">
+        <div class="p-8 space-y-8 max-w-[1800px] mx-auto w-full">
             
-            <!-- KPI CARDS -->
+            <!-- KPI CARDS (Matching Screenshot) -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="card-green text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
+                <div class="bg-[#2ECC71] text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-user-check"></i></div>
                     <div><div class="text-3xl font-extrabold">137</div><div class="text-[10px] font-bold uppercase opacity-80">Verified Tenants</div></div>
                 </div>
-                <div class="card-blue text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
+                <div class="bg-[#1E5EFF] text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-house"></i></div>
                     <div><div class="text-3xl font-extrabold">27</div><div class="text-[10px] font-bold uppercase opacity-80">Active Properties</div></div>
                 </div>
-                <div class="card-navy text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
+                <div class="bg-kpi-navy text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-dollar-sign"></i></div>
                     <div><div class="text-3xl font-extrabold">$152,200</div><div class="text-[10px] font-bold uppercase opacity-80">Rent Verified</div></div>
                 </div>
-                <div class="card-red text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
+                <div class="bg-[#E74C3C] text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-triangle-exclamation"></i></div>
                     <div><div class="text-3xl font-extrabold">8</div><div class="text-[10px] font-bold uppercase opacity-80">Pending Issues</div></div>
                 </div>
             </div>
 
             <div class="flex gap-8">
-                <!-- AT RISK TENANTS TABLE -->
+                <!-- MAIN TABLE AREA -->
                 <div class="flex-1 space-y-6">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                        <div class="px-6 py-5 border-b border-gray-100 flex justify-between bg-gray-50/50">
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
                             <h3 class="font-bold text-[#0B1B3F]">At Risk Tenants</h3>
                         </div>
 
-                        <!-- 7. FILTER SECTION -->
+                        <!-- Filter Hub -->
                         <div class="p-4 border-b border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
                             <div class="relative">
-                                <input type="text" placeholder="Search for Tenants" class="w-full pl-10 pr-4 py-2 border rounded-lg text-xs bg-gray-50 outline-none">
-                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400 text-xs"></i>
+                                <input type="text" placeholder="Search for Tenants" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-xs bg-gray-50 outline-none">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
                             </div>
-                            <select class="border rounded-lg p-2 text-xs bg-gray-50 text-gray-500">
-                                <option>Select a Property...</option>
-                            </select>
-                            <div class="flex gap-2">
-                                <button class="bg-white border border-gray-200 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 hover:bg-gray-50 transition">Filter <i class="fa-solid fa-chevron-left text-[10px] ml-1"></i> <i class="fa-solid fa-bars-staggered"></i></button>
-                            </div>
+                            <select class="border border-gray-200 rounded-lg p-2 text-xs bg-gray-50 text-gray-500"><option>Select a Property...</option></select>
+                            <button class="bg-white border border-gray-200 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 flex items-center justify-center gap-2">Filter <i class="fa-solid fa-chevron-left text-[10px]"></i> <i class="fa-solid fa-bars-staggered"></i></button>
                         </div>
 
-                        <!-- TABLE ALIGNED CORRECTLY -->
                         <table class="w-full text-sm text-left table-fixed">
                             <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold tracking-widest border-b border-gray-100">
                                 <tr>
                                     <th class="px-6 py-4 col-tenant">Tenant ↑</th>
                                     <th class="px-6 py-4 text-center col-property">Property ↑</th>
                                     <th class="px-6 py-4 text-center col-rent">Rent Due ↑</th>
-                                    <th class="px-6 py-4 col-scores">Scores</th>
+                                    <!-- REMARK FIX: RISK INSTEAD OF SCORES -->
+                                    <th class="px-6 py-4 col-risk">Risk</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                <!-- Row: Emma -->
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <img src="https://i.pravatar.cc/100?img=32" class="w-10 h-10 rounded-full shadow-sm">
-                                            <div><div class="font-bold text-gray-800">Emma Johnson</div><div class="text-[10px] text-gray-400">12 Grove St, Melbourne VIC</div></div>
-                                        </div>
+                                <!-- Row 1 -->
+                                <tr class="hover:bg-gray-50 cursor-pointer">
+                                    <td class="px-6 py-4 flex items-center gap-3">
+                                        <img src="https://i.pravatar.cc/100?img=32" class="w-10 h-10 rounded-full shadow-sm">
+                                        <div><div class="font-bold text-gray-800">Emma Johnson</div><div class="text-[10px] text-gray-400">12 Grove St, Melbourne VIC</div></div>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <div class="flex items-center justify-center gap-1 font-bold text-gray-700 text-xs"><span class="bg-blue-900 text-white px-1.5 rounded-[2px] text-[8px]">ANZ</span> 1030</div>
-                                        <div class="text-[9px] text-gray-400 font-bold">$500 <span class="font-normal opacity-70">Current</span></div>
+                                        <div class="text-[9px] text-gray-400 font-bold">$500 <span class="font-normal opacity-70 italic">Current</span></div>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <div class="font-bold text-gray-800">$1,500 <span class="text-orange-500 text-[10px] ml-1">Over 2 Days</span></div>
-                                        <div class="text-[9px] text-red-500 font-bold uppercase tracking-tighter">Overdue 11 days</div>
+                                        <div class="text-[9px] text-red-500 font-bold uppercase tracking-tighter">Overdue 11 Days</div>
                                     </td>
                                     <td class="px-6 py-4 text-right"><button class="bg-[#F5A623] text-white px-4 py-2 rounded text-[9px] font-black uppercase shadow-sm">Flag Overdue</button></td>
                                 </tr>
-                                <!-- Row: Alex (SELECTED) -->
-                                <tr class="bg-blue-50/50 border-l-4 border-blue-500 cursor-pointer">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full shadow-sm">
-                                            <div><div class="font-bold text-blue-600">Alex Patel</div><div class="text-[10px] text-gray-400">77 York St, Richmond VIC</div></div>
-                                        </div>
+                                <!-- Row 2 (Alex Patel - SELECTED) -->
+                                <tr class="bg-blue-50/50 border-l-4 border-blue-600 cursor-pointer">
+                                    <td class="px-6 py-4 flex items-center gap-3">
+                                        <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full shadow-sm">
+                                        <div><div class="font-bold text-blue-600">Alex Patel</div><div class="text-[10px] text-gray-400">202 Falcon Dr, Richmond VIC</div></div>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <div class="flex items-center justify-center gap-1 font-bold text-gray-700 text-xs"><span class="bg-red-700 text-white px-1.5 rounded-[2px] text-[8px]">STAE</span> 7800</div>
-                                        <div class="text-[9px] text-gray-400 font-bold">$650 <span class="font-normal opacity-70">Current</span></div>
+                                        <div class="text-[9px] text-gray-400 font-bold">$650 <span class="font-normal opacity-70 italic">Current</span></div>
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         <div class="font-bold text-gray-800">$1,650 <span class="text-orange-500 text-[10px] ml-1">Over 1 Day</span></div>
-                                        <div class="text-[9px] text-red-500 font-bold uppercase tracking-tighter">Overdue 11 days</div>
                                     </td>
-                                    <td class="px-6 py-4 text-right"><button class="bg-yellow-50 text-orange-400 border border-orange-200 px-3 py-2 rounded text-[9px] font-black uppercase">Flag Moderate Risk</button></td>
-                                </tr>
-                                <!-- Row: Mia -->
-                                <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4">
-                                        <div class="flex items-center gap-3">
-                                            <img src="https://i.pravatar.cc/100?img=44" class="w-10 h-10 rounded-full shadow-sm">
-                                            <div><div class="font-bold text-gray-800">Mia Thompson</div><div class="text-[10px] text-gray-400">331 High St, Richmond VIC</div></div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <div class="flex items-center justify-center gap-1 font-bold text-gray-700 text-xs"><span class="bg-black text-white px-1.5 rounded-[2px] text-[8px]">NAB</span> 1670</div>
-                                        <div class="text-[9px] text-gray-400 font-bold">$950 <span class="font-normal opacity-70">Current</span></div>
-                                    </td>
-                                    <td class="px-6 py-4 text-center">
-                                        <div class="font-bold text-gray-800">$1,900 <span class="text-red-500 text-[10px] ml-1">Over 2 Days</span></div>
-                                        <div class="text-[9px] text-red-500 font-bold uppercase tracking-tighter">Overdue Timeline</div>
-                                    </td>
-                                    <td class="px-6 py-4 text-right"><button class="bg-[#E74C3C] text-white px-8 py-2 rounded text-[9px] font-black uppercase">High Risk</button></td>
+                                    <td class="px-6 py-4 text-right"><button class="bg-yellow-50 text-orange-400 border border-orange-200 px-3 py-2 rounded text-[9px] font-black uppercase">Flag Moderate</button></td>
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="p-4 bg-gray-50/50 text-center border-t"><button class="bg-white border border-gray-200 text-gray-400 px-6 py-2 rounded-lg text-[10px] font-black uppercase hover:text-blue-500">View All Tenants</button></div>
+                        <div class="p-4 bg-gray-50/50 text-center border-t">
+                            <button class="bg-white border border-gray-200 text-gray-400 px-6 py-2 rounded-lg text-[10px] font-black uppercase hover:text-blue-500 transition shadow-sm">View All Managed Tenants</button>
+                        </div>
                     </div>
                 </div>
 
-                <!-- RIGHT SIDEBAR (Dynamic History & Score) -->
+                <!-- RIGHT SIDEBAR (Matching Layout) -->
                 <div class="w-80 flex flex-col gap-6 flex-shrink-0">
                     
                     <!-- Quick Overview -->
                     <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-                        <h3 class="font-bold text-gray-800 text-[10px] uppercase mb-4 tracking-widest opacity-60">Quick Overview</h3>
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                        <h3 class="font-bold text-gray-500 text-[10px] uppercase mb-4 tracking-widest">Quick Overview</h3>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-lg">1</div>
                             <div class="flex-1">
                                 <div class="font-bold text-sm text-[#0B1B3F]">John Ellis</div>
                                 <div class="text-[10px] text-gray-400">44 Lygon St, Brunswick VIC</div>
@@ -219,14 +266,14 @@
                             </div>
                             <i class="fa-solid fa-circle-check text-green-500"></i>
                         </div>
-                        <button class="w-full bg-gray-50 border border-gray-200 text-gray-400 py-2.5 rounded-lg font-black text-[9px] uppercase tracking-widest hover:bg-gray-100 transition">View 3 Overdue Issues</button>
+                        <button class="w-full bg-gray-50 border border-gray-200 text-gray-400 py-2.5 rounded-lg font-black text-[9px] uppercase tracking-widest hover:bg-gray-100 transition">View 3 Arrears Alerts</button>
                     </div>
 
                     <!-- Landlord Activity -->
                     <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
-                        <h3 class="font-bold text-gray-800 text-[10px] uppercase mb-4 tracking-widest opacity-60">Landlord Activity</h3>
+                        <h3 class="font-bold text-gray-500 text-[10px] uppercase mb-4 tracking-widest">Landlord Activity</h3>
                         <div class="flex items-center gap-3">
-                            <img src="https://i.pravatar.cc/100?u=bill" class="w-10 h-10 rounded-full border-2 border-white">
+                            <img src="https://i.pravatar.cc/100?u=bill" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
                             <div>
                                 <div class="font-bold text-sm text-[#0B1B3F]">Bill Anderson</div>
                                 <div class="text-[10px] text-gray-400">Flagged overdue 15 days ago <span class="text-blue-500">Success</span></div>
@@ -235,66 +282,62 @@
                         </div>
                     </div>
 
-                    <!-- TENANT CREDIT SCORE (Replaced Mortgage Readiness) -->
+                    <!-- REMARK FIX: TENANT CREDIT SCORE HUB (Below Landlord Activity) -->
                     <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-[#2ECC71]"></div>
-                        <h3 class="font-bold text-gray-800 text-[10px] uppercase mb-6 tracking-widest">Tenant Credit Score</h3>
+                        <h3 class="font-bold text-gray-800 text-[10px] uppercase mb-6 tracking-widest">Tenant Credit Profile</h3>
                         
-                        <!-- Score Display -->
-                        <div class="flex flex-col items-center mb-6">
-                            <div class="bg-green-50 rounded-2xl p-4 border border-green-100 w-full flex justify-between items-center">
-                                <div>
-                                    <div class="text-[10px] font-bold text-green-700 uppercase">Alex Patel</div>
-                                    <div class="text-4xl font-black text-green-600 mt-1">745</div>
-                                </div>
-                                <div class="text-right">
-                                    <span class="bg-green-600 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-tighter">Good</span>
-                                    <div class="text-[9px] text-green-800 font-bold mt-1">11/11 On-Time</div>
-                                </div>
-                            </div>
+                        <div class="flex items-center flex-col text-center mb-6">
+                            <!-- Image matched to profile -->
+                            <img src="https://i.pravatar.cc/150?img=11" class="w-16 h-16 rounded-full border-4 border-gray-50 shadow-md mb-3">
+                            <div class="text-lg font-bold text-[#0B1B3F]">Alex Patel</div>
+                            <div class="text-xs text-gray-400">Tenant ID: #7890-NAB</div>
                         </div>
 
-                        <div class="space-y-4">
-                            <div class="text-xs font-bold text-gray-800 border-b pb-2">Verification History</div>
-                            <div class="space-y-3">
-                                <div class="flex items-center gap-3 text-[10px]">
-                                    <i class="fa-solid fa-check text-green-500"></i>
-                                    <div class="flex-1 font-bold text-gray-700">April Rent Paid</div>
-                                    <div class="text-gray-400 font-mono">$1,650</div>
-                                </div>
-                                <div class="flex items-center gap-3 text-[10px]">
-                                    <i class="fa-solid fa-check text-green-500"></i>
-                                    <div class="flex-1 font-bold text-gray-700">March Rent Paid</div>
-                                    <div class="text-gray-400 font-mono">$1,650</div>
-                                </div>
+                        <div class="bg-green-50 rounded-2xl p-4 border border-green-100 mb-4 flex justify-between items-center">
+                            <div>
+                                <div class="text-[10px] font-bold text-green-700 uppercase tracking-tighter">Verified Score</div>
+                                <div class="text-4xl font-black text-green-600 mt-1">745</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="bg-green-600 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase">Good</span>
+                                <div class="text-[9px] text-green-800 font-bold mt-1">11/11 ON-TIME</div>
                             </div>
                         </div>
-                        <button class="w-full mt-6 bg-[#0B1B3F] text-white py-2.5 rounded-lg font-black text-[9px] uppercase tracking-widest shadow-lg hover:bg-black transition">Full Screening PDF</button>
+                        <button class="w-full mt-4 bg-[#0B1B3F] text-white py-3 rounded-xl font-black text-[9px] uppercase tracking-widest shadow-lg hover:bg-black transition">Download Full Screening</button>
                     </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- MODAL: AGENT REPORTS -->
+    <!-- REMARK FIX: AGENT FEEDBACK MODAL -->
+    <div id="modal-feedback-agent" class="modal-overlay">
+        <div class="modal-content p-12">
+            <h2 class="text-2xl font-black text-[#0B1B3F] mb-4 uppercase tracking-widest">Agency Platform Feedback</h2>
+            <p class="text-gray-500 mb-8 text-sm">How can we optimize Rent2Score for your agency's property management workflow?</p>
+            <form onsubmit="handleFakeSubmit(event, 'modal-feedback-agent', 'Thank you for your agency feedback!')">
+                <textarea class="w-full p-6 border-2 border-gray-100 rounded-2xl bg-gray-50 h-44 mb-8 font-medium outline-none focus:border-blue-500 transition shadow-inner" placeholder="Your suggestions for features or improvements..."></textarea>
+                <button type="submit" class="w-full bg-[#0B1B3F] text-white py-4 rounded-xl font-black uppercase tracking-widest shadow-xl hover:bg-black transition">Submit Feedback</button>
+            </form>
+            <button onclick="closeModal('modal-feedback-agent')" class="w-full mt-4 text-gray-400 text-xs font-bold uppercase tracking-widest text-center">Cancel</button>
+        </div>
+    </div>
+
+    <!-- MODAL: AGENT REPORTS (Center) -->
     <div id="modal-reports-agent" class="modal-overlay">
         <div class="modal-content p-10 max-w-2xl">
             <h2 class="text-2xl font-bold text-[#0B1B3F] mb-6 flex items-center gap-2"><i class="fa-solid fa-chart-line text-blue-500"></i> Agency Reporting Hub</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="p-5 border rounded-2xl bg-gray-50 hover:border-blue-500 transition cursor-pointer flex flex-col justify-between">
-                    <div class="font-bold text-sm">Active Properties Log</div>
-                    <div class="text-[10px] text-gray-400 mt-1">Status of all managed units.</div>
+                    <div class="font-bold text-sm">Portfolio Rent Audit</div>
+                    <div class="text-[10px] text-gray-400 mt-1">Verification trails for all properties.</div>
                     <i class="fa-solid fa-file-pdf mt-4 text-blue-500"></i>
                 </div>
                 <div class="p-5 border rounded-2xl bg-gray-50 hover:border-blue-500 transition cursor-pointer flex flex-col justify-between">
-                    <div class="font-bold text-sm">Rent Verification Audit</div>
-                    <div class="text-[10px] text-gray-400 mt-1">Payment trails for compliance.</div>
+                    <div class="font-bold text-sm">Tenant Risk Analytics</div>
+                    <div class="text-[10px] text-gray-400 mt-1">Compliance heatmap data export.</div>
                     <i class="fa-solid fa-file-invoice-dollar mt-4 text-green-500"></i>
-                </div>
-                <div class="p-5 border rounded-2xl bg-gray-50 hover:border-blue-500 transition cursor-pointer flex flex-col justify-between">
-                    <div class="font-bold text-sm">Maintenance KPI Report</div>
-                    <div class="text-[10px] text-gray-400 mt-1">Pending issues by time.</div>
-                    <i class="fa-solid fa-wrench mt-4 text-orange-500"></i>
                 </div>
             </div>
             <button onclick="closeModal('modal-reports-agent')" class="w-full mt-10 bg-gray-100 text-gray-600 py-4 rounded-2xl font-bold hover:bg-gray-200 transition">Close Hub</button>
@@ -302,5 +345,9 @@
     </div>
 
     <script src="js/app.js"></script>
+    <script>
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    </script>
 </body>
 </html>
