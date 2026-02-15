@@ -78,15 +78,11 @@
             font-weight: 700;
         }
 
-        /* Xerox-match status alignment */
-        .status-header-align { text-align: right; padding-right: 4.5rem; }
+        /* Xerox-match status alignment - aligned with button edges */
+        .status-header-align { text-align: right; padding-right: 5.2rem; }
 
-        /* KPI Card Shading */
         .bg-kpi-navy-grad { background: linear-gradient(135deg, #0B1B3F 0%, #1E5EFF 100%); }
 
-        /* ========================================================================== */
-        /* 4. UTILITIES                                                               */
-        /* ========================================================================== */
         .custom-scrollbar::-webkit-scrollbar { width: 4px; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
 
@@ -107,7 +103,7 @@
     <!-- ========================================================================== -->
     <aside class="w-72 bg-[#0B1B3F] flex flex-col flex-shrink-0 z-30 shadow-2xl">
         <div class="sidebar-brand-box">
-            <!-- 1. BIG LOGO (140px) -->
+            <!-- 1. BIG LOGO (140px) with White Background -->
             <img src="images/logo.png" alt="Rent2Score" style="width: 140px;" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
             <span class="hidden text-xl font-black text-[#0B1B3F]">RentScore Pro</span>
         </div>
@@ -117,19 +113,18 @@
                 <i class="fa-solid fa-house"></i> Dashboard
             </a>
             <a href="#" class="nav-link">
-                <i class="fa-solid fa-user-group"></i> Tenants
+                <i class="fa-solid fa-user-group"></i> Tenants List
             </a>
             <a href="#" class="nav-link">
                 <i class="fa-solid fa-building"></i> Properties
             </a>
             <a href="#" class="nav-link">
-                <i class="fa-solid fa-face-smile"></i> Transactions
+                <i class="fa-solid fa-file-invoice-dollar"></i> Rent Ledger
             </a>
             <a href="#" class="nav-link">
                 <i class="fa-solid fa-chart-simple"></i> Reports
             </a>
 
-            <!-- Added Feedback and Management Items -->
             <div class="mt-8 px-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Management</div>
             <a href="#" class="nav-link"><i class="fa-solid fa-star-half-stroke"></i> Rate Tenant</a>
             <a href="#" class="nav-link"><i class="fa-solid fa-tools"></i> Schedule Maintenance</a>
@@ -138,6 +133,7 @@
             </a>
         </nav>
 
+        <!-- LOGOUT AT BOTTOM -->
         <div class="p-6 border-t border-white/10 bg-black/10">
             <a href="index.html" class="flex items-center gap-3 text-red-400 font-bold text-sm hover:text-red-300 transition uppercase tracking-widest text-[10px]">
                 <i class="fa-solid fa-power-off"></i> Logout
@@ -152,10 +148,10 @@
         
         <!-- HEADER -->
         <header class="bg-white px-8 h-[88px] flex justify-between items-center sticky top-0 z-40 border-b border-gray-200">
-            <h1 class="text-2xl font-bold text-[#0B1B3F]">Hi Adam, Rent Verification Dashboard</h1>
+            <h1 class="text-2xl font-bold text-[#0B1B3F]">Hi Bill, Rent Verification Dashboard</h1>
             
             <div class="flex items-center gap-6">
-                <!-- Search & Filter Fields Top Right (Xerox Replica) -->
+                <!-- Filter Hub Top Right -->
                 <div class="flex items-center gap-2">
                     <div class="flex border border-gray-200 rounded-lg overflow-hidden shadow-sm bg-gray-50">
                         <button class="px-3 py-1.5 text-xs font-bold text-gray-500 bg-white border-r">Filter</button>
@@ -164,20 +160,29 @@
                             <i class="fa-solid fa-magnifying-glass absolute right-3 top-2 text-gray-400"></i>
                         </div>
                     </div>
-                    <button class="bg-white border border-gray-300 px-4 py-1.5 rounded-lg text-xs font-bold text-gray-600 hover:bg-gray-50">Filter</button>
+                    <button class="bg-white border border-gray-300 px-4 py-1.5 rounded-lg text-xs font-bold text-gray-600 hover:bg-gray-50 transition">Filter</button>
                 </div>
 
-                <div class="flex items-center gap-3 pl-4 border-l border-gray-200 cursor-pointer">
-                    <img src="https://i.pravatar.cc/150?u=adam" class="w-10 h-10 rounded-full border-2 border-white shadow-sm">
-                    <div class="text-sm font-bold text-gray-800">Adam Williams</div>
-                    <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shadow-lg">2</div>
+                <!-- 2. & 3. PHOTO UPLOAD / PROFILE / MY ACCOUNT -->
+                <div class="flex items-center gap-3 pl-4 border-l border-gray-200 cursor-pointer group">
+                    <div class="relative">
+                        <img src="https://i.pravatar.cc/150?u=bill" class="w-10 h-10 rounded-full border-2 border-white shadow-sm group-hover:border-blue-100 transition">
+                        <div class="absolute -bottom-0.5 -right-0.5 bg-[#1E5EFF] w-4.5 h-4.5 rounded-full flex items-center justify-center text-[8px] border border-white shadow-sm" title="Change Profile Photo">
+                            <i class="fa-solid fa-camera text-white"></i>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-bold text-[#0B1B3F] leading-tight">Bill Anderson</div>
+                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wide group-hover:text-[#1E5EFF] transition">My Account</div>
+                    </div>
+                    <div class="bg-red-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold">2</div>
                 </div>
             </div>
         </header>
 
         <div class="p-8 space-y-8 max-w-[1800px] mx-auto w-full">
             
-            <!-- KPI CARDS (Green, Caramel, Orange, Navy) -->
+            <!-- KPI CARDS -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="bg-[#2ECC71] text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-circle-check"></i></div>
@@ -191,14 +196,14 @@
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-flag"></i></div>
                     <div><div class="text-3xl font-extrabold">10</div><div class="text-[10px] font-bold uppercase opacity-80">Flagged Issues</div></div>
                 </div>
-                <!-- REMARK FIX: Rents Verified (Removed one $) -->
+                <!-- Rents Verified (One $ sign) -->
                 <div class="bg-kpi-navy-grad text-white p-5 rounded-xl shadow-lg flex items-center gap-4">
                     <div class="bg-white/20 p-3 rounded-lg text-xl"><i class="fa-solid fa-dollar-sign"></i></div>
                     <div><div class="text-3xl font-extrabold">$242,000</div><div class="text-[10px] font-bold uppercase opacity-80">Rents Verified</div></div>
                 </div>
             </div>
 
-            <div class="flex gap-8">
+            <div class="flex gap-8 items-start">
                 <!-- MAIN TABLE AREA -->
                 <div class="flex-1 space-y-6">
                     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -214,7 +219,7 @@
                                 <input type="text" placeholder="Search for Tenants" class="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm bg-gray-50 outline-none focus:bg-white transition">
                                 <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-gray-400"></i>
                             </div>
-                            <button class="bg-white border border-gray-200 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 flex items-center gap-2"><span class="text-[#2ECC71]">Filter</span> <i class="fa-solid fa-chevron-left text-[10px]"></i><i class="fa-solid fa-list-ul"></i></button>
+                            <button class="bg-white border border-gray-200 px-4 py-2 rounded-lg text-xs font-bold text-gray-600 flex items-center gap-2 hover:bg-gray-50 transition"><span class="text-[#2ECC71]">Filter</span> <i class="fa-solid fa-chevron-left text-[10px]"></i><i class="fa-solid fa-list-ul"></i></button>
                         </div>
 
                         <table class="w-full text-sm text-left">
@@ -223,7 +228,7 @@
                                     <th class="px-6 py-4">Tenant</th>
                                     <th class="px-6 py-4">Property</th>
                                     <th class="px-6 py-4">Rent Due ↑</th>
-                                    <!-- REMARK FIX: STATUS ALIGNMENT -->
+                                    <!-- STATUS ALIGNMENT FIX -->
                                     <th class="px-6 py-4 status-header-align">Status</th>
                                 </tr>
                             </thead>
@@ -235,7 +240,7 @@
                                         <div><div class="font-bold text-gray-800">Emma Johnson</div><div class="text-[10px] text-gray-400">15 Grove St, Melbourne VIC</div></div>
                                     </td>
                                     <td class="px-6 py-4">
-                                        <div class="flex items-center gap-2"><span class="bg-[#002B5C] text-white text-[10px] px-1.5 py-0.5 rounded font-bold">ANZ</span> <span class="font-mono text-xs">*4329</span></div>
+                                        <div class="flex items-center gap-2"><span class="bg-[#002B5C] text-white text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">ANZ</span> <span class="font-mono text-xs">*4329</span></div>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="font-bold text-gray-800">$1,800 <span class="text-gray-400 text-[10px] font-normal ml-1">Due May 1</span></div>
@@ -249,12 +254,12 @@
                                     </td>
                                 </tr>
                                 <!-- Alex Patel (SELECTED) -->
-                                <tr class="bg-blue-50/70 border-l-4 border-blue-600 cursor-pointer">
+                                <tr class="bg-blue-50/70 border-l-4 border-blue-600 cursor-pointer shadow-inner">
                                     <td class="px-6 py-4 flex items-center gap-3">
-                                        <img src="https://i.pravatar.cc/100?img=11" class="w-10 h-10 rounded-full shadow-sm">
+                                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100" class="w-10 h-10 rounded-full shadow-sm">
                                         <div><div class="font-bold text-blue-600">Alex Patel</div><div class="text-[10px] text-gray-400">202 Falcon Dr, Richmond VIC</div></div>
                                     </td>
-                                    <td class="px-6 py-4"><span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold">NAB</span> *7890</td>
+                                    <td class="px-6 py-4"><span class="bg-black text-white text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">NAB</span> *7890</td>
                                     <td class="px-6 py-4"><div class="font-bold text-gray-800">$1,500 <span class="text-gray-400 text-[10px] ml-1">Due May 2</span></div></td>
                                     <td class="px-6 py-4 text-right">
                                         <div class="flex gap-2 justify-end">
@@ -263,46 +268,57 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- Added More Tenants -->
+                                <!-- Nick Cooper -->
                                 <tr class="hover:bg-gray-50 transition cursor-pointer">
-                                    <td class="px-6 py-4 flex items-center gap-3"><img src="https://i.pravatar.cc/100?img=35" class="w-10 h-10 rounded-full shadow-sm"><div><div class="font-bold text-gray-800">Mia Thompson</div><div class="text-[10px] text-gray-400">7 York St, Carlton VIC</div></div></td>
-                                    <td class="px-6 py-4"><span class="font-black text-red-600 text-xs tracking-tighter italic">W</span> *6543</td>
-                                    <td class="px-6 py-4"><div class="font-bold text-gray-800">$1,700 <span class="text-gray-400 text-[10px] ml-1">Due May 2</span></div></td>
-                                    <td class="px-6 py-4 text-right"><div class="flex gap-2 justify-end"><button class="bg-[#2ECC71] text-white px-4 py-1.5 rounded text-[10px] font-black uppercase shadow-sm">Verify ▼</button><button class="bg-[#E67E22] text-white px-4 py-1.5 rounded text-[10px] font-black uppercase shadow-sm">Flag</button></div></td>
+                                    <td class="px-6 py-4 flex items-center gap-3">
+                                        <img src="https://i.pravatar.cc/100?img=12" class="w-10 h-10 rounded-full shadow-sm">
+                                        <div><div class="font-bold text-gray-800">Nick Cooper</div><div class="text-[10px] text-gray-400">44 Lygen St, Brunswick</div></div>
+                                    </td>
+                                    <td class="px-6 py-4"><span class="bg-[#002B5C] text-white text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">ANZ</span> *4321</td>
+                                    <td class="px-6 py-4"><div class="font-bold text-gray-800">$1,600 <span class="text-gray-400 text-[10px] ml-1">Due May 2</span></div></td>
+                                    <td class="px-6 py-4 text-right">
+                                        <button class="bg-[#E67E22] text-white px-6 py-1.5 rounded text-[10px] font-black uppercase shadow-sm">Flag</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- RIGHT SIDEBAR (Matching Verification History Xerox) -->
-                <div class="w-80 flex flex-col gap-6 flex-shrink-0">
+                <!-- ========================================================================== -->
+                <!-- 5. RIGHT SIDEBAR (Tenant Profile + BOTH Verification History blocks)       -->
+                <!-- ========================================================================== -->
+                <div class="w-80 flex flex-col gap-6 flex-shrink-0 pb-10">
                     
-                    <!-- Profile Header (Reduced as requested) -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm text-center">
-                        <img src="https://i.pravatar.cc/150?img=11" class="w-16 h-16 rounded-full border-4 border-gray-50 shadow-md mx-auto mb-3">
-                        <div class="text-lg font-bold text-[#0B1B3F]">Alex Patel</div>
-                        <div class="text-xs text-gray-400 font-bold uppercase tracking-widest">Selected Tenant</div>
-                    </div>
-
-                    <!-- REMARK FIX: TENANT CREDIT SCORE SECTION -->
-                    <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm relative overflow-hidden">
+                    <!-- XEROX: TENANT CREDIT PROFILE CARD -->
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-lg relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-1 bg-[#2ECC71]"></div>
-                        <h3 class="font-bold text-gray-500 text-[10px] uppercase mb-4 tracking-widest">Tenant Credit Score</h3>
+                        <h3 class="font-bold text-gray-500 text-[10px] uppercase mb-6 tracking-widest text-center">Tenant Credit Profile</h3>
                         
-                        <div class="flex items-center justify-between bg-green-50 p-4 rounded-xl border border-green-100">
-                            <div>
-                                <div class="text-[10px] font-bold text-green-700 uppercase leading-none">Verified Score</div>
-                                <div class="text-4xl font-black text-green-600 mt-1">745</div>
-                            </div>
-                            <div class="text-right">
-                                <span class="bg-green-600 text-white text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-tighter">GOOD</span>
-                                <div class="text-[9px] text-green-800 font-bold mt-1">11/11 ON-TIME PMTS</div>
+                        <div class="flex items-center flex-col text-center mb-8">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop" class="w-20 h-20 rounded-full border-4 border-gray-50 shadow-md mb-3">
+                            <div class="text-xl font-bold text-[#0B1B3F] tracking-tight leading-none mb-1">Alex Patel</div>
+                            <div class="text-xs text-gray-400 font-medium uppercase tracking-tighter">Tenant ID: #7890-NAB</div>
+                        </div>
+
+                        <!-- SCORE BOX -->
+                        <div class="bg-green-50 rounded-2xl p-6 border border-green-100 mb-8 flex flex-col items-start relative overflow-hidden">
+                            <div class="text-[10px] font-bold text-green-700 uppercase tracking-tighter mb-2">Verified Score</div>
+                            <div class="flex items-baseline justify-between w-full">
+                                <div class="text-5xl font-black text-green-600 tracking-tighter leading-none">745</div>
+                                <div class="text-right">
+                                    <span class="bg-green-600 text-white text-[10px] px-2.5 py-0.5 rounded font-bold uppercase">Good</span>
+                                    <div class="text-[9px] text-green-800 font-bold mt-1 uppercase leading-none">11/11 On-Time</div>
+                                </div>
                             </div>
                         </div>
+
+                        <button class="w-full bg-[#0B1B3F] text-white py-4 rounded-xl font-black text-[11px] uppercase tracking-widest shadow-xl hover:bg-black transition transform active:scale-95">
+                            Download Full Screening
+                        </button>
                     </div>
 
-                    <!-- Verification History (Screenshot Match) -->
+                    <!-- VERIFICATION HISTORY BLOCK 1 (Detailed List) -->
                     <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex flex-col">
                         <h3 class="font-bold text-gray-800 text-sm mb-4">Verification History</h3>
                         <div class="space-y-4">
@@ -320,11 +336,18 @@
                                     <div class="text-[10px] text-gray-400 font-bold">$1,500 - 1 Apr <span class="ml-4 font-normal">5 Henry St</span></div>
                                 </div>
                             </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-6 h-6 rounded-full bg-green-500 text-white flex items-center justify-center text-[10px]"><i class="fa-solid fa-check"></i></div>
+                                <div class="flex-1">
+                                    <div class="font-bold text-xs text-gray-800 flex justify-between">Nathan Lee <i class="fa-solid fa-circle-check text-green-500 text-[10px] opacity-40"></i></div>
+                                    <div class="text-[10px] text-gray-400 font-bold">$1,800 - 23 Mar <span class="ml-3 font-normal">251 High St</span></div>
+                                </div>
+                            </div>
                         </div>
-                        <button class="w-full mt-6 bg-[#0B1B3F] text-white py-2.5 rounded-lg font-black text-[10px] uppercase tracking-widest shadow-lg hover:bg-black transition">View Full Report ▼</button>
+                        <button class="w-full mt-6 bg-[#0B1B3F] text-white py-2.5 rounded-lg font-black text-[10px] uppercase tracking-widest shadow-lg hover:bg-black transition">View Full Ledger ▼</button>
                     </div>
 
-                    <!-- History Block 2 -->
+                    <!-- VERIFICATION HISTORY BLOCK 2 (Activity Log) -->
                     <div class="bg-white rounded-xl p-5 border border-gray-200 shadow-sm flex-1">
                         <h3 class="font-bold text-gray-800 text-sm mb-4">Past Activity</h3>
                         <div class="space-y-4">
@@ -332,20 +355,29 @@
                                 <div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> <span class="font-bold text-gray-600">David Wilson</span> <span class="text-gray-400">10 King St</span></div>
                                 <span class="font-mono text-gray-400">$1,340 - 1 Apr</span>
                             </div>
+                            <div class="flex items-center justify-between text-[10px] border-b border-gray-50 pb-2">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> <span class="font-bold text-gray-600">Lisa Nguyen</span> <span class="text-gray-400">5 Henry St</span></div>
+                                <span class="font-mono text-gray-400">$2,200 - 1 Apr</span>
+                            </div>
+                            <div class="flex items-center justify-between text-[10px]">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-green-500"></i> <span class="font-bold text-gray-600">Nathan Lee</span> <span class="text-gray-400">231 High St</span></div>
+                                <span class="font-mono text-gray-400">$1,800 - 23 Mar</span>
+                            </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- REMARK FIX: LANDLORD FEEDBOARD MODAL -->
+    <!-- LANDLORD FEEDBACK MODAL -->
     <div id="modal-feedback-landlord" class="modal-overlay">
         <div class="modal-content p-12">
             <h2 class="text-2xl font-black text-[#0B1B3F] mb-4 uppercase tracking-widest">Platform Feedback</h2>
-            <p class="text-gray-500 mb-8 text-sm">Help us improve RentScore Pro for your property portfolio management.</p>
-            <form onsubmit="handleFakeSubmit(event, 'modal-feedback-landlord', 'Thank you for your feedback!')">
-                <textarea class="w-full p-6 border-2 border-gray-100 rounded-2xl bg-gray-50 h-44 mb-8 font-medium outline-none focus:border-blue-500 transition shadow-inner" placeholder="Tell us how we can serve you better..."></textarea>
+            <p class="text-gray-400 text-sm mb-8">Tell us how we can optimize RentScore Pro for your property portfolio management.</p>
+            <form onsubmit="handleFakeSubmit(event, 'modal-feedback-landlord', 'Thank you for your valuable feedback!')">
+                <textarea class="w-full p-6 border-2 border-gray-100 rounded-2xl bg-gray-50 h-44 mb-8 font-medium outline-none focus:border-blue-500 transition shadow-inner" placeholder="Your thoughts here..."></textarea>
                 <button type="submit" class="w-full bg-[#0B1B3F] text-white py-4 rounded-xl font-black uppercase tracking-widest shadow-xl hover:bg-black transition">Submit Feedback</button>
             </form>
             <button onclick="closeModal('modal-feedback-landlord')" class="w-full mt-4 text-gray-400 text-xs font-bold uppercase tracking-widest text-center">Cancel</button>
