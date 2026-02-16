@@ -50,6 +50,7 @@
             font-weight: 500;
             transition: all 0.2s ease;
             border-left: 4px solid transparent;
+            cursor: pointer;
         }
 
         .nav-link:hover {
@@ -92,6 +93,14 @@
             z-index: 100; display: none; justify-content: center; align-items: center;
         }
         .modal-overlay.active { display: flex; }
+
+        /* PORTAL IFRAME STYLING */
+        #portal-iframe {
+            width: 100%;
+            height: calc(100vh - 88px);
+            border: none;
+            display: none;
+        }
     </style>
 </head>
 <body class="flex h-screen overflow-hidden">
@@ -106,23 +115,22 @@
             <span class="hidden text-2xl font-black text-[#0B1B3F] tracking-tighter">Rent2Score</span>
         </div>
 
-        <nav class="flex-1 mt-4 overflow-y-auto custom-scrollbar">
-            <a href="#" class="nav-link active">
+        <nav class="flex-1 mt-4 overflow-y-auto custom-scrollbar" id="admin-sidebar">
+            <a onclick="showAdminHome(this)" class="nav-link active">
                 <i class="fa-solid fa-gauge-high"></i> System Overview
             </a>
 
-            <!-- PORTAL MANAGEMENT -->
+            <!-- PORTAL MANAGEMENT - Updated to load portals inside current page -->
             <div class="mt-6 px-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Portal Management</div>
-            <a href="dashboard-tenant.html" class="nav-link"><i class="fa-solid fa-user-gear"></i> Tenant Portal</a>
-            <a href="dashboard-landlord.html" class="nav-link"><i class="fa-solid fa-house-lock"></i> Landlord Portal</a>
-            <a href="dashboard-agent.html" class="nav-link"><i class="fa-solid fa-building-shield"></i> Agency Portal</a>
+            <a onclick="loadPortal('dashboard-tenant.html', this)" class="nav-link"><i class="fa-solid fa-user-gear"></i> Tenant Portal</a>
+            <a onclick="loadPortal('dashboard-landlord.html', this)" class="nav-link"><i class="fa-solid fa-house-lock"></i> Landlord Portal</a>
+            <a onclick="loadPortal('dashboard-agent.html', this)" class="nav-link"><i class="fa-solid fa-building-shield"></i> Agency Portal</a>
 
             <!-- ADMIN SPECIFIC -->
             <div class="mt-6 px-6 text-[10px] font-black text-gray-500 uppercase tracking-widest">Global Controls</div>
             <a href="#" class="nav-link"><i class="fa-solid fa-users-viewfinder"></i> User Management</a>
             
-            <!-- REMARK FIX: FEEDBACK HUB MENU ITEM -->
-            <a href="#" onclick="showTab('feedback')" class="nav-link text-white bg-white/5">
+            <a onclick="showTab('feedback')" class="nav-link text-white bg-white/5">
                 <i class="fa-solid fa-comments text-[#2ECC71]"></i> User Feedback Hub
             </a>
             
@@ -140,15 +148,15 @@
     <!-- ========================================================================== -->
     <!-- MAIN CONTENT AREA                                                          -->
     <!-- ========================================================================== -->
-    <main class="flex-1 overflow-y-auto relative">
+    <main class="flex-1 overflow-y-auto relative" id="main-content-scroll">
         
         <!-- HEADER -->
         <header class="bg-white px-8 h-[88px] flex justify-between items-center sticky top-0 z-40 border-b border-gray-200">
-            <h1 class="text-2xl font-bold text-[#0B1B3F]">System Admin Dashboard</h1>
+            <h1 class="text-2xl font-bold text-[#0B1B3F]" id="main-header-title">System Admin Dashboard</h1>
             
             <div class="flex items-center gap-6">
                 <!-- Advanced Global Filter -->
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3" id="header-filters">
                     <div class="relative">
                         <input type="text" placeholder="Global user search..." class="w-72 pl-10 pr-4 py-2 bg-gray-100 border border-gray-200 rounded-xl text-xs outline-none focus:border-blue-400 transition">
                         <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-gray-400 text-xs"></i>
@@ -160,7 +168,6 @@
                 <div class="flex items-center gap-3 pl-6 border-l border-gray-200 cursor-pointer group">
                     <div class="relative">
                         <img src="https://i.pravatar.cc/150?u=adam" class="w-11 h-11 rounded-full border-2 border-white shadow-sm group-hover:border-blue-100 transition">
-                        <!-- Upload Action -->
                         <div class="absolute -bottom-0.5 -right-0.5 bg-[#1E5EFF] w-5 h-5 rounded-full flex items-center justify-center text-[10px] border-2 border-white shadow-sm">
                             <i class="fa-solid fa-camera text-white"></i>
                         </div>
@@ -173,7 +180,11 @@
             </div>
         </header>
 
-        <div class="p-8 max-w-[1800px] mx-auto space-y-6">
+        <!-- CONTAINER FOR PORTAL IFRAME (Seamless loading) -->
+        <iframe id="portal-iframe" src=""></iframe>
+
+        <!-- ORIGINAL ADMIN CONTENT (Overview) -->
+        <div id="admin-overview-content" class="p-8 max-w-[1800px] mx-auto space-y-6">
             
             <!-- GLOBAL KPI CARDS -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -189,7 +200,7 @@
                     <div class="bg-red-100 text-red-600 w-12 h-12 rounded-xl flex items-center justify-center text-2xl"><i class="fa-solid fa-shield-virus"></i></div>
                     <div><div class="text-3xl font-extrabold">12</div><div class="text-[10px] font-bold text-gray-400 uppercase">Security Flags</div></div>
                 </div>
-                <div class="bg-navy-gradient p-5 rounded-2xl flex items-center gap-4 shadow-lg text-white">
+                <div class="bg-navy-gradient p-5 rounded-xl flex items-center gap-4 shadow-lg text-white">
                     <div class="bg-white/20 w-12 h-12 rounded-lg flex items-center justify-center text-2xl"><i class="fa-solid fa-chart-line"></i></div>
                     <div><div class="text-3xl font-extrabold">$1.2M</div><div class="text-[10px] font-bold opacity-80 uppercase tracking-widest">Global Rent Volume</div></div>
                 </div>
@@ -231,61 +242,33 @@
                             </table>
                         </div>
 
-                        <!-- REMARK FIX: TAB 2: USER FEEDBACK HUB (Tenants, Landlords, Agents) -->
+                        <!-- TAB 2: USER FEEDBACK HUB -->
                         <div id="tab-feedback" class="tab-panel">
-                            <div class="p-6 bg-blue-50/30 border-b border-gray-100 flex justify-between items-center">
-                                <h4 class="font-black text-[#0B1B3F] text-xs uppercase tracking-tighter">Aggregated Platform Feedback</h4>
-                                <div class="flex gap-2">
-                                    <button class="text-[10px] font-bold px-3 py-1 bg-white border rounded shadow-sm">All Roles</button>
-                                    <button class="text-[10px] font-bold px-3 py-1 bg-gray-100 rounded">Export for Board</button>
-                                </div>
-                            </div>
                             <table class="w-full text-sm text-left">
                                 <thead class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold border-b">
                                     <tr><th class="px-6 py-3">Source</th><th class="px-6 py-3">User Role</th><th class="px-6 py-3 w-1/2">Feedback Summary</th><th class="px-6 py-3 text-right">Status</th></tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100">
-                                    <!-- Tenant Feedback -->
                                     <tr class="hover:bg-gray-50 transition">
                                         <td class="px-6 py-4 font-bold text-gray-800">Sarah Martin</td>
                                         <td class="px-6 py-4"><span class="text-blue-500 font-bold text-[10px] uppercase">Tenant</span></td>
-                                        <td class="px-6 py-4 text-xs text-gray-600 leading-relaxed italic">"Love the new credit meter visual! Could we add a way to see our reward point history on a monthly scale?"</td>
+                                        <td class="px-6 py-4 text-xs text-gray-600 leading-relaxed italic">"Love the new credit meter visual!"</td>
                                         <td class="px-6 py-4 text-right"><span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[10px] font-bold uppercase">Reviewed</span></td>
-                                    </tr>
-                                    <!-- Landlord Feedback -->
-                                    <tr class="hover:bg-gray-50 transition">
-                                        <td class="px-6 py-4 font-bold text-gray-800">Bill Anderson</td>
-                                        <td class="px-6 py-4"><span class="text-green-600 font-bold text-[10px] uppercase">Landlord</span></td>
-                                        <td class="px-6 py-4 text-xs text-gray-600 leading-relaxed italic">"Verification history on the sidebar is excellent for quick screening. Very efficient."</td>
-                                        <td class="px-6 py-4 text-right"><span class="bg-orange-100 text-orange-700 px-2 py-1 rounded text-[10px] font-bold uppercase">Pending Response</span></td>
-                                    </tr>
-                                    <!-- Agent Feedback -->
-                                    <tr class="hover:bg-gray-50 transition">
-                                        <td class="px-6 py-4 font-bold text-gray-800">James Adamson</td>
-                                        <td class="px-6 py-4"><span class="text-orange-600 font-bold text-[10px] uppercase">Estate Agent</span></td>
-                                        <td class="px-6 py-4 text-xs text-gray-600 leading-relaxed italic">"The compliance heatmap is a game changer for our agency month-end reporting."</td>
-                                        <td class="px-6 py-4 text-right"><span class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[10px] font-bold uppercase">Archived</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- RIGHT SIDEBAR (Matching Layout) -->
+                <!-- RIGHT SIDEBAR -->
                 <div class="w-80 flex flex-col gap-6 flex-shrink-0">
-                    
                     <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm relative overflow-hidden">
                         <h3 class="font-bold text-gray-400 text-[10px] uppercase mb-6 tracking-widest">Global Activity Feed</h3>
                         <div class="space-y-6">
                             <div class="flex items-start gap-4">
                                 <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center text-[10px] mt-1 shadow-sm"><i class="fa-solid fa-building-circle-check"></i></div>
                                 <div><div class="font-bold text-xs">Agency Milestone</div><div class="text-[10px] text-gray-400 leading-tight">Brightstone Realty hit 100 verified tenants.</div></div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-8 h-8 rounded-lg bg-green-100 text-green-600 flex items-center justify-center text-[10px] mt-1 shadow-sm"><i class="fa-solid fa-shield-halved"></i></div>
-                                <div><div class="font-bold text-xs">Security Integrity</div><div class="text-[10px] text-gray-400 leading-tight">Monthly PII audit completed. 0 vulnerabilities.</div></div>
                             </div>
                         </div>
                         <button class="w-full mt-8 bg-[#0B1B3F] text-white py-3 rounded-xl font-bold text-xs hover:bg-black transition shadow-lg uppercase tracking-wider">Download Health PDF</button>
@@ -309,23 +292,64 @@
 
     <script src="js/app.js"></script>
     <script>
-        // Tab Switcher for Admin Hub
+        // --- PORTAL NAVIGATION LOGIC ---
+        
+        const mainContent = document.getElementById('admin-overview-content');
+        const portalIframe = document.getElementById('portal-iframe');
+        const headerTitle = document.getElementById('main-header-title');
+        const headerFilters = document.getElementById('header-filters');
+
+        function loadPortal(url, element) {
+            // 1. Update Sidebar Active State
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+
+            // 2. Hide Admin Content, Show Iframe
+            mainContent.style.display = 'none';
+            portalIframe.style.display = 'block';
+            headerFilters.style.display = 'none'; // Hide Admin filters when inside client portals
+            
+            // 3. Update Header Title
+            const portalName = element.innerText.trim();
+            headerTitle.innerText = `Admin Access: ${portalName}`;
+
+            // 4. Load the URL
+            portalIframe.src = url;
+
+            // Scroll to top
+            document.getElementById('main-content-scroll').scrollTop = 0;
+        }
+
+        function showAdminHome(element) {
+            // 1. Update Sidebar Active State
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            element.classList.add('active');
+
+            // 2. Show Admin Content, Hide Iframe
+            mainContent.style.display = 'block';
+            portalIframe.style.display = 'none';
+            headerFilters.style.display = 'flex';
+            
+            // 3. Reset Header
+            headerTitle.innerText = "System Admin Dashboard";
+            portalIframe.src = "";
+        }
+
+        // --- TAB SWITCHER FOR OVERVIEW ---
         function showTab(tabId) {
-            // Hide all panels
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-            // Deactivate all buttons
             document.querySelectorAll('.tab-btn-admin').forEach(b => {
                 b.classList.remove('active');
                 b.classList.add('text-gray-400');
             });
-            // Show target
-            document.getElementById('tab-' + tabId).classList.add('active');
-            // Activate target button
-            document.getElementById('btn-' + tabId).classList.add('active');
-            document.getElementById('btn-' + tabId).classList.remove('text-gray-400');
+            const targetTab = document.getElementById('tab-' + tabId);
+            if(targetTab) targetTab.classList.add('active');
             
-            // Audio feedback
-            try { playSfx('click'); } catch(e) {}
+            const targetBtn = document.getElementById('btn-' + tabId);
+            if(targetBtn) {
+                targetBtn.classList.add('active');
+                targetBtn.classList.remove('text-gray-400');
+            }
         }
     </script>
 </body>
